@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpfoyrvr7r5ig"]
+
+[ext_resource type="Script" uid="uid://bkim5a3g86llo" path="res://entities/characters/chimata.gd" id="1_hj2v7"]
+[ext_resource type="Texture2D" uid="uid://bj6otafe7n1m5" path="res://assets/sprites/ChimataTEST.png" id="1_ufpsg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hj2v7"]
+
+[node name="Chimata" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_hj2v7")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_ufpsg")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hj2v7")
+
+[node name="chimataCamera" type="Camera2D" parent="."]
+enabled = false
