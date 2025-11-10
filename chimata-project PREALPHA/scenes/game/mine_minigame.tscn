@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d33ey25jdpimv"]
+[gd_scene load_steps=6 format=3 uid="uid://d33ey25jdpimv"]
 
 [ext_resource type="Script" uid="uid://b80hdq3ug5e08" path="res://scenes/game/minigame_data.gd" id="1_8p414"]
 [ext_resource type="Texture2D" uid="uid://b6mj3aiurm4vx" path="res://assets/tiles/oreMine.png" id="2_0wkj4"]
+[ext_resource type="Texture2D" uid="uid://5bdm7lmq4ojq" path="res://assets/tiles/mineBG.png" id="2_nknyf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nknyf"]
 texture = ExtResource("2_0wkj4")
@@ -19,6 +20,15 @@ sources/1 = SubResource("TileSetAtlasSource_nknyf")
 
 [node name="MinigameData" type="Node2D"]
 script = ExtResource("1_8p414")
+
+[node name="Background" type="Parallax2D" parent="."]
+repeat_size = Vector2(128, 128)
+repeat_times = 250
+
+[node name="bgDirt" type="Sprite2D" parent="Background"]
+position = Vector2(-24, -24)
+scale = Vector2(2, 2)
+texture = ExtResource("2_nknyf")
 
 [node name="mineWindow" type="Node2D" parent="."]
 

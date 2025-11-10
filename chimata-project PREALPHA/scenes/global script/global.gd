@@ -8,6 +8,10 @@ var bombQty = 1
 
 #Chimata camera flag
 var follow = false
+var maxUP = true
+var maxDOWN = true
+var maxLEFT = true
+var maxRIGHT = true
 
 #Mine shop
 var mShopOpen = false

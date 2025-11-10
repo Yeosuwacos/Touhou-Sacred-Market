@@ -30,13 +30,13 @@ func _physics_process(delta):
 	#Walking only if we are currently mining, and in corresponding tiles
 		
 	if Global.isMining == true:
-		if Input.is_action_just_pressed("walkLeft"):
+		if Input.is_action_just_pressed("walkLeft") && Global.maxLEFT == true:
 			position.x -= 128
-		if Input.is_action_just_pressed("walkRight"):
+		if Input.is_action_just_pressed("walkRight") && Global.maxRIGHT == true:
 			position.x += 128
-		if Input.is_action_just_pressed("walkDown"):
+		if Input.is_action_just_pressed("walkDown") && Global.maxDOWN == true:
 			position.y += 128
-		if Input.is_action_just_pressed("walkUp"):
+		if Input.is_action_just_pressed("walkUp") && Global.maxUP == true:
 			position.y -= 128
 		
 	direction = direction.normalized() * speed

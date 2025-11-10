@@ -56,26 +56,52 @@ func _physics_process(delta):
 	$mineWindow/moveCounter.text = str(moves) + " moves"
 	$mineWindow/moveCounter.position = Vector2((chimataLocation[0]*128+832),(chimataLocation[1]*128-464))
 	
+	#Manages the boundaries
+	if chimataLocation[0] <= 0:
+		Global.maxLEFT = false
+	else:
+		Global.maxLEFT = true
+		
+	if chimataLocation[0] >= 100:
+		Global.maxRIGHT = false
+	else:
+		Global.maxRIGHT = true
+		
+	if chimataLocation[1] <= 0:
+		Global.maxUP = false
+	else:
+		Global.maxUP = true
+		
+	if chimataLocation[1] >= 500:
+		Global.maxDOWN = false
+	else:
+		Global.maxDOWN = true
+	
+	#Makes sure that you cant go out of bounds
 	if moves > 0:
 		if Input.is_action_just_pressed("walkLeft"):
-			chimataLocation[0] -= 1
-			updateLocation()
-			mineTile(0,0)
+			if chimataLocation[0] > 0:
+				chimataLocation[0] -= 1
+				updateLocation()
+				mineTile(0,0)
 			
 		if Input.is_action_just_pressed("walkRight"):
-			chimataLocation[0] += 1
-			updateLocation()
-			mineTile(0,0)
+			if chimataLocation[0] < 100:
+				chimataLocation[0] += 1
+				updateLocation()
+				mineTile(0,0)
 			
 		if Input.is_action_just_pressed("walkDown"):
-			chimataLocation[1] += 1
-			updateLocation()
-			mineTile(0,0)
+			if chimataLocation[1] < 500:
+				chimataLocation[1] += 1
+				updateLocation()
+				mineTile(0,0)
 			
 		if Input.is_action_just_pressed("walkUp"):
-			chimataLocation[1] -= 1
-			updateLocation()
-			mineTile(0,0)
+			if chimataLocation[1] > 0:
+				chimataLocation[1] -= 1
+				updateLocation()
+				mineTile(0,0)
 			
 		#Special actions
 		if Input.is_action_just_pressed("bomb"):
