@@ -10,6 +10,10 @@ var follow = false
 #Workshop minigame flags
 var game1Running = false
 
+#Market minigame variables
+var nb1 = 0
+var nb2 = 0
+
 #Cards to be sold
 var sold_xs = 0
 var sold_s = 0
@@ -31,5 +35,5 @@ var ability_card_m = 9
 var ability_card_l = 9
 var ability_card_xl = 9
 
-#Currencies
+#Funds & GUI updating
 var funds = 0

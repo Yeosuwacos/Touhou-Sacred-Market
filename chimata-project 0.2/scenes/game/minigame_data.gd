@@ -120,4 +120,5 @@ func _on_back_pressed() -> void:
 	Global.dragon_gem_m += ore_m
 	Global.dragon_gem_l += ore_l
 	Global.dragon_gem_xl += ore_xl
+	queue_free()
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/game/mines.tscn")
