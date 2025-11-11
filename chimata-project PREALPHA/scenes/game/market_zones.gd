@@ -1,13 +1,11 @@
 extends Node2D
 
-@onready var viewport_sizeX = get_viewport().size.x
-
 func _ready():
 	
 	#Place the paths to other locations
 	
 	$gotoMine.position = Vector2(0,0)
-	$gotoWorkshop.position.x = viewport_sizeX
+	$gotoWorkshop.position = Vector2(Global.res.x,0)
 
 func _physics_process(delta):
 	

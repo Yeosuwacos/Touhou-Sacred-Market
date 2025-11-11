@@ -5,12 +5,12 @@ extends Node2D
 func _ready():
 	var chimata = chimataScene.instantiate()
 	add_child(chimata)
-	chimata.position = Vector2(900,300)
+	chimata.position = Vector2i(Global.res.x-50,300)
 
 #Opens the mine shop
 func _on_shop_button_pressed() -> void:
 	if Global.mShopOpen == false:
-		$Shop.position = Vector2(500,200)
+		$Shop.position = Vector2(Global.res.x/2,Global.res.y/2)
 		Global.mShopOpen = true
 		
 	elif Global.mShopOpen == true:

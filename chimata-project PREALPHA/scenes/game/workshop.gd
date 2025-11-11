@@ -5,4 +5,4 @@ extends Node2D
 func _ready():
 	var chimata = chimataScene.instantiate()
 	add_child(chimata)
-	chimata.position = Vector2(300,300)
+	chimata.position = Vector2(50,300)

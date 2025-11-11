@@ -1,5 +1,12 @@
 extends Node2D
 
+#Resolution settings
+var res = Vector2i(1920,1080)
+var zoom = 1
+
+#Options menu settings
+var menuOpen = false
+
 #Mine minigame variables
 var isMining = false
 var moves = 20

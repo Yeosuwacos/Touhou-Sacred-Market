@@ -13,11 +13,6 @@ offset_right = 200.0
 offset_bottom = 100.0
 text = "Shop"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 100.0
-offset_bottom = 100.0
-color = Color(0.14461616, 0.4183033, 0.2519203, 0.5647059)
-
 [node name="MineZones" type="Node2D" parent="."]
 script = ExtResource("3_2au7w")
 

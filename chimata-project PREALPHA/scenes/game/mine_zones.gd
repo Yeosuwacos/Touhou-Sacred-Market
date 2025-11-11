@@ -1,12 +1,11 @@
 extends Node2D
 
-@onready var viewport_sizeX = get_viewport().size.x
 
 func _ready():
 	
 	#Place the paths to other locations
 	
-	$gotoMarket.position.x = viewport_sizeX
+	$gotoMarket.position = Global.res.x
 
 func _physics_process(delta):
 	

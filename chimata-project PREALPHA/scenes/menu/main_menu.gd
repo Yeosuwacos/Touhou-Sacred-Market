@@ -1,5 +1,8 @@
 extends Node2D
 
 func _ready():
-	#Runs the main game
+	run()
+	
+#Runs the main game
+func run():	
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/game/market.tscn")

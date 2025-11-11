@@ -1,7 +1,6 @@
 extends Node2D
 
 #Game settings
-@onready var viewport_sizeX = get_viewport().size.x
 @onready var game1Counter = 0
 @onready var backwards = false
 @onready var targetX = 312
@@ -14,7 +13,7 @@ func _ready():
 	$gotoMarket.position = Vector2(0,0)
 	
 	#Setup the available card fabrication options
-	$cardOptions.position = Vector2i(640,256)
+	$cardOptions.position = Vector2i(50,500)
 	
 	$cardOptions/cardXs/Price.text = "Card 1\r" + str(Global.dragon_gem_xs) + "/25 dragon gem dust"
 
