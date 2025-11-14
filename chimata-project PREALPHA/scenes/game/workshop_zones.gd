@@ -3,6 +3,10 @@ extends Node2D
 #Preparing the arrows
 @onready var arrowSent = preload("res://entities/misc/arrow.tscn")
 
+#Variables
+@onready var mult = 0
+@onready var hits = 0
+
 func _ready():
 	
 	#Place the paths to other locations
@@ -38,10 +42,14 @@ func _physics_process(delta):
 	#Hit system for the minigame
 	if Global.hittable == true:
 		if Input.is_action_just_pressed("confirm"):
-			print("blep")
+			hits += 1
+			print(hits)
 
 #Initiates the rhythm game
 func play(card,rep):
+	#Sets up the playing field & variables
+	mult = 0
+	hits = 0
 	$cardOptions.visible = false
 	$cardMinigames/Repeater.wait_time = 1 - 0.1*card
 	$cardMinigames/Repeater.start()
@@ -52,6 +60,10 @@ func play(card,rep):
 		arrow.position = Vector2i(600,$cardMinigames/Hitzone.position.y+16)
 		arrow.speed = 400
 		await $cardMinigames/Repeater.timeout
+	#Calculates the rounded multiplier
+	mult = ceili(hits/card)
+	print(mult)
+		
 	#Updates the display
 	await $cardMinigames/Repeater.timeout
 	await $cardMinigames/Repeater.timeout
