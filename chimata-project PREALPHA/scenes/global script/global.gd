@@ -28,6 +28,9 @@ var nb1 = 0
 var nb2 = 0
 var wager = 0
 
+#Workshop minigame variables
+var hittable = false
+
 #Cards to be sold
 var sold_xs = 0
 var sold_s = 0
@@ -36,11 +39,11 @@ var sold_l = 0
 var sold_xl = 0
 
 #Mining resources
-var dragon_gem_xs = 100
-var dragon_gem_s = 100
-var dragon_gem_m = 0
-var dragon_gem_l = 0
-var dragon_gem_xl = 0
+var dragon_gem_xs = 1000
+var dragon_gem_s = 1000
+var dragon_gem_m = 1000
+var dragon_gem_l = 1000
+var dragon_gem_xl = 1000
 
 #Workshop resources
 var ability_card_xs = 9

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjsd8jqp4iyqs"]
+[gd_scene load_steps=4 format=3 uid="uid://cjsd8jqp4iyqs"]
 
 [ext_resource type="Script" uid="uid://d3wakf4nkuqrm" path="res://scenes/game/workshop.gd" id="1_nryu2"]
 [ext_resource type="Script" uid="uid://d5ja3ucwhd3t" path="res://scenes/game/workshop_zones.gd" id="3_xg03h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nryu2"]
+size = Vector2(64, 64)
 
 [node name="Workshop" type="Node2D"]
 script = ExtResource("1_nryu2")
@@ -70,18 +73,26 @@ offset_bottom = 23.0
 offset_top = -64.0
 offset_right = 64.0
 
-[node name="cardMinigames" type="CanvasLayer" parent="WorkshopZones"]
+[node name="cardMinigames" type="Node2D" parent="WorkshopZones"]
+position = Vector2(128, 0)
 
-[node name="Hitzone" type="ColorRect" parent="WorkshopZones/cardMinigames"]
-offset_right = 128.0
-offset_bottom = 128.0
-color = Color(0.40704513, 0.68412215, 0.80363286, 1)
+[node name="Hitzone" type="Area2D" parent="WorkshopZones/cardMinigames"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorkshopZones/cardMinigames/Hitzone"]
+shape = SubResource("RectangleShape2D_nryu2")
+
+[node name="Indicator" type="ColorRect" parent="WorkshopZones/cardMinigames/Hitzone"]
+z_index = -1
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(0.4509804, 1, 1, 1)
 
 [node name="Repeater" type="Timer" parent="WorkshopZones/cardMinigames"]
-wait_time = 0.5
 
 [connection signal="pressed" from="WorkshopZones/cardOptions/cardXs/SelectXs" to="WorkshopZones" method="_on_selectXs_pressed"]
 [connection signal="pressed" from="WorkshopZones/cardOptions/cardS/SelectS" to="WorkshopZones" method="_on_select_s_pressed"]
 [connection signal="pressed" from="WorkshopZones/cardOptions/cardM/SelectM" to="WorkshopZones" method="_on_select_m_pressed"]
 [connection signal="pressed" from="WorkshopZones/cardOptions/cardL/SelectL" to="WorkshopZones" method="_on_select_l_pressed"]
 [connection signal="pressed" from="WorkshopZones/cardOptions/cardXl/SelectXl" to="WorkshopZones" method="_on_select_xl_pressed"]
+[connection signal="area_entered" from="WorkshopZones/cardMinigames/Hitzone" to="WorkshopZones" method="_on_hitzone_area_entered"]
+[connection signal="area_exited" from="WorkshopZones/cardMinigames/Hitzone" to="WorkshopZones" method="_on_hitzone_area_exited"]
