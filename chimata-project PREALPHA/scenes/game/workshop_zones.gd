@@ -2,8 +2,18 @@ extends Node2D
 
 #Preparing the arrows
 @onready var arrowSent = preload("res://entities/misc/arrow.tscn")
+@onready var readyArrow: Area2D = null
 
 #Variables
+@onready var type = {
+	1: "up",
+	2: "down",
+	3: "left",
+	4: "right"
+}
+@onready var setType = ""
+@onready var regType = ""
+@onready var orient = 0
 @onready var mult = 0
 @onready var hits = 0
 
@@ -38,13 +48,26 @@ func _physics_process(delta):
 	if $gotoMarket.is_colliding():
 		get_parent().queue_free()
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/game/market.tscn")
+	
+	#Detects the action pressed to check the right move
+	if Input.is_action_just_pressed("walkUp"):
+		regType = "up"
+	elif Input.is_action_just_pressed("walkDown"):
+		regType = "down"
+	elif Input.is_action_just_pressed("walkLeft"):
+		regType = "left"
+	elif Input.is_action_just_pressed("walkRight"):
+		regType = "right"
 		
 	#Hit system for the minigame
-	if Global.hittable == true:
-		if Input.is_action_just_pressed("confirm"):
+	if readyArrow and regType != "":
+		if readyArrow.type == regType:
 			hits += 1
-			print(hits)
+		readyArrow.queue_free()
+		readyArrow = null
 
+	regType = "" # prevent duplicate hits
+	
 #Initiates the rhythm game
 func play(card,rep):
 	#Sets up the playing field & variables
@@ -55,18 +78,30 @@ func play(card,rep):
 	$cardMinigames/Repeater.start()
 	for i in range(0,rep):
 		#Creates the notes in intervals
+		selOrient()
 		var arrow = arrowSent.instantiate()
 		add_child(arrow)
+		arrow.type = type[orient]
 		arrow.position = Vector2i(600,$cardMinigames/Hitzone.position.y+16)
 		arrow.speed = 400
 		await $cardMinigames/Repeater.timeout
-	#Calculates the rounded multiplier
+	$cardMinigames/Repeater.wait_time = 3
+	await $cardMinigames/Repeater.timeout
+	$cardMinigames/Repeater.stop()
+	
+	#Calculates the rounded multiplier and gives out the correct amount of cards
 	mult = ceili(hits/card)
-	print(mult)
-		
+	if card == 1:
+		Global.ability_card_xs += mult
+	if card == 2:
+		Global.ability_card_s += mult
+	if card == 3:
+		Global.ability_card_m += mult
+	if card == 4:
+		Global.ability_card_l += mult
+	if card == 5:
+		Global.ability_card_xl += mult
 	#Updates the display
-	await $cardMinigames/Repeater.timeout
-	await $cardMinigames/Repeater.timeout
 	$cardMinigames/Repeater.stop()
 	$cardOptions/cardXs/Price.text = "Card 1\r" + str(Global.dragon_gem_xs) + "/25 dragon gem dust"
 
@@ -84,6 +119,10 @@ func play(card,rep):
 	str(Global.dragon_gem_s) + "/400 dragon gem pieces\r" + str(Global.dragon_gem_m) + "/200 dragon gems\r" + \
 	str(Global.ability_card_l) + "/175 dragon gem chunks\r" + str(Global.dragon_gem_xl) + "/100 dragon gem clusters"
 	$cardOptions.visible = true
+
+#Randomizes the orientation
+func selOrient():
+	orient = randi_range(1,4)
 
 #Making the first card
 func _on_selectXs_pressed():
@@ -130,7 +169,10 @@ func _on_select_xl_pressed():
 #Manages the arrow game detection
 func _on_hitzone_area_entered(area: Area2D):
 	Global.hittable = true
+	readyArrow = area
 
 func _on_hitzone_area_exited(area: Area2D):
 	Global.hittable = false
+	if readyArrow == area:
+		readyArrow = null
 	area.queue_free()
