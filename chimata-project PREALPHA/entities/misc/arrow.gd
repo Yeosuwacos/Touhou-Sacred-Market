@@ -3,13 +3,23 @@ extends Area2D
 var speed = 400
 var type = ""
 
+func set_hand_from_atlas(atlas_coords: Vector2i):
+	var tex = AtlasTexture.new()
+	tex.atlas = load("res://assets/game elements/directions.png")
+
+	var tile_size = Vector2i(64,64)
+	tex.region = Rect2(atlas_coords * tile_size,tile_size)
+
+	$Hand.texture = tex
+
+#Sets the hand texture
 func _physics_process(delta):
 	position -= transform.x * speed * delta
 	if type == "up":
-		$test.color = Color(0.147, 0.382, 1.0, 1.0)
+		set_hand_from_atlas(Vector2i(0,0))
 	elif type == "down":
-		$test.color = Color(0.997, 0.0, 0.0, 1.0)
-	elif type == "left":
-		$test.color = Color(0.0, 0.855, 0.0, 1.0)
+		set_hand_from_atlas(Vector2i(1,0))
 	elif type == "right":
-		$test.color = Color(0.768, 0.624, 0.254, 1.0)
+		set_hand_from_atlas(Vector2i(2,0))
+	elif type == "left":
+		set_hand_from_atlas(Vector2i(3,0))

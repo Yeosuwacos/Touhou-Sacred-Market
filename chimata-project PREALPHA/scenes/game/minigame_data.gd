@@ -8,8 +8,9 @@ extends Node2D
 @onready var tilemap = get_node("mineWindow/oreMap")
 @onready var chimataScene = preload("res://entities/characters/chimata.tscn")
 
-#Sets the amount of bombs 
+#Sets the amount of utilities 
 @onready var bombs = Global.bombQty
+@onready var tps = Global.tpQty
 
 func _ready():
 	#Sets the isMining flag to true
@@ -107,11 +108,20 @@ func _physics_process(delta):
 			
 		#Special actions
 		if Input.is_action_just_pressed("bomb"):
+			#Makes sure the bomb explosion is within range of the map
 			if bombs > 0 && chimataLocation[1] > Global.bombStr:
 				for i in range(1-Global.bombStr,Global.bombStr):
 					for j in range(1-Global.bombStr,Global.bombStr):
 						mineTile(i,j)
 				bombs -= 1
+				
+		if Input.is_action_just_pressed("tp"):
+			#Make sure Chimata does not tp out of bounds
+			if tps > 0 && (chimataLocation[1] + Global.tpStr) < 500:
+				chimataLocation[1] += Global.tpStr
+				updateLocation()
+				mineTile(0,0)
+				tps -= 1
 			
 	#Brings up the minigame end screen (stats and button)
 	elif moves == 0:

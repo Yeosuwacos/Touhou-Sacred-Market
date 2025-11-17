@@ -21,7 +21,7 @@ func _physics_process(delta):
 	
 	
 	#Walking direction (only left & right) normally
-	if Global.isMining == false && Global.follow == false:
+	if Global.isMining == false && Global.follow == false && Global.isMoving == true:
 		if Input.is_action_pressed("walkLeft"):
 			direction.x -= 1
 		if Input.is_action_pressed("walkRight"):
@@ -38,6 +38,10 @@ func _physics_process(delta):
 			position.y += 128
 		if Input.is_action_just_pressed("walkUp") && Global.maxUP == true:
 			position.y -= 128
+			
+		#Tp skill
+		if Input.is_action_just_pressed("tp") && (position.y/128 + Global.tpStr) < 500:
+			position.y += Global.tpStr * 128
 		
 	direction = direction.normalized() * speed
 	position += direction * delta

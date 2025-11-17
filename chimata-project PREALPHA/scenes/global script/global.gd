@@ -10,8 +10,12 @@ var menuOpen = false
 #Mine minigame variables
 var isMining = false
 var moves = 20
+
 var bombStr = 2
 var bombQty = 1
+
+var tpStr = 5
+var tpQty = 1
 
 #Chimata camera flag
 var follow = false
@@ -19,6 +23,7 @@ var maxUP = true
 var maxDOWN = true
 var maxLEFT = true
 var maxRIGHT = true
+var isMoving = true
 
 #Mine shop
 var mShopOpen = false

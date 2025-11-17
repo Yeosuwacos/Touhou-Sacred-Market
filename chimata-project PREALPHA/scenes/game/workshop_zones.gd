@@ -44,7 +44,6 @@ func _ready():
 func _physics_process(delta):
 	
 	#Verify if Chimata goes left or right
-	
 	if $gotoMarket.is_colliding():
 		get_parent().queue_free()
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/game/market.tscn")
@@ -70,6 +69,8 @@ func _physics_process(delta):
 	
 #Initiates the rhythm game
 func play(card,rep):
+	#Prevents Chimata from moving
+	Global.isMoving = false
 	#Sets up the playing field & variables
 	mult = 0
 	hits = 0
@@ -82,7 +83,7 @@ func play(card,rep):
 		var arrow = arrowSent.instantiate()
 		add_child(arrow)
 		arrow.type = type[orient]
-		arrow.position = Vector2i(600,$cardMinigames/Hitzone.position.y+16)
+		arrow.position = Vector2i(600,$cardMinigames/Hitzone.position.y+32)
 		arrow.speed = 400
 		await $cardMinigames/Repeater.timeout
 	$cardMinigames/Repeater.wait_time = 3
@@ -119,6 +120,8 @@ func play(card,rep):
 	str(Global.dragon_gem_s) + "/400 dragon gem pieces\r" + str(Global.dragon_gem_m) + "/200 dragon gems\r" + \
 	str(Global.ability_card_l) + "/175 dragon gem chunks\r" + str(Global.dragon_gem_xl) + "/100 dragon gem clusters"
 	$cardOptions.visible = true
+	#Makes Chimata able to move again
+	Global.isMoving = true
 
 #Randomizes the orientation
 func selOrient():

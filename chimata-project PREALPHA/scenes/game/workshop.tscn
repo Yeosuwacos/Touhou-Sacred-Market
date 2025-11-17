@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d5ja3ucwhd3t" path="res://scenes/game/workshop_zones.gd" id="3_xg03h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nryu2"]
-size = Vector2(128, 64)
+size = Vector2(64, 64)
 
 [node name="Workshop" type="Node2D"]
 script = ExtResource("1_nryu2")
@@ -79,6 +79,7 @@ position = Vector2(128, 0)
 [node name="Hitzone" type="Area2D" parent="WorkshopZones/cardMinigames"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorkshopZones/cardMinigames/Hitzone"]
+position = Vector2(64, 32)
 shape = SubResource("RectangleShape2D_nryu2")
 
 [node name="Indicator" type="ColorRect" parent="WorkshopZones/cardMinigames/Hitzone"]
