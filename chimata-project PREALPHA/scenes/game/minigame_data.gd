@@ -130,15 +130,7 @@ func _physics_process(delta):
 				adds -= 1
 	#Brings up the minigame end screen (stats and button)
 	elif moves == 0:
-		Global.isMining = false
-		#Removes move counter
-		$mineWindow/Labels/moveCounter.text = ""
-		
-		#Displays surface
-		$mineWindow/Labels/returnSurface.visible = true
-		$mineWindow/Labels/returnSurface/Stats.text = "You mined:\r" + str(ore_xs) + " dragon gem dust\r" \
-		+ str(ore_s) + " dragon gem pieces\r" + str(ore_m) + " dragon gems\r" + str(ore_l) \
-		+ " dragon gem chunks\r" + str(ore_xl) + " dragon gem clusters" 
+		endGame()
 		
 #Executes multiple mining operations
 func mineTile(offsetX,offsetY,mult):
@@ -155,19 +147,17 @@ func updateLocation():
 
 #Adds the corresponding ore and multiplier
 func add_ore(nb,mult):
-	var str = 1
+	var strength = 1
 	if mult == true:
-		str = Global.addStr
-	if nb == 1:
-		ore_xs += str
-	if nb == 2:
-		ore_s += str
-	if nb == 3:
-		ore_m += str
-	if nb == 4:
-		ore_l += str
-	if nb == 5:
-		ore_xl += str
+		strength = Global.addStr
+		
+	match nb:
+		1: ore_xs += strength
+		2: ore_s += strength
+		3: ore_m += strength
+		4: ore_l += strength
+		5: ore_xl += strength
+		
 	Global.addActive = false
 
 #Ends the mining session and returns to the surface
@@ -184,6 +174,10 @@ func _on_back_pressed() -> void:
 
 #Ends the mining game early
 func _on_back_early_pressed() -> void:
+	endGame()
+
+#Displays statistics and offers to go back to the surface
+func endGame():
 	Global.isMining = false
 	#Removes move counter 
 	$mineWindow/Labels/moveCounter.text = ""

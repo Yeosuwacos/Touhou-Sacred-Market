@@ -69,8 +69,9 @@ func _physics_process(delta):
 	
 #Initiates the rhythm game
 func play(card,rep):
-	#Prevents Chimata from moving
+	#Prevents Chimata from moving and locks the camera onto her
 	Global.isMoving = false
+	Global.follow = true
 	#Sets up the playing field & variables
 	mult = 0
 	hits = 0
@@ -92,16 +93,13 @@ func play(card,rep):
 	
 	#Calculates the rounded multiplier and gives out the correct amount of cards
 	mult = ceili(hits/card)
-	if card == 1:
-		Global.ability_card_xs += mult
-	if card == 2:
-		Global.ability_card_s += mult
-	if card == 3:
-		Global.ability_card_m += mult
-	if card == 4:
-		Global.ability_card_l += mult
-	if card == 5:
-		Global.ability_card_xl += mult
+	match card:
+		1: Global.ability_card_xs += mult
+		2: Global.ability_card_s += mult
+		3: Global.ability_card_m += mult
+		4: Global.ability_card_l += mult
+		5: Global.ability_card_xl += mult
+		
 	#Updates the display
 	$cardMinigames/Repeater.stop()
 	$cardOptions/cardXs/Price.text = "Card 1\r" + str(Global.dragon_gem_xs) + "/25 dragon gem dust"
@@ -120,8 +118,9 @@ func play(card,rep):
 	str(Global.dragon_gem_s) + "/400 dragon gem pieces\r" + str(Global.dragon_gem_m) + "/200 dragon gems\r" + \
 	str(Global.ability_card_l) + "/175 dragon gem chunks\r" + str(Global.dragon_gem_xl) + "/100 dragon gem clusters"
 	$cardOptions.visible = true
-	#Makes Chimata able to move again
+	#Makes Chimata able to move again and unlocks the camera
 	Global.isMoving = true
+	Global.follow = false
 
 #Randomizes the orientation
 func selOrient():
