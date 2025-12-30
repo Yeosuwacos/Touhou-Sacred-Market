@@ -37,9 +37,15 @@ var mShopOpen = false
 var iShopOpen = false
 
 #Market minigame variables
+var wager = 0
+
+#Higher-lower
 var nb1 = 0
 var nb2 = 0
-var wager = 0
+
+#Blackjack
+var playerHand = 0
+var marisaHand = 0
 
 #Workshop minigame variables
 var hittable = false
