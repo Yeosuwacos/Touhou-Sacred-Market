@@ -40,42 +40,62 @@ z_index = 1
 texture_filter = 1
 texture = ExtResource("4_8ojic")
 
+[node name="mDialogue" type="Label" parent="ShopGUI"]
+z_index = 1
+offset_left = 8600.0
+offset_top = 2977.0
+offset_right = 8640.0
+offset_bottom = 3000.0
+
 [node name="BG" type="ColorRect" parent="ShopGUI"]
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.4660673, 0.17293522, 0.009066197, 1)
 
-[node name="Shop" type="Node2D" parent="."]
-position = Vector2(9000, 3000)
+[node name="Shop" type="GridContainer" parent="."]
+visible = false
+offset_left = 9000.0
+offset_top = 3000.0
+offset_right = 9000.0
+offset_bottom = 3000.0
+columns = 2
 script = ExtResource("3_yh3sh")
 
 [node name="Moves" type="Button" parent="Shop"]
-offset_right = 128.0
-offset_bottom = 64.0
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="MovesText" type="Label" parent="Shop"]
+layout_mode = 2
 
 [node name="Bombs" type="Button" parent="Shop"]
-offset_top = 64.0
-offset_right = 128.0
-offset_bottom = 128.0
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="BombsText" type="Label" parent="Shop"]
+layout_mode = 2
 
 [node name="BombPower" type="Button" parent="Shop"]
-offset_top = 128.0
-offset_right = 128.0
-offset_bottom = 192.0
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 
-[node name="mDialogue" type="Label" parent="Shop"]
-offset_left = -400.0
-offset_top = -23.0
-offset_right = -360.0
+[node name="BombPowerText" type="Label" parent="Shop"]
+layout_mode = 2
 
-[node name="IdleShop" type="Node2D" parent="."]
-position = Vector2(9000, 3000)
+[node name="IdleShop" type="GridContainer" parent="."]
+offset_left = 9000.0
+offset_top = 3000.0
+offset_right = 9000.0
+offset_bottom = 3000.0
+columns = 2
 script = ExtResource("4_yh3sh")
 
 [node name="idlerXs" type="Button" parent="IdleShop"]
-offset_right = 128.0
-offset_bottom = 64.0
-text = "+1 xs/s"
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="idlerXsText" type="Label" parent="IdleShop"]
+layout_mode = 2
 
 [connection signal="pressed" from="ShopButton" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="IdleShopButton" to="." method="_on_idle_shop_button_pressed"]

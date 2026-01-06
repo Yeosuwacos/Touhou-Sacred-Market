@@ -1,8 +1,8 @@
-extends Node2D
+extends GridContainer
 
 #Prepares the idle shop for when it is opened
 func _ready():
-	$idlerXs.text = "+1 xs/s: " + str(floori(Prices.idleXs))
+	$idlerXsText.text = "+1 xs/s: " + str(floori(Prices.idleXs))
 	
 #Buys idle harvesters
 func _on_idler_xs_pressed() -> void:
@@ -11,4 +11,4 @@ func _on_idler_xs_pressed() -> void:
 		Global.idleXs += 1
 		Prices.idleXsBought += 1
 		Prices.idleXs += 100*Prices.idleXsBought**1.6
-		$idlerXs.text = "+1 xs/s: " + str(floori(Prices.idleXs))
+		$idlerXsText.text = "+1 xs/s: " + str(floori(Prices.idleXs))
