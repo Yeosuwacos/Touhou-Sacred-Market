@@ -1,15 +1,10 @@
 extends Node2D
 
-#Preloading Chimata/GUI
-@onready var chimataScene = preload("res://entities/characters/chimata.tscn")
+#Preloading GUI
 @onready var options = preload("res://scenes/menu/menu.tscn")
 @onready var optionPopup = options.instantiate()
 
 func _ready():
-	var chimata = chimataScene.instantiate()
-	add_child(chimata)
-	chimata.position = Vector2(50,300)
-	
 	#Settings initialization
 	add_child(optionPopup)
 	optionPopup.position = Vector2i(9000,3000)

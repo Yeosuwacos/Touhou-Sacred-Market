@@ -4,6 +4,11 @@ extends Node2D
 @onready var arrowSent = preload("res://entities/misc/arrow.tscn")
 @onready var readyArrow: Area2D = null
 
+#Workshop layout
+@onready var shopSize = Vector2(1280,450)
+@onready var cardChoiceSize = Vector2(480,360)
+@onready var chimataScene = preload("res://entities/characters/chimata.tscn")
+
 #Variables
 @onready var type = {
 	1: "up",
@@ -16,18 +21,27 @@ extends Node2D
 @onready var orient = 0
 @onready var mult = 0
 @onready var hits = 0
+@onready var chimata = chimataScene.instantiate()
 
 func _ready():
+	add_child(chimata)
+	chimata.position = Vector2(50,get_viewport_rect().size.y - shopSize.y - 64)
 	
 	#Place the paths to other locations
 	$gotoMarket.position = Vector2(0,0)
 	
 	#Setup the available card fabrication options
-	$cardOptions.visible = true
+	$shopGUI.visible = true
 	update_prices()
 	
 	#Keep the indicator invisible
 	$cardMinigames/Hitzone/Indicator.visible = false
+	
+	#Places down the different workshop elements
+	$shopGUI.position = Vector2(get_viewport_rect().size.x/2 - cardChoiceSize.x/2, \
+	get_viewport_rect().size.y - cardChoiceSize.y)
+	$BG.size = shopSize
+	$BG.position = Vector2(0, get_viewport_rect().size.y - shopSize.y)
 
 func _physics_process(delta):
 	
@@ -61,19 +75,19 @@ func _on_updater_timeout() -> void:
 
 #Updates all the prices
 func update_prices():
-	$cardOptions/cardXs/Price.text = "Card 1\r" + str(Global.dragon_gem_xs) + "/25 dragon gem dust"
+	$shopGUI/cardOptions/cards/PriceXs.text = "Card 1\r" + str(Global.dragon_gem_xs) + "/25 dragon gem dust"
 
-	$cardOptions/cardS/Price.text = "Card 2\r" + str(Global.dragon_gem_xs) + "/75 dragon gem dust\r" + \
+	$shopGUI/cardOptions/cards/PriceS.text = "Card 2\r" + str(Global.dragon_gem_xs) + "/75 dragon gem dust\r" + \
 	str(Global.dragon_gem_s) + "/25 dragon gem piece"
 	
-	$cardOptions/cardM/Price.text = "Card 3\r" + str(Global.dragon_gem_xs) + "/200 dragon gem dust\r" + \
+	$shopGUI/cardOptions/cards/PriceM.text = "Card 3\r" + str(Global.dragon_gem_xs) + "/200 dragon gem dust\r" + \
 	str(Global.dragon_gem_s) + "/125 dragon gem pieces\r" + str(Global.dragon_gem_m) + "/50 dragon gems"
 	
-	$cardOptions/cardL/Price.text = "Card 4\r" + str(Global.dragon_gem_xs) + "/350 dragon gem dust\r" + \
+	$shopGUI/cardOptions/cards/PriceL.text = "Card 4\r" + str(Global.dragon_gem_xs) + "/350 dragon gem dust\r" + \
 	str(Global.dragon_gem_s) + "/275 dragon gem pieces\r" + str(Global.dragon_gem_m) + "/100 dragon gems\r" + \
 	str(Global.dragon_gem_l) + "/75 dragon gem chunks"
 
-	$cardOptions/cardXl/Price.text = "Card 5\r" + str(Global.dragon_gem_xs) + "/500 dragon gem dust\r" +\
+	$shopGUI/cardOptions/cards/PriceXl.text = "Card 5\r" + str(Global.dragon_gem_xs) + "/500 dragon gem dust\r" +\
 	str(Global.dragon_gem_s) + "/400 dragon gem pieces\r" + str(Global.dragon_gem_m) + "/200 dragon gems\r" + \
 	str(Global.dragon_gem_l) + "/175 dragon gem chunks\r" + str(Global.dragon_gem_xl) + "/100 dragon gem clusters"
 
@@ -85,8 +99,9 @@ func play(card,rep):
 	#Sets up the playing field & variables
 	mult = 0
 	hits = 0
-	$cardOptions.visible = false
+	$shopGUI.visible = false
 	$cardMinigames/Hitzone/Indicator.visible = true
+	$cardMinigames/Hitzone.position = Vector2(chimata.position.x-188, 50)
 	$cardMinigames/Repeater.wait_time = 1 - 0.1*card
 	$cardMinigames/Repeater.start()
 	for i in range(0,rep):
@@ -95,10 +110,10 @@ func play(card,rep):
 		var arrow = arrowSent.instantiate()
 		add_child(arrow)
 		arrow.type = type[orient]
-		arrow.position = Vector2i(600,$cardMinigames/Hitzone.position.y+32)
+		arrow.position = Vector2i($cardMinigames/Hitzone.position.x + 600,$cardMinigames/Hitzone.position.y+32)
 		arrow.speed = 400
 		await $cardMinigames/Repeater.timeout
-	$cardMinigames/Repeater.wait_time = 3
+	$cardMinigames/Repeater.wait_time = 3 + 0.2*card
 	await $cardMinigames/Repeater.timeout
 	$cardMinigames/Repeater.stop()
 	
@@ -114,7 +129,7 @@ func play(card,rep):
 	#Updates the display
 	$cardMinigames/Repeater.stop()
 	update_prices()
-	$cardOptions.visible = true
+	$shopGUI.visible = true
 	$cardMinigames/Hitzone/Indicator.visible = false
 	
 	#Makes Chimata able to move again and unlocks the camera

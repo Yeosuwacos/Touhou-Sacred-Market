@@ -12,69 +12,65 @@ script = ExtResource("1_nryu2")
 [node name="WorkshopZones" type="Node2D" parent="."]
 script = ExtResource("3_xg03h")
 
+[node name="BG" type="ColorRect" parent="WorkshopZones"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.4660673, 0.17293522, 0.009066197, 1)
+
 [node name="gotoMarket" type="RayCast2D" parent="WorkshopZones"]
 target_position = Vector2(0, 1500)
 
-[node name="cardOptions" type="Node2D" parent="WorkshopZones"]
-visible = false
-position = Vector2(0, 128)
+[node name="shopGUI" type="Node2D" parent="WorkshopZones"]
 
-[node name="Updater" type="Timer" parent="WorkshopZones/cardOptions"]
+[node name="cardOptions" type="ScrollContainer" parent="WorkshopZones/shopGUI"]
+custom_minimum_size = Vector2(480, 360)
+offset_right = 488.0
+offset_bottom = 360.0
+horizontal_scroll_mode = 0
+
+[node name="Updater" type="Timer" parent="WorkshopZones/shopGUI/cardOptions"]
 autostart = true
 
-[node name="cardXs" type="Node2D" parent="WorkshopZones/cardOptions"]
+[node name="cards" type="GridContainer" parent="WorkshopZones/shopGUI/cardOptions"]
+custom_minimum_size = Vector2(480, 360)
+layout_mode = 2
+theme_override_constants/v_separation = 32
+columns = 2
 
-[node name="Price" type="Label" parent="WorkshopZones/cardOptions/cardXs"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="SelectXs" type="Button" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
 
-[node name="SelectXs" type="Button" parent="WorkshopZones/cardOptions/cardXs"]
-offset_top = -64.0
-offset_right = 64.0
+[node name="PriceXs" type="Label" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+layout_mode = 2
 
-[node name="cardS" type="Node2D" parent="WorkshopZones/cardOptions"]
-position = Vector2(256, 0)
+[node name="SelectS" type="Button" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
 
-[node name="Price" type="Label" parent="WorkshopZones/cardOptions/cardS"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="PriceS" type="Label" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+layout_mode = 2
 
-[node name="SelectS" type="Button" parent="WorkshopZones/cardOptions/cardS"]
-offset_top = -64.0
-offset_right = 64.0
+[node name="SelectM" type="Button" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
 
-[node name="cardM" type="Node2D" parent="WorkshopZones/cardOptions"]
-position = Vector2(512, 0)
+[node name="PriceM" type="Label" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+layout_mode = 2
 
-[node name="Price" type="Label" parent="WorkshopZones/cardOptions/cardM"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="SelectL" type="Button" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
 
-[node name="SelectM" type="Button" parent="WorkshopZones/cardOptions/cardM"]
-offset_top = -64.0
-offset_right = 64.0
+[node name="PriceL" type="Label" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+layout_mode = 2
 
-[node name="cardL" type="Node2D" parent="WorkshopZones/cardOptions"]
-position = Vector2(768, 0)
+[node name="SelectXl" type="Button" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
 
-[node name="Price" type="Label" parent="WorkshopZones/cardOptions/cardL"]
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="SelectL" type="Button" parent="WorkshopZones/cardOptions/cardL"]
-offset_top = -64.0
-offset_right = 64.0
-
-[node name="cardXl" type="Node2D" parent="WorkshopZones/cardOptions"]
-position = Vector2(1024, 0)
-
-[node name="Price" type="Label" parent="WorkshopZones/cardOptions/cardXl"]
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="SelectXl" type="Button" parent="WorkshopZones/cardOptions/cardXl"]
-offset_top = -64.0
-offset_right = 64.0
+[node name="PriceXl" type="Label" parent="WorkshopZones/shopGUI/cardOptions/cards"]
+layout_mode = 2
 
 [node name="cardMinigames" type="Node2D" parent="WorkshopZones"]
 position = Vector2(128, 0)
@@ -93,11 +89,11 @@ color = Color(0.4509804, 1, 1, 1)
 
 [node name="Repeater" type="Timer" parent="WorkshopZones/cardMinigames"]
 
-[connection signal="timeout" from="WorkshopZones/cardOptions/Updater" to="WorkshopZones" method="_on_updater_timeout"]
-[connection signal="pressed" from="WorkshopZones/cardOptions/cardXs/SelectXs" to="WorkshopZones" method="_on_selectXs_pressed"]
-[connection signal="pressed" from="WorkshopZones/cardOptions/cardS/SelectS" to="WorkshopZones" method="_on_select_s_pressed"]
-[connection signal="pressed" from="WorkshopZones/cardOptions/cardM/SelectM" to="WorkshopZones" method="_on_select_m_pressed"]
-[connection signal="pressed" from="WorkshopZones/cardOptions/cardL/SelectL" to="WorkshopZones" method="_on_select_l_pressed"]
-[connection signal="pressed" from="WorkshopZones/cardOptions/cardXl/SelectXl" to="WorkshopZones" method="_on_select_xl_pressed"]
+[connection signal="timeout" from="WorkshopZones/shopGUI/cardOptions/Updater" to="WorkshopZones" method="_on_updater_timeout"]
+[connection signal="pressed" from="WorkshopZones/shopGUI/cardOptions/cards/SelectXs" to="WorkshopZones" method="_on_selectXs_pressed"]
+[connection signal="pressed" from="WorkshopZones/shopGUI/cardOptions/cards/SelectS" to="WorkshopZones" method="_on_select_s_pressed"]
+[connection signal="pressed" from="WorkshopZones/shopGUI/cardOptions/cards/SelectM" to="WorkshopZones" method="_on_select_m_pressed"]
+[connection signal="pressed" from="WorkshopZones/shopGUI/cardOptions/cards/SelectL" to="WorkshopZones" method="_on_select_l_pressed"]
+[connection signal="pressed" from="WorkshopZones/shopGUI/cardOptions/cards/SelectXl" to="WorkshopZones" method="_on_select_xl_pressed"]
 [connection signal="area_entered" from="WorkshopZones/cardMinigames/Hitzone" to="WorkshopZones" method="_on_hitzone_area_entered"]
 [connection signal="area_exited" from="WorkshopZones/cardMinigames/Hitzone" to="WorkshopZones" method="_on_hitzone_area_exited"]
