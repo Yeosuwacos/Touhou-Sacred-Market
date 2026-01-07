@@ -21,10 +21,120 @@ target_position = Vector2(0, 1500)
 [node name="SellingSystem" type="Node2D" parent="."]
 script = ExtResource("3_cn1e3")
 
+[node name="BG" type="ColorRect" parent="SellingSystem"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.4660673, 0.17293522, 0.009066197, 1)
+
+[node name="minigameGUI" type="Node2D" parent="SellingSystem"]
+
+[node name="Bartering" type="Node2D" parent="SellingSystem/minigameGUI"]
+
+[node name="Cashout" type="Button" parent="SellingSystem/minigameGUI/Bartering"]
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="HigherLower" type="Node2D" parent="SellingSystem/minigameGUI/Bartering"]
+position = Vector2(0, 300)
+
+[node name="Higher" type="Button" parent="SellingSystem/minigameGUI/Bartering/HigherLower"]
+offset_right = 32.0
+offset_bottom = 32.0
+text = "+"
+
+[node name="Lower" type="Button" parent="SellingSystem/minigameGUI/Bartering/HigherLower"]
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 64.0
+text = "-"
+
+[node name="Card1" type="Label" parent="SellingSystem/minigameGUI/Bartering/HigherLower"]
+offset_left = 32.0
+offset_right = 72.0
+offset_bottom = 23.0
+
+[node name="Card2" type="Label" parent="SellingSystem/minigameGUI/Bartering/HigherLower"]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 72.0
+offset_bottom = 55.0
+
+[node name="Blackjack" type="Node2D" parent="SellingSystem/minigameGUI/Bartering"]
+position = Vector2(300, 300)
+
+[node name="Hit" type="Button" parent="SellingSystem/minigameGUI/Bartering/Blackjack"]
+offset_right = 112.0
+offset_bottom = 32.0
+text = "Hit"
+
+[node name="DDown" type="Button" parent="SellingSystem/minigameGUI/Bartering/Blackjack"]
+offset_top = 32.0
+offset_right = 112.0
+offset_bottom = 64.0
+text = "Double down"
+
+[node name="Stand" type="Button" parent="SellingSystem/minigameGUI/Bartering/Blackjack"]
+offset_top = 64.0
+offset_right = 112.0
+offset_bottom = 96.0
+text = "Stand"
+
+[node name="PlayerNb" type="Label" parent="SellingSystem/minigameGUI/Bartering/Blackjack"]
+offset_left = 120.0
+offset_right = 152.0
+offset_bottom = 32.0
+
+[node name="OpponentNb" type="Label" parent="SellingSystem/minigameGUI/Bartering/Blackjack"]
+offset_left = 120.0
+offset_top = 32.0
+offset_right = 152.0
+offset_bottom = 64.0
+
+[node name="BlCards" type="Node2D" parent="SellingSystem/minigameGUI/Bartering/Blackjack"]
+
+[node name="YourCards" type="HBoxContainer" parent="SellingSystem/minigameGUI/Bartering/Blackjack/BlCards"]
+offset_top = 96.0
+offset_right = 40.0
+offset_bottom = 136.0
+scale = Vector2(0.1, 0.1)
+
+[node name="MarisaCards" type="HBoxContainer" parent="SellingSystem/minigameGUI/Bartering/Blackjack/BlCards"]
+offset_top = 300.0
+offset_right = 40.0
+offset_bottom = 340.0
+scale = Vector2(0.1, 0.1)
+
 [node name="GUI" parent="SellingSystem" instance=ExtResource("2_cn1e3")]
 
 [node name="CardSale" type="Node2D" parent="SellingSystem"]
-position = Vector2(256, 256)
+
+[node name="Characters" type="Node2D" parent="SellingSystem/CardSale"]
+
+[node name="CallChara" type="HBoxContainer" parent="SellingSystem/CardSale/Characters"]
+
+[node name="ReimuSale" type="Button" parent="SellingSystem/CardSale/Characters/CallChara"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="SakuyaHiLo" type="Button" parent="SellingSystem/CardSale/Characters/CallChara"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="MarisaBlackjack" type="Button" parent="SellingSystem/CardSale/Characters/CallChara"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="SanaeRoulette" type="Button" parent="SellingSystem/CardSale/Characters/CallChara"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="Sakuya" type="Sprite2D" parent="SellingSystem/CardSale/Characters"]
+position = Vector2(8344, 2744)
+texture = ExtResource("5_fwmry")
+
+[node name="dialogue" type="Label" parent="SellingSystem/CardSale/Characters"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Buttons" type="Node2D" parent="SellingSystem/CardSale"]
 
@@ -94,106 +204,33 @@ layout_mode = 2
 text = "Quest card"
 
 [node name="Sell" type="Button" parent="SellingSystem/CardSale/Buttons"]
-offset_top = 160.0
+offset_top = 180.0
 offset_right = 64.0
-offset_bottom = 192.0
+offset_bottom = 212.0
 text = "Sell"
 
 [node name="HiLo" type="Button" parent="SellingSystem/CardSale/Buttons"]
-offset_top = 192.0
+offset_top = 180.0
 offset_right = 64.0
-offset_bottom = 224.0
+offset_bottom = 212.0
 text = "HiLo"
 
 [node name="Blackjack" type="Button" parent="SellingSystem/CardSale/Buttons"]
-offset_top = 224.0
+offset_top = 180.0
 offset_right = 64.0
-offset_bottom = 256.0
+offset_bottom = 212.0
 text = "Black"
 
-[node name="Bartering" type="Node2D" parent="SellingSystem"]
-
-[node name="Cashout" type="Button" parent="SellingSystem/Bartering"]
-offset_left = 18000.0
-offset_top = 6000.0
-offset_right = 18032.0
-offset_bottom = 6032.0
-
-[node name="HigherLower" type="Node2D" parent="SellingSystem/Bartering"]
-position = Vector2(9000, 3000)
-
-[node name="Higher" type="Button" parent="SellingSystem/Bartering/HigherLower"]
-offset_right = 32.0
-offset_bottom = 32.0
-text = "+"
-
-[node name="Lower" type="Button" parent="SellingSystem/Bartering/HigherLower"]
-offset_top = 32.0
-offset_right = 32.0
-offset_bottom = 64.0
-text = "-"
-
-[node name="Card1" type="Label" parent="SellingSystem/Bartering/HigherLower"]
-offset_left = 32.0
-offset_right = 72.0
-offset_bottom = 23.0
-
-[node name="Card2" type="Label" parent="SellingSystem/Bartering/HigherLower"]
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 72.0
-offset_bottom = 55.0
-
-[node name="Sakuya" type="Sprite2D" parent="SellingSystem/Bartering/HigherLower"]
-position = Vector2(-400, 0)
-texture = ExtResource("5_fwmry")
-centered = false
-
-[node name="Blackjack" type="Node2D" parent="SellingSystem/Bartering"]
-position = Vector2(9000, 3000)
-
-[node name="Hit" type="Button" parent="SellingSystem/Bartering/Blackjack"]
-offset_right = 112.0
-offset_bottom = 32.0
-text = "Hit"
-
-[node name="DDown" type="Button" parent="SellingSystem/Bartering/Blackjack"]
-offset_top = 32.0
-offset_right = 112.0
-offset_bottom = 64.0
-text = "Double down"
-
-[node name="Stand" type="Button" parent="SellingSystem/Bartering/Blackjack"]
-offset_top = 64.0
-offset_right = 112.0
-offset_bottom = 96.0
-text = "Stand"
-
-[node name="PlayerNb" type="Label" parent="SellingSystem/Bartering/Blackjack"]
-offset_left = 120.0
-offset_right = 152.0
-offset_bottom = 32.0
-
-[node name="OpponentNb" type="Label" parent="SellingSystem/Bartering/Blackjack"]
-offset_left = 120.0
-offset_top = 32.0
-offset_right = 152.0
-offset_bottom = 64.0
-
-[node name="BlCards" type="Node2D" parent="SellingSystem/Bartering/Blackjack"]
-
-[node name="YourCards" type="HBoxContainer" parent="SellingSystem/Bartering/Blackjack/BlCards"]
-offset_top = 96.0
-offset_right = 40.0
-offset_bottom = 136.0
-scale = Vector2(0.25, 0.25)
-
-[node name="MarisaCards" type="HBoxContainer" parent="SellingSystem/Bartering/Blackjack/BlCards"]
-offset_top = 300.0
-offset_right = 40.0
-offset_bottom = 340.0
-scale = Vector2(0.25, 0.25)
-
+[connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/Cashout" to="SellingSystem" method="_on_cashout_pressed"]
+[connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/HigherLower/Higher" to="SellingSystem" method="_on_higher_pressed"]
+[connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/HigherLower/Lower" to="SellingSystem" method="_on_lower_pressed"]
+[connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/Blackjack/Hit" to="SellingSystem" method="_on_hit_pressed"]
+[connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/Blackjack/DDown" to="SellingSystem" method="_on_d_down_pressed"]
+[connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/Blackjack/Stand" to="SellingSystem" method="_on_stand_pressed"]
+[connection signal="pressed" from="SellingSystem/CardSale/Characters/CallChara/ReimuSale" to="SellingSystem" method="_on_reimu_sale_pressed"]
+[connection signal="pressed" from="SellingSystem/CardSale/Characters/CallChara/SakuyaHiLo" to="SellingSystem" method="_on_sakuya_hi_lo_pressed"]
+[connection signal="pressed" from="SellingSystem/CardSale/Characters/CallChara/MarisaBlackjack" to="SellingSystem" method="_on_marisa_blackjack_pressed"]
+[connection signal="pressed" from="SellingSystem/CardSale/Characters/CallChara/SanaeRoulette" to="SellingSystem" method="_on_sanae_roulette_pressed"]
 [connection signal="pressed" from="SellingSystem/CardSale/Buttons/AddRem/addXs" to="SellingSystem" method="_on_add_xs_pressed"]
 [connection signal="pressed" from="SellingSystem/CardSale/Buttons/AddRem/remXs" to="SellingSystem" method="_on_rem_xs_pressed"]
 [connection signal="pressed" from="SellingSystem/CardSale/Buttons/AddRem/addS" to="SellingSystem" method="_on_add_s_pressed"]
@@ -207,9 +244,3 @@ scale = Vector2(0.25, 0.25)
 [connection signal="pressed" from="SellingSystem/CardSale/Buttons/Sell" to="SellingSystem" method="_on_sell_pressed"]
 [connection signal="pressed" from="SellingSystem/CardSale/Buttons/HiLo" to="SellingSystem" method="_on_hi_lo_pressed"]
 [connection signal="pressed" from="SellingSystem/CardSale/Buttons/Blackjack" to="SellingSystem" method="_on_blackjack_pressed"]
-[connection signal="pressed" from="SellingSystem/Bartering/Cashout" to="SellingSystem" method="_on_cashout_pressed"]
-[connection signal="pressed" from="SellingSystem/Bartering/HigherLower/Higher" to="SellingSystem" method="_on_higher_pressed"]
-[connection signal="pressed" from="SellingSystem/Bartering/HigherLower/Lower" to="SellingSystem" method="_on_lower_pressed"]
-[connection signal="pressed" from="SellingSystem/Bartering/Blackjack/Hit" to="SellingSystem" method="_on_hit_pressed"]
-[connection signal="pressed" from="SellingSystem/Bartering/Blackjack/DDown" to="SellingSystem" method="_on_d_down_pressed"]
-[connection signal="pressed" from="SellingSystem/Bartering/Blackjack/Stand" to="SellingSystem" method="_on_stand_pressed"]

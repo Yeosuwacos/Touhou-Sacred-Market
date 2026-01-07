@@ -5,7 +5,7 @@ extends Node2D
 @onready var readyArrow: Area2D = null
 
 #Workshop layout
-@onready var shopSize = Vector2(1280,450)
+@onready var shopSize = Vector2(2560,450)
 @onready var cardChoiceSize = Vector2(480,360)
 @onready var chimataScene = preload("res://entities/characters/chimata.tscn")
 

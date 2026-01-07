@@ -1,5 +1,12 @@
 extends Node2D
 
+#Layout for minigames
+@onready var minigameSize = Vector2(1280,450)
+@onready var gameAreaSize = Vector2(480,360)
+@onready var characterSize = Vector2(360,450)
+@onready var viewX = get_viewport_rect().size.x
+@onready var viewY = get_viewport_rect().size.y
+
 #Refreshes the card labels
 func _ready():
 	$CardSale/Buttons/AddRem/Xs.text = "Lesser ability cards " + str(Global.sold_xs) + "/" + str(Global.ability_card_xs)
@@ -7,10 +14,76 @@ func _ready():
 	$CardSale/Buttons/AddRem/M.text = "Greater ability cards " + str(Global.sold_m) + "/" + str(Global.ability_card_m)
 	$CardSale/Buttons/AddRem/L.text = "Quest ability cards " + str(Global.sold_l) + "/" + str(Global.ability_card_l)
 	$CardSale/Buttons/AddRem/Xl.text = "Special ability cards " + str(Global.sold_xl) + "/" + str(Global.ability_card_xl)
+
+	#Sets the scale for characters
+
+	$CardSale/Characters/Sakuya.scale = characterSize/$CardSale/Characters/Sakuya.texture.get_size()
+	$CardSale/Characters/Sakuya.position = Vector2(characterSize.x/2, get_viewport_rect().size.y - characterSize.y/2)
 	
-	#Adjusts Sakuya's scale
-	$Bartering/HigherLower/Sakuya.scale = Vector2(400.0/$Bartering/HigherLower/Sakuya.texture.get_width(), \
-	500.0/$Bartering/HigherLower/Sakuya.texture.get_height())
+	#Creates the layout for the interface
+	
+	$BG.size = minigameSize
+	$BG.position = Vector2(0, get_viewport_rect().size.y - minigameSize.y)
+	$minigameGUI/Bartering/HigherLower.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y/2)
+	$CardSale/Characters/dialogue.position = Vector2(characterSize.x, viewY - minigameSize.y) 
+	
+	$BG.visible = false
+	$minigameGUI/Bartering/HigherLower.visible = false
+	$minigameGUI/Bartering/Blackjack.visible = false
+	$minigameGUI/Bartering/Cashout.visible = false
+	$CardSale/Buttons.visible = false
+	$CardSale/Characters/dialogue.visible = false
+	
+	#Hides the characters
+	$CardSale/Characters/Sakuya.visible = false
+	
+	#Places the character calling buttons in good proportions
+	
+	$CardSale/Characters/CallChara.add_theme_constant_override("separation", viewX/5)
+	$CardSale/Characters/CallChara.position = Vector2(viewX/2 - $CardSale/Characters/CallChara.size.x/2, 50)
+	$CardSale/Buttons.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
+	$CardSale/Buttons/Sell.visible = false
+	$CardSale/Buttons/HiLo.visible = false
+	$CardSale/Buttons/Blackjack.visible = false
+
+#Picks the right character and begins a sale
+
+func _on_reimu_sale_pressed() -> void:
+	$CardSale/Buttons.visible = true
+	$CardSale/Buttons/Sell.visible = true
+	$CardSale/Buttons/HiLo.visible = false
+	$CardSale/Buttons/Blackjack.visible = false
+	$BG.visible = true
+
+	$CardSale/Characters/Sakuya.visible = false
+	
+	$CardSale/Characters/dialogue.visible = true
+
+func _on_sakuya_hi_lo_pressed() -> void:
+	$CardSale/Buttons.visible = true
+	$CardSale/Buttons/HiLo.visible = true
+	$CardSale/Buttons/Sell.visible = false
+	$CardSale/Buttons/Blackjack.visible = false
+	$BG.visible = true
+	
+	$CardSale/Characters/Sakuya.visible = true
+	
+	$CardSale/Characters/dialogue.visible = true
+	$CardSale/Characters/dialogue.text = Dialogue.HiLoLines.pick_random()
+
+func _on_marisa_blackjack_pressed() -> void:
+	$CardSale/Buttons.visible = true
+	$CardSale/Buttons/Blackjack.visible = true
+	$CardSale/Buttons/Sell.visible = false
+	$CardSale/Buttons/HiLo.visible = false
+	$BG.visible = true
+	
+	$CardSale/Characters/Sakuya.visible = false
+	
+	$CardSale/Characters/dialogue.visible = true
+
+func _on_sanae_roulette_pressed() -> void:
+	pass # Replace with function body.
 
 #Adding or removing cards for sale
 
@@ -85,11 +158,13 @@ func _on_hi_lo_pressed() -> void:
 	total += (Global.sold_xs * 50 + Global.sold_s * 300 + Global.sold_m * \
 	825 + Global.sold_l * 2150 + Global.sold_xl * 5400)
 	if total > 0:
-		$CardSale.position = Vector2(9000,3000)
+		$CardSale/Buttons.visible = false
+		$CardSale/Characters/CallChara.visible = false
+		$CardSale/Characters/dialogue.text = ""
 		HigherLower(total)
 
 func HigherLower(wager):
-	$Bartering/HigherLower.position = Vector2(900,300)
+	$minigameGUI/Bartering/HigherLower.visible = true
 	Global.wager = wager
 	Global.nb1 = randi_range(3,10)
 	Global.nb2 = randi_range(1,12)
@@ -98,28 +173,28 @@ func HigherLower(wager):
 	while Global.nb2 == Global.nb1:
 		Global.nb2 = randi_range(1,12)
 	
-	$Bartering/HigherLower/Card1.text = str(Global.nb1)
+	$minigameGUI/Bartering/HigherLower/Card1.text = str(Global.nb1)
 	
 #Variables for the higher-lower minigame
 func _on_higher_pressed() -> void:
-	$Bartering/HigherLower/Card2.text = str(Global.nb2)
+	$minigameGUI/Bartering/HigherLower/Card2.text = str(Global.nb2)
 	if Global.nb1 < Global.nb2:
 		Global.wager *= 1.25
-		$Bartering/HigherLower/Card2.text += ": Win!"
+		$minigameGUI/Bartering/HigherLower/Card2.text += ": Win!"
 	elif Global.nb1 > Global.nb2:
 		Global.wager *= 0.75
-		$Bartering/HigherLower/Card2.text += ": Lose!"
-	$Bartering/Cashout.position = Vector2(900,268)
+		$minigameGUI/Bartering/HigherLower/Card2.text += ": Lose!"
+	$minigameGUI/Bartering/Cashout.visible = true
 
 func _on_lower_pressed() -> void:
-	$Bartering/HigherLower/Card2.text = str(Global.nb2)
+	$minigameGUI/Bartering/HigherLower/Card2.text = str(Global.nb2)
 	if Global.nb1 > Global.nb2:
 		Global.wager *= 1.25
-		$Bartering/HigherLower/Card2.text += ": Win!"
+		$minigameGUI/Bartering/HigherLower/Card2.text += ": Win!"
 	elif Global.nb1 < Global.nb2:
 		Global.wager *= 0.75
-		$Bartering/HigherLower/Card2.text += ": Lose!"
-	$Bartering/Cashout.position = Vector2(900,268)
+		$minigameGUI/Bartering/HigherLower/Card2.text += ": Lose!"
+	$minigameGUI/Bartering/Cashout.visible = true
 
 #Blackjack minigame
 func _on_blackjack_pressed() -> void:
@@ -127,22 +202,23 @@ func _on_blackjack_pressed() -> void:
 	total += (Global.sold_xs * 50 + Global.sold_s * 300 + Global.sold_m * \
 	825 + Global.sold_l * 2150 + Global.sold_xl * 5400)
 	if total > 0:
-		$CardSale.position = Vector2(9000,3000)
+		$CardSale/Buttons.visible = false
+		$CardSale/Characters/CallChara.visible = false
 		Blackjack(total)
 		
 func Blackjack(wager):
-	$Bartering/Blackjack.position = Vector2(900,300)
+	$minigameGUI/Bartering/Blackjack.visible = true
 	Global.wager = wager
 	var starterCard1 = randi_range(1,10)
 	var starterCard2 = randi_range(1,10)
 	Global.playerHand = starterCard1 + starterCard2
 	Global.marisaHand = starterCard1 + starterCard2
-	$Bartering/Blackjack/PlayerNb.text = str(Global.playerHand)
-	$Bartering/Blackjack/OpponentNb.text = str(Global.marisaHand)
-	$Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(starterCard1))
-	$Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(starterCard2))
-	$Bartering/Blackjack/BlCards/MarisaCards.add_child(BlDisplayCard(starterCard1))
-	$Bartering/Blackjack/BlCards/MarisaCards.add_child(BlDisplayCard(starterCard2))
+	$minigameGUI/Bartering/Blackjack/PlayerNb.text = str(Global.playerHand)
+	$minigameGUI/Bartering/Blackjack/OpponentNb.text = str(Global.marisaHand)
+	$minigameGUI/Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(starterCard1))
+	$minigameGUI/Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(starterCard2))
+	$minigameGUI/Bartering/Blackjack/BlCards/MarisaCards.add_child(BlDisplayCard(starterCard1))
+	$minigameGUI/Bartering/Blackjack/BlCards/MarisaCards.add_child(BlDisplayCard(starterCard2))
 	
 #Hitting adds a card while doubling down adds two and ends the turn
 	
@@ -150,20 +226,20 @@ func _on_hit_pressed() -> void:
 	if Global.playerHand < 21:
 		var drawnCard = randi_range(1,10)
 		Global.playerHand += drawnCard
-		$Bartering/Blackjack/PlayerNb.text = str(Global.playerHand)
-		$Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(drawnCard))
+		$minigameGUI/Bartering/Blackjack/PlayerNb.text = str(Global.playerHand)
+		$minigameGUI/Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(drawnCard))
 		checkBust()
 	
 func _on_d_down_pressed() -> void:
-	$Bartering/Blackjack/DDown.disabled = true
+	$minigameGUI/Bartering/Blackjack/DDown.disabled = true
 	if Global.playerHand < 21:
 		var drawnCard1 = randi_range(1,13)
 		var drawnCard2 = randi_range(1,13)
 		Global.playerHand += drawnCard1
 		Global.playerHand += drawnCard2
-		$Bartering/Blackjack/PlayerNb.text = str(Global.playerHand)
-		$Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(drawnCard1))
-		$Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(drawnCard2))
+		$minigameGUI/Bartering/Blackjack/PlayerNb.text = str(Global.playerHand)
+		$minigameGUI/Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(drawnCard1))
+		$minigameGUI/Bartering/Blackjack/BlCards/YourCards.add_child(BlDisplayCard(drawnCard2))
 		checkBust()
 
 func _on_stand_pressed() -> void:
@@ -171,33 +247,33 @@ func _on_stand_pressed() -> void:
 	while Global.marisaHand < 17:
 		var drawnCard =  randi_range(1,13)
 		Global.marisaHand += drawnCard
-		$Bartering/Blackjack/OpponentNb.text = str(Global.marisaHand)
-		$Bartering/Blackjack/BlCards/MarisaCards.add_child(BlDisplayCard(drawnCard))
+		$minigameGUI/Bartering/Blackjack/OpponentNb.text = str(Global.marisaHand)
+		$minigameGUI/Bartering/Blackjack/BlCards/MarisaCards.add_child(BlDisplayCard(drawnCard))
 		
 	if Global.marisaHand == Global.playerHand:
-		$Bartering/Blackjack/PlayerNb.text += " - Draw!"
+		$minigameGUI/Bartering/Blackjack/PlayerNb.text += " - Draw!"
 		
 	elif Global.marisaHand < Global.playerHand || Global.marisaHand > 21: 
-		$Bartering/Blackjack/PlayerNb.text += " - Win!"
+		$minigameGUI/Bartering/Blackjack/PlayerNb.text += " - Win!"
 		Global.wager *= 1.5
 		
 	else: 
-		$Bartering/Blackjack/PlayerNb.text += " - Lose!"
+		$minigameGUI/Bartering/Blackjack/PlayerNb.text += " - Lose!"
 		Global.wager *= 0.5
-	$Bartering/Cashout.position = Vector2(900,268)
+	$minigameGUI/Bartering/Cashout.visible = true
 
 func checkBust():
 	if Global.playerHand > 21:
-		$Bartering/Blackjack/PlayerNb.text += " - Bust!"
+		$minigameGUI/Bartering/Blackjack/PlayerNb.text += " - Bust!"
 		Global.wager *= 0.5
 		disable()
-		$Bartering/Cashout.position = Vector2(900,268)
+		$minigameGUI/Bartering/Cashout.visible = true
 	elif Global.playerHand == 21:
-		$Bartering/Blackjack/PlayerNb.text += " - Blackjack!"
+		$minigameGUI/Bartering/Blackjack/PlayerNb.text += " - Blackjack!"
 		Global.wager *= 1.5
 		disable()
-		$Bartering/Cashout.position = Vector2(900,268)
-	elif $Bartering/Blackjack/DDown.disabled == true:
+		$minigameGUI/Bartering/Cashout.visible = true
+	elif $minigameGUI/Bartering/Blackjack/DDown.disabled == true:
 		_on_stand_pressed()
 		
 #Creating and matching the right card to the sprites for display
@@ -223,16 +299,16 @@ func BlDisplayCard(cardNo):
 
 #Disables the buttons
 func disable():
-	$Bartering/Blackjack/Hit.disabled = true
-	$Bartering/Blackjack/DDown.disabled = true
-	$Bartering/Blackjack/Stand.disabled = true
+	$minigameGUI/Bartering/Blackjack/Hit.disabled = true
+	$minigameGUI/Bartering/Blackjack/DDown.disabled = true
+	$minigameGUI/Bartering/Blackjack/Stand.disabled = true
 
 #Confirming a sale and updating the amount
 func sell(total):
 	Global.funds += total
 	$GUI/Funds.text = "Funds: " + str(floori(Global.funds))
-	$Bartering/HigherLower.position = Vector2(9000,3000)
-	$Bartering/Blackjack.position = Vector2(9000,3000)
+	$minigameGUI/Bartering/HigherLower.visible = false
+	$minigameGUI/Bartering/Blackjack.visible = false
 
 #Removing the sold items/secondary variables
 func remove_stock():
@@ -248,8 +324,8 @@ func remove_stock():
 	Global.sold_l = 0
 	Global.sold_xl = 0
 	
-	$Bartering/HigherLower/Card1.text = ""
-	$Bartering/HigherLower/Card2.text = ""
+	$minigameGUI/Bartering/HigherLower/Card1.text = ""
+	$minigameGUI/Bartering/HigherLower/Card2.text = ""
 	
 	$CardSale/Buttons/AddRem/Xs.text = "Lesser ability cards " + str(Global.sold_xs) + "/" + str(Global.ability_card_xs)
 	$CardSale/Buttons/AddRem/S.text = "Ability cards " + str(Global.sold_s) + "/" + str(Global.ability_card_s)
@@ -261,13 +337,17 @@ func remove_stock():
 func _on_cashout_pressed() -> void:
 	remove_stock()
 	sell(ceili(Global.wager))
-	$Bartering/Cashout.position = Vector2(9000,3000)
-	$Bartering/Blackjack/Hit.disabled = false
-	$Bartering/Blackjack/Stand.disabled = false
-	$Bartering/Blackjack/DDown.disabled = false
-	$CardSale.position = Vector2(50,50)
-	var removeYourHand = $Bartering/Blackjack/BlCards/YourCards.get_children()
-	var removeMarisaHand = $Bartering/Blackjack/BlCards/MarisaCards.get_children()
+	$minigameGUI/Bartering/Cashout.visible = false
+	$minigameGUI/Bartering/Blackjack/Hit.disabled = false
+	$minigameGUI/Bartering/Blackjack/Stand.disabled = false
+	$minigameGUI/Bartering/Blackjack/DDown.disabled = false
+	
+	$CardSale.visible = true
+	$CardSale/Buttons.visible = true
+	$CardSale/Characters/CallChara.visible = true
+	
+	var removeYourHand = $minigameGUI/Bartering/Blackjack/BlCards/YourCards.get_children()
+	var removeMarisaHand = $minigameGUI/Bartering/Blackjack/BlCards/MarisaCards.get_children()
 	discard(removeYourHand)
 	discard(removeMarisaHand)
 

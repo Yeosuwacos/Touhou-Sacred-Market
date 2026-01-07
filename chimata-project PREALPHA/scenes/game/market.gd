@@ -4,13 +4,14 @@ extends Node2D
 @onready var chimataScene = preload("res://entities/characters/chimata.tscn")
 @onready var options = preload("res://scenes/menu/menu.tscn")
 @onready var optionPopup = options.instantiate()
+@onready var minigameSize = Vector2(1280,450)
 
 func _ready():
 	
 	#When loaded, place chimata down on x,y
 	var chimata = chimataScene.instantiate()
 	add_child(chimata)
-	chimata.position = Vector2i(Global.res.x/2,300)
+	chimata.position = Vector2i(Global.res.x/2,get_viewport_rect().size.y - minigameSize.y - 64)
 	
 	#GUI initialization
 	$SellingSystem/CardSale.position = Vector2i(50,50)

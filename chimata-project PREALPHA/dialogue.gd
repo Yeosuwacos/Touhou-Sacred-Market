@@ -13,3 +13,8 @@ var idleShopLines = [
 	"Wait isn't that a little bit lazy?",
 	"When in doubt, send others to do your own work"
 ]
+
+var HiLoLines = [
+	"Care for a game?",
+	"Let us make this a tad more interesting"
+]
