@@ -91,18 +91,18 @@ offset_right = 152.0
 offset_bottom = 64.0
 
 [node name="BlCards" type="Node2D" parent="SellingSystem/minigameGUI/Bartering/Blackjack"]
+position = Vector2(0, 96)
 
 [node name="YourCards" type="HBoxContainer" parent="SellingSystem/minigameGUI/Bartering/Blackjack/BlCards"]
-offset_top = 96.0
 offset_right = 40.0
-offset_bottom = 136.0
-scale = Vector2(0.1, 0.1)
+offset_bottom = 40.0
+scale = Vector2(0.15, 0.15)
 
 [node name="MarisaCards" type="HBoxContainer" parent="SellingSystem/minigameGUI/Bartering/Blackjack/BlCards"]
-offset_top = 300.0
+offset_top = 128.0
 offset_right = 40.0
-offset_bottom = 340.0
-scale = Vector2(0.1, 0.1)
+offset_bottom = 168.0
+scale = Vector2(0.15, 0.15)
 
 [node name="GUI" parent="SellingSystem" instance=ExtResource("2_cn1e3")]
 
