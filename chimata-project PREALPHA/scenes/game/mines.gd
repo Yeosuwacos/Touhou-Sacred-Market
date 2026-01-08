@@ -16,7 +16,8 @@ func _ready():
 	
 	#Settings/GUI initialization
 	add_child(optionPopup)
-	optionPopup.position = Vector2i(9000,3000)
+	optionPopup.position = Vector2i(0,0)
+	optionPopup.visible = false
 	$ShopGUI/BG.size = shopSize
 	$ShopGUI/BG.position = Vector2(0, get_viewport_rect().size.y - shopSize.y)
 	$Shop.position = Vector2(get_viewport_rect().size.x/2 - itemChoiceSize.x/2, \
@@ -45,6 +46,7 @@ func _on_shop_button_pressed() -> void:
 		$ShopGUI.visible = true
 		$Shop.visible = true
 		Global.mShopOpen = true
+		$Shop/GUI/Funds.text = "Funds: " + str(floori(Global.funds))
 		
 		$IdleShop.visible = false
 		Global.iShopOpen = false
@@ -61,6 +63,7 @@ func _on_idle_shop_button_pressed() -> void:
 		$ShopGUI.visible = true
 		$IdleShop.visible = true
 		Global.iShopOpen = true
+		$IdleShop/GUI/Funds.text = "Funds: " + str(floori(Global.funds))
 		
 		$Shop.visible = false
 		Global.mShopOpen = false
@@ -71,13 +74,14 @@ func _on_idle_shop_button_pressed() -> void:
 		$IdleShop.visible = false
 		Global.iShopOpen = false
 
+#Settings menu
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_ESCAPE:
 			if Global.menuOpen == false:
 				Global.menuOpen = true
-				optionPopup.position = Vector2i(Global.res.x/2,Global.res.y/2)
+				optionPopup.visible = true
 				
 			elif Global.menuOpen == true:
 				Global.menuOpen = false
-				optionPopup.position = Vector2i(9000,3000)
+				optionPopup.visible = false

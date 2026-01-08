@@ -8,22 +8,23 @@ extends Node2D
 func _ready():
 	#Settings initialization
 	add_child(optionPopup)
-	optionPopup.position = Vector2i(9000,3000)
+	optionPopup.position = Vector2i(0,0)
+	optionPopup.visible = false
 	
 	#Interface initialization
 	$WorkshopZones/shopGUI.visible = false
-	
+
 #Settings menu
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_ESCAPE:
 			if Global.menuOpen == false:
 				Global.menuOpen = true
-				optionPopup.position = Vector2i(Global.res.x/2,Global.res.y/2)
+				optionPopup.visible = true
 				
 			elif Global.menuOpen == true:
 				Global.menuOpen = false
-				optionPopup.position = Vector2i(9000,3000)
+				optionPopup.visible = false
 
 #Opens the workshop interface
 func _on_open_workshop_pressed() -> void:

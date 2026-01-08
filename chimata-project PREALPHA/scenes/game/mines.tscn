@@ -96,6 +96,13 @@ layout_mode = 2
 [node name="BombPowerText" type="Label" parent="Shop/ShopGrid"]
 layout_mode = 2
 
+[node name="TPs" type="Button" parent="Shop/ShopGrid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="TPsText" type="Label" parent="Shop/ShopGrid"]
+layout_mode = 2
+
 [node name="IdleShop" type="Node2D" parent="."]
 script = ExtResource("4_yh3sh")
 
@@ -114,10 +121,19 @@ layout_mode = 2
 [node name="idlerXsText" type="Label" parent="IdleShop/IdleShopGrid"]
 layout_mode = 2
 
+[node name="idlerS" type="Button" parent="IdleShop/IdleShopGrid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="idlerSText" type="Label" parent="IdleShop/IdleShopGrid"]
+layout_mode = 2
+
 [connection signal="pressed" from="ShopButton" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="IdleShopButton" to="." method="_on_idle_shop_button_pressed"]
 [connection signal="pressed" from="MineZones/StartMining" to="MineZones" method="_on_start_mining_pressed"]
 [connection signal="pressed" from="Shop/ShopGrid/Moves" to="Shop" method="_on_moves_pressed"]
 [connection signal="pressed" from="Shop/ShopGrid/Bombs" to="Shop" method="_on_bombs_pressed"]
 [connection signal="pressed" from="Shop/ShopGrid/BombPower" to="Shop" method="_on_bomb_power_pressed"]
+[connection signal="pressed" from="Shop/ShopGrid/TPs" to="Shop" method="_on_t_ps_pressed"]
 [connection signal="pressed" from="IdleShop/IdleShopGrid/idlerXs" to="IdleShop" method="_on_idler_xs_pressed"]
+[connection signal="pressed" from="IdleShop/IdleShopGrid/idlerS" to="IdleShop" method="_on_idler_s_pressed"]

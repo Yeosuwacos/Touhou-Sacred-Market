@@ -13,6 +13,11 @@ script = ExtResource("1_klgdb")
 
 [node name="DevMode" type="Node2D" parent="."]
 
+[node name="BG" type="ColorRect" parent="DevMode"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.4660673, 0.17293522, 0.009066197, 1)
+
 [node name="Access" type="Button" parent="DevMode"]
 offset_left = 160.0
 offset_top = 24.0

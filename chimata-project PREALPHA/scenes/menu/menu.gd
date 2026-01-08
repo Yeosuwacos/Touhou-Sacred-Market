@@ -6,6 +6,8 @@ func _ready():
 	$DevMode/Resources.visible = false
 	if Global.passwordEntered == true:
 		$DevMode/Resources.visible = true
+	$DevMode/BG.size = Vector2($DevMode/Resources.size.x, $DevMode/Resources.size.y \
+	+ $DevMode/Password.size.y + $DevMode/Title.size.y)
 
 func _on_access_pressed() -> void:
 	if $DevMode/Password.text == "LuvChimata<3":
@@ -59,13 +61,13 @@ func _on_reset_rem_pressed() -> void:
 	Global.moves = 20
 
 	Global.bombStr = 2
-	Global.bombQty = 1
+	Global.bombQty = 0
 
 	Global.tpStr = 5
-	Global.tpQty = 1
+	Global.tpQty = 0
 
 	Global.addStr = 2
-	Global.addQty = 1
+	Global.addQty = 0
 
 	Global.idleXs = 0
 	

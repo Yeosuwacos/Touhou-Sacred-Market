@@ -20,7 +20,8 @@ func _ready():
 	
 	#Settings initialization
 	add_child(optionPopup)
-	optionPopup.position = Vector2i(9000,3000)
+	optionPopup.position = Vector2i(0,0)
+	optionPopup.visible = false
 
 #Settings menu
 func _input(event):
@@ -28,8 +29,8 @@ func _input(event):
 		if event.keycode == KEY_ESCAPE:
 			if Global.menuOpen == false:
 				Global.menuOpen = true
-				optionPopup.position = Vector2i(Global.res.x/2,Global.res.y/2)
+				optionPopup.visible = true
 				
 			elif Global.menuOpen == true:
 				Global.menuOpen = false
-				optionPopup.position = Vector2i(9000,3000)
+				optionPopup.visible = false

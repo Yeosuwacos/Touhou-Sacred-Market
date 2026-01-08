@@ -14,17 +14,18 @@ var isMining = false
 var moves = 20
 
 var bombStr = 2
-var bombQty = 1
+var bombQty = 0
 
 var tpStr = 5
-var tpQty = 1
+var tpQty = 0
 
 var addStr = 2
-var addQty = 1
+var addQty = 0
 var addActive = false
 
 #Idler shop variables
 var idleXs = 0
+var idleS = 0
 
 #Chimata camera flag
 var follow = false
