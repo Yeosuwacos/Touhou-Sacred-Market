@@ -11,39 +11,69 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_klgdb")
 
-[node name="setRes" type="Control" parent="."]
-anchors_preset = 0
+[node name="DevMode" type="Node2D" parent="."]
+
+[node name="Access" type="Button" parent="DevMode"]
+offset_left = 160.0
+offset_top = 24.0
+offset_right = 192.0
+offset_bottom = 56.0
+text = "Ok"
+
+[node name="Password" type="LineEdit" parent="DevMode"]
+offset_top = 24.0
+offset_right = 160.0
+offset_bottom = 56.0
+
+[node name="Title" type="Label" parent="DevMode"]
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 23.0
+text = "Access dev mode"
 
-[node name="2560x1440" type="Button" parent="setRes"]
-layout_mode = 0
-offset_right = 90.0
-offset_bottom = 32.0
-text = "2560x1440"
+[node name="Resources" type="GridContainer" parent="DevMode"]
+offset_top = 60.0
+offset_right = 40.0
+offset_bottom = 100.0
+columns = 2
 
-[node name="1920x1080" type="Button" parent="setRes"]
-layout_mode = 0
-offset_top = 32.0
-offset_right = 90.0
-offset_bottom = 64.0
-text = "1920x1080"
+[node name="MoreFundsAdd" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
 
-[node name="1280x720" type="Button" parent="setRes"]
-layout_mode = 0
-offset_top = 64.0
-offset_right = 81.0
-offset_bottom = 96.0
-text = "1280x720"
+[node name="MoreFunds" type="Label" parent="DevMode/Resources"]
+layout_mode = 2
+text = "10k funds"
 
-[node name="Fullscreen" type="Button" parent="setRes"]
-layout_mode = 0
-offset_top = 96.0
-offset_right = 32.0
-offset_bottom = 128.0
-text = "FS"
+[node name="LotsMoreFundsAdd" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
 
-[connection signal="pressed" from="setRes/2560x1440" to="." method="_on_x_1440_pressed"]
-[connection signal="pressed" from="setRes/1920x1080" to="." method="_on_x_1080_pressed"]
-[connection signal="pressed" from="setRes/1280x720" to="." method="_on_x_720_pressed"]
-[connection signal="pressed" from="setRes/Fullscreen" to="." method="_on_fullscreen_pressed"]
+[node name="LotsMoreFunds" type="Label" parent="DevMode/Resources"]
+layout_mode = 2
+text = "1m funds"
+
+[node name="MoreOresAdd" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
+
+[node name="MoreOres" type="Label" parent="DevMode/Resources"]
+layout_mode = 2
+text = "1k ores"
+
+[node name="MoreCardsAdd" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
+
+[node name="MoreCards" type="Label" parent="DevMode/Resources"]
+layout_mode = 2
+text = "10 cards"
+
+[connection signal="pressed" from="DevMode/Access" to="." method="_on_access_pressed"]
+[connection signal="pressed" from="DevMode/Resources/MoreFundsAdd" to="." method="_on_more_funds_add_pressed"]
+[connection signal="pressed" from="DevMode/Resources/LotsMoreFundsAdd" to="." method="_on_lots_more_funds_add_pressed"]
+[connection signal="pressed" from="DevMode/Resources/MoreOresAdd" to="." method="_on_more_ores_add_pressed"]
+[connection signal="pressed" from="DevMode/Resources/MoreCardsAdd" to="." method="_on_more_cards_add_pressed"]

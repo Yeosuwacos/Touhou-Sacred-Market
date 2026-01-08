@@ -1,28 +1,32 @@
 extends Control
 
-#Manages the different resolutions available
+#Developer mode (variable modification)
 
-func _on_x_1440_pressed() -> void:
-	Global.res = Vector2i(2560,1440)
-	Global.amp = 1
-	get_window().size = Vector2i(2560,1440)
-	get_window().position = Vector2i(50,50)
-	get_tree().reload_current_scene()
+func _ready():
+	$DevMode/Resources.visible = false
 
-func _on_x_1080_pressed() -> void:
-	Global.res = Vector2i(1920,1080)
-	Global.amp = 2
-	get_window().size = Vector2i(1920,1080)
-	get_window().position = Vector2i(50,50)
-	get_tree().reload_current_scene()
+func _on_access_pressed() -> void:
+	if $DevMode/Password.text == "LuvChimata<3":
+		$DevMode/Resources.visible = true
+		
+#Adding resources
 
-func _on_x_720_pressed() -> void:
-	Global.res = Vector2i(1280,720)
-	Global.amp = 1
-	get_window().size = Vector2i(1280,720)
-	get_window().position = Vector2i(50,50)
-	get_tree().reload_current_scene()
+func _on_more_funds_add_pressed() -> void:
+	Global.funds += 10000
 
-#Fullscreen management
-func _on_fullscreen_pressed() -> void:
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+func _on_lots_more_funds_add_pressed() -> void:
+	Global.funds += 1000000
+
+func _on_more_ores_add_pressed() -> void:
+	Global.dragon_gem_xs += 1000
+	Global.dragon_gem_s += 1000
+	Global.dragon_gem_m += 1000
+	Global.dragon_gem_l += 1000
+	Global.dragon_gem_xl += 1000
+
+func _on_more_cards_add_pressed() -> void:
+	Global.ability_card_xs += 10
+	Global.ability_card_s += 10
+	Global.ability_card_m += 10
+	Global.ability_card_l += 10
+	Global.ability_card_xl += 10
