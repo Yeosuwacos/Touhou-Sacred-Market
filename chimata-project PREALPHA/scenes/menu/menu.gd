@@ -4,10 +4,13 @@ extends Control
 
 func _ready():
 	$DevMode/Resources.visible = false
+	if Global.passwordEntered == true:
+		$DevMode/Resources.visible = true
 
 func _on_access_pressed() -> void:
 	if $DevMode/Password.text == "LuvChimata<3":
 		$DevMode/Resources.visible = true
+		Global.passwordEntered = true
 		
 #Adding resources
 
@@ -63,6 +66,21 @@ func _on_reset_rem_pressed() -> void:
 
 	Global.addStr = 2
 	Global.addQty = 1
-	Global.addActive = false
 
 	Global.idleXs = 0
+	
+	Prices.MoreMoves = 100
+	Prices.MoreMovesBought = 0
+
+	Prices.MoreBombs = 200
+	Prices.MoreBombsBought = 0
+
+	Prices.BombPower = 500
+
+	Prices.idleXs = 1000
+	Prices.idleXsBought = 0
+
+#Reloads the current page with the correct variables
+func _on_reload_pressed() -> void:
+	get_parent().queue_free()
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/game/market.tscn")

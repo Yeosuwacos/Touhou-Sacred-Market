@@ -81,9 +81,15 @@ text = "x"
 layout_mode = 2
 text = "Reset progress"
 
+[node name="Reload" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Reload "
+
 [connection signal="pressed" from="DevMode/Access" to="." method="_on_access_pressed"]
 [connection signal="pressed" from="DevMode/Resources/MoreFundsAdd" to="." method="_on_more_funds_add_pressed"]
 [connection signal="pressed" from="DevMode/Resources/LotsMoreFundsAdd" to="." method="_on_lots_more_funds_add_pressed"]
 [connection signal="pressed" from="DevMode/Resources/MoreOresAdd" to="." method="_on_more_ores_add_pressed"]
 [connection signal="pressed" from="DevMode/Resources/MoreCardsAdd" to="." method="_on_more_cards_add_pressed"]
 [connection signal="pressed" from="DevMode/Resources/ResetRem" to="." method="_on_reset_rem_pressed"]
+[connection signal="pressed" from="DevMode/Resources/Reload" to="." method="_on_reload_pressed"]

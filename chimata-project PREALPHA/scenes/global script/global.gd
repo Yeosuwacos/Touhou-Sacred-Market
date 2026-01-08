@@ -3,6 +3,9 @@ extends Node2D
 #Resolution settings
 var res = Vector2i(1280,720)
 
+#Dev mode confirmation
+var passwordEntered = false
+
 #Options menu settings
 var menuOpen = false
 
