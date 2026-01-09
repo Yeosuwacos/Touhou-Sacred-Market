@@ -40,7 +40,8 @@ func _ready():
 	#Places the character calling buttons in good proportions
 	
 	$CardSale/Characters/CallChara.add_theme_constant_override("separation", viewX/5)
-	$CardSale/Characters/CallChara.position = Vector2(viewX/2 - $CardSale/Characters/CallChara.size.x/2, 50)
+	$CardSale/Characters/CallChara.position = Vector2(viewX/2 - $CardSale/Characters/CallChara.size.x/2, \
+	viewY - minigameSize.y - $CardSale/Characters/CallChara.size.y - 50)
 	$CardSale/Buttons.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
 	$CardSale/Buttons/Sell.visible = false
 	$CardSale/Buttons/HiLo.visible = false
