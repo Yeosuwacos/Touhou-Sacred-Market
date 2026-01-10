@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b00kh2h5kbxj1"]
+[gd_scene load_steps=10 format=3 uid="uid://b00kh2h5kbxj1"]
 
 [ext_resource type="Script" uid="uid://brc20ms50tw2o" path="res://scenes/game/market.gd" id="1_hpopc"]
 [ext_resource type="PackedScene" uid="uid://cs0ie4yghnk43" path="res://scenes/menu/gui.tscn" id="2_cn1e3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c78aofn4rjquj" path="res://scenes/game/selling_system.gd" id="3_cn1e3"]
 [ext_resource type="Script" uid="uid://52rfga556q4" path="res://scenes/game/market_zones.gd" id="3_s7log"]
 [ext_resource type="Texture2D" uid="uid://b2dg1b6dem85w" path="res://assets/sprites/sakuya.png" id="5_fwmry"]
+[ext_resource type="Texture2D" uid="uid://djli38mvmfwab" path="res://assets/buttons/confirm.png" id="6_a3nyx"]
 [ext_resource type="Texture2D" uid="uid://b8uynqbvyo18s" path="res://assets/sprites/chimata.png" id="7_e0t0h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1wap"]
@@ -132,13 +133,10 @@ layout_mode = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SellingSystem/CardSale/Characters/CallChara/Reimu/ReimuSale"]
 shape = SubResource("RectangleShape2D_j1wap")
 
-[node name="pressE" type="ColorRect" parent="SellingSystem/CardSale/Characters/CallChara/Reimu/ReimuSale"]
+[node name="pressE" type="Sprite2D" parent="SellingSystem/CardSale/Characters/CallChara/Reimu/ReimuSale"]
 visible = false
-custom_minimum_size = Vector2(32, 32)
-offset_left = 64.0
-offset_top = -32.0
-offset_right = 96.0
-color = Color(0.30980393, 1, 1, 1)
+position = Vector2(0, 64)
+texture = ExtResource("6_a3nyx")
 
 [node name="Sakuya" type="GridContainer" parent="SellingSystem/CardSale/Characters/CallChara"]
 layout_mode = 2
@@ -148,13 +146,10 @@ layout_mode = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SellingSystem/CardSale/Characters/CallChara/Sakuya/SakuyaHiLo"]
 shape = SubResource("RectangleShape2D_j1wap")
 
-[node name="pressE" type="ColorRect" parent="SellingSystem/CardSale/Characters/CallChara/Sakuya/SakuyaHiLo"]
+[node name="pressE" type="Sprite2D" parent="SellingSystem/CardSale/Characters/CallChara/Sakuya/SakuyaHiLo"]
 visible = false
-custom_minimum_size = Vector2(32, 32)
-offset_left = 64.0
-offset_top = -32.0
-offset_right = 96.0
-color = Color(0.30980393, 1, 1, 1)
+position = Vector2(0, 64)
+texture = ExtResource("6_a3nyx")
 
 [node name="Marisa" type="GridContainer" parent="SellingSystem/CardSale/Characters/CallChara"]
 layout_mode = 2
@@ -164,13 +159,10 @@ layout_mode = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SellingSystem/CardSale/Characters/CallChara/Marisa/MarisaBlackjack"]
 shape = SubResource("RectangleShape2D_j1wap")
 
-[node name="pressE" type="ColorRect" parent="SellingSystem/CardSale/Characters/CallChara/Marisa/MarisaBlackjack"]
+[node name="pressE" type="Sprite2D" parent="SellingSystem/CardSale/Characters/CallChara/Marisa/MarisaBlackjack"]
 visible = false
-custom_minimum_size = Vector2(32, 32)
-offset_left = 64.0
-offset_top = -32.0
-offset_right = 96.0
-color = Color(0.30980393, 1, 1, 1)
+position = Vector2(0, 64)
+texture = ExtResource("6_a3nyx")
 
 [node name="Sanae" type="GridContainer" parent="SellingSystem/CardSale/Characters/CallChara"]
 layout_mode = 2
@@ -180,13 +172,10 @@ layout_mode = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SellingSystem/CardSale/Characters/CallChara/Sanae/SanaeCardFlip"]
 shape = SubResource("RectangleShape2D_j1wap")
 
-[node name="pressE" type="ColorRect" parent="SellingSystem/CardSale/Characters/CallChara/Sanae/SanaeCardFlip"]
+[node name="pressE" type="Sprite2D" parent="SellingSystem/CardSale/Characters/CallChara/Sanae/SanaeCardFlip"]
 visible = false
-custom_minimum_size = Vector2(32, 32)
-offset_left = 64.0
-offset_top = -32.0
-offset_right = 96.0
-color = Color(0.30980393, 1, 1, 1)
+position = Vector2(0, 64)
+texture = ExtResource("6_a3nyx")
 
 [node name="Sakuya" type="Sprite2D" parent="SellingSystem/CardSale/Characters"]
 position = Vector2(8344, 2744)

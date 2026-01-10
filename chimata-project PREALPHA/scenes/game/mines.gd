@@ -30,12 +30,14 @@ func _ready():
 	get_viewport_rect().size.y - itemChoiceSize.y)
 	$ShopGUI/mDialogue.position = Vector2(characterSize.x, get_viewport_rect().size.y - shopSize.y) 
 	
-	#Momoyo initialization
+	#Character and frame initialization
 	$ShopGUI/Momoyo.scale = characterSize/$ShopGUI/Momoyo.texture.get_size()
 	$ShopGUI/Momoyo.position = Vector2(characterSize.x/2, get_viewport_rect().size.y - characterSize.y/2)
+	$ShopGUI/MomoyoFrame.position = Vector2(characterSize.x/2, get_viewport_rect().size.y - characterSize.y/2)
 	
 	$ShopGUI/Chimata.scale = characterSize/$ShopGUI/Chimata.texture.get_size()
 	$ShopGUI/Chimata.position = Vector2(get_viewport_rect().size.x - characterSize.x/2, get_viewport_rect().size.y - characterSize.y/2)
+	$ShopGUI/ChimataFrame.position = Vector2(get_viewport_rect().size.x - characterSize.x/2, get_viewport_rect().size.y - characterSize.y/2)
 	
 	#Hides the shop until the button is pressed
 	Global.mShopOpen = false
