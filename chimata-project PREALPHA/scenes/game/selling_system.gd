@@ -4,7 +4,7 @@ extends Node2D
 @onready var minigameSize = Vector2(1280,450)
 @onready var gameAreaSize = Vector2(480,360)
 @onready var characterSize = Vector2(360,450)
-@onready var chimataSize = Vector2(432,540)
+@onready var chimataSize = Vector2(420,510)
 @onready var viewX = get_viewport_rect().size.x
 @onready var viewY = get_viewport_rect().size.y
 @onready var currentHover = ""
@@ -17,13 +17,16 @@ func _ready():
 	$CardSale/Buttons/AddRem/L.text = "Quest ability cards " + str(Global.sold_l) + "/" + str(Global.ability_card_l)
 	$CardSale/Buttons/AddRem/Xl.text = "Special ability cards " + str(Global.sold_xl) + "/" + str(Global.ability_card_xl)
 
-	#Sets the scale for characters
+	#Sets the scale/layout for the characters and the frames
 
-	$CardSale/Characters/Sakuya.scale = characterSize/$CardSale/Characters/Sakuya.texture.get_size()
-	$CardSale/Characters/Sakuya.position = Vector2(characterSize.x/2, viewY - characterSize.y/2)
+	$CardSale/Characters/Sprites/OpponentFrame.position = Vector2(characterSize.x/2, viewY - characterSize.y/2)
+
+	$CardSale/Characters/Sprites/Sakuya.scale = characterSize/$CardSale/Characters/Sprites/Sakuya.texture.get_size()
+	$CardSale/Characters/Sprites/Sakuya.position = Vector2(characterSize.x/2, viewY - characterSize.y/2)
 	
-	$CardSale/Characters/Chimata.scale = characterSize/$CardSale/Characters/Chimata.texture.get_size()
-	$CardSale/Characters/Chimata.position = Vector2(viewX - chimataSize.x/2, viewY - chimataSize.y/2)
+	$CardSale/Characters/Sprites/Chimata.scale = characterSize/$CardSale/Characters/Sprites/Chimata.texture.get_size()
+	$CardSale/Characters/Sprites/Chimata.position = Vector2(viewX - characterSize.x/2, viewY - characterSize.y/2)
+	$CardSale/Characters/Sprites/ChimataFrame.position = Vector2(viewX - characterSize.x/2, viewY - characterSize.y/2)
 	
 	#Creates the layout for the interface
 	
@@ -32,6 +35,11 @@ func _ready():
 	$minigameGUI/Bartering/HigherLower.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y/2)
 	$CardSale/Characters/dialogue.position = Vector2(characterSize.x, viewY - minigameSize.y) 
 	
+	$CardSale/Characters/Names/ChimataName.position = Vector2(viewX - characterSize.x/2 - \
+	$CardSale/Characters/Names/ChimataName.size.x/2, viewY - characterSize.y + 12)
+	$CardSale/Characters/Names/OpponentName.position = Vector2(characterSize.x/2 - \
+	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - characterSize.y + 12)
+	
 	$BG.visible = false
 	$minigameGUI/Bartering/HigherLower.visible = false
 	$minigameGUI/Bartering/Blackjack.visible = false
@@ -39,19 +47,28 @@ func _ready():
 	$CardSale/Buttons.visible = false
 	$CardSale/Characters/dialogue.visible = false
 	
+	$CardSale/Characters/Sprites/OpponentFrame.visible = false
+	$CardSale/Characters/Sprites/ChimataFrame.visible = false
+	$CardSale/Characters/Names/OpponentName.visible = false
+	$CardSale/Characters/Names/ChimataName.visible = false
+	
 	#Hides the characters
-	$CardSale/Characters/Sakuya.visible = false
-	$CardSale/Characters/Chimata.visible = false
+	
+	$CardSale/Characters/Sprites/Sakuya.visible = false
+	$CardSale/Characters/Sprites/Chimata.visible = false
 	
 	#Places the character calling buttons in good proportions
 	
 	$CardSale/Characters/CallChara.add_theme_constant_override("separation", viewX/5)
-	$CardSale/Characters/CallChara.position = Vector2(viewX/2 - $CardSale/Characters/CallChara.size.x/2, \
-	viewY - minigameSize.y - $CardSale/Characters/CallChara.size.y - 128)
 	$CardSale/Buttons.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
 	$CardSale/Buttons/Sell.visible = false
 	$CardSale/Buttons/HiLo.visible = false
 	$CardSale/Buttons/Blackjack.visible = false
+
+#Replaces the opponent names correctly
+func replace():
+	$CardSale/Characters/Names/OpponentName.position = Vector2(characterSize.x/2 - \
+	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - characterSize.y + 12)
 
 #Picks the right character and begins a sale
 func _input(event):
@@ -65,23 +82,36 @@ func _input(event):
 					$CardSale/Buttons/Sell.visible = true
 					$CardSale/Buttons/HiLo.visible = false
 					$CardSale/Buttons/Blackjack.visible = false
+					
+					$CardSale/Characters/Sprites/OpponentFrame.visible = true
+					$CardSale/Characters/Sprites/ChimataFrame.visible = true
 					$BG.visible = true
 
-					$CardSale/Characters/Sakuya.visible = false
-					$CardSale/Characters/Chimata.visible = true
+					$CardSale/Characters/Sprites/Sakuya.visible = false
+					$CardSale/Characters/Sprites/Chimata.visible = true
 					
+					$CardSale/Characters/Names/ChimataName.visible = true
+					$CardSale/Characters/Names/OpponentName.text = "Reimu"
+					$CardSale/Characters/Names/OpponentName.visible = true
 					$CardSale/Characters/dialogue.visible = true
+					$CardSale/Characters/dialogue.text = ""
 					
 				"sakuya":
 					$CardSale/Buttons.visible = true
 					$CardSale/Buttons/HiLo.visible = true
 					$CardSale/Buttons/Sell.visible = false
 					$CardSale/Buttons/Blackjack.visible = false
+					
+					$CardSale/Characters/Sprites/OpponentFrame.visible = true
+					$CardSale/Characters/Sprites/ChimataFrame.visible = true
 					$BG.visible = true
 					
-					$CardSale/Characters/Sakuya.visible = true
-					$CardSale/Characters/Chimata.visible = true
+					$CardSale/Characters/Sprites/Sakuya.visible = true
+					$CardSale/Characters/Sprites/Chimata.visible = true
 					
+					$CardSale/Characters/Names/ChimataName.visible = true
+					$CardSale/Characters/Names/OpponentName.text = "Sakuya"
+					$CardSale/Characters/Names/OpponentName.visible = true
 					$CardSale/Characters/dialogue.visible = true
 					$CardSale/Characters/dialogue.text = Dialogue.HiLoLines.pick_random()
 					
@@ -90,15 +120,23 @@ func _input(event):
 					$CardSale/Buttons/Blackjack.visible = true
 					$CardSale/Buttons/Sell.visible = false
 					$CardSale/Buttons/HiLo.visible = false
+					
+					$CardSale/Characters/Sprites/OpponentFrame.visible = true
+					$CardSale/Characters/Sprites/ChimataFrame.visible = true
 					$BG.visible = true
 					
-					$CardSale/Characters/Sakuya.visible = false
-					$CardSale/Characters/Chimata.visible = true
+					$CardSale/Characters/Sprites/Sakuya.visible = false
+					$CardSale/Characters/Sprites/Chimata.visible = true
 					
+					$CardSale/Characters/Names/ChimataName.visible = true
+					$CardSale/Characters/Names/OpponentName.text = "Marisa"
+					$CardSale/Characters/Names/OpponentName.visible = true
 					$CardSale/Characters/dialogue.visible = true
+					$CardSale/Characters/dialogue.text = ""
 					
 				"sanae":
 					pass
+			replace()
 
 #Detection functions for character sales
 

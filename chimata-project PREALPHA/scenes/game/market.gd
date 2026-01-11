@@ -5,6 +5,7 @@ extends Node2D
 @onready var options = preload("res://scenes/menu/menu.tscn")
 @onready var optionPopup = options.instantiate()
 @onready var minigameSize = Vector2(1280,450)
+@onready var cardInterface = Vector2(50,50)
 
 func _ready():
 	
@@ -14,9 +15,12 @@ func _ready():
 	chimata.position = Vector2i(Global.res.x/2,get_viewport_rect().size.y - minigameSize.y - 64)
 	
 	#GUI initialization
-	$SellingSystem/CardSale.position = Vector2i(50,50)
-	$SellingSystem/GUI.position = Vector2i(Global.res.x-100,Global.res.y-50)
+	$SellingSystem/CardSale.position = cardInterface
+	$SellingSystem/CardSale/Characters.position = Vector2(-50,-50)
 	$SellingSystem/GUI/Funds.text = "Funds: " + str(floori(Global.funds))
+	
+	$SellingSystem/CardSale/Characters/CallChara.position = Vector2(get_viewport_rect().size.x/2 - \
+	$SellingSystem/CardSale/Characters/CallChara.size.x/2, chimata.position.y - 64 - cardInterface.y)
 	
 	#Settings initialization
 	add_child(optionPopup)

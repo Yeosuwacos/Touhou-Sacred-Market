@@ -34,8 +34,7 @@ func _ready():
 	
 	#Interaction areas placement 
 	$Buttons.add_theme_constant_override("separation", get_viewport_rect().size.x/4)
-	$Buttons.position = Vector2(get_viewport_rect().size.x/2 - $Buttons.size.x/2, \
-	get_viewport_rect().size.y - shopSize.y - $Buttons.size.y - 128)
+	$Buttons.position = Vector2(get_viewport_rect().size.x/2 - $Buttons.size.x/2, chimata.position.y - 64)
 	
 	#Character and frame initialization
 	$ShopGUI/Characters/Momoyo.scale = characterSize/$ShopGUI/Characters/Momoyo.texture.get_size()
@@ -78,7 +77,7 @@ func _on_idle_shop_button_body_entered(_body) -> void:
 	currentHover = "idleShop"
 	$Buttons/IdleShop/IdleShopButton/pressE.visible = true
 func _on_idle_shop_button_body_exited(_body) -> void:
-	currentHover = "idleShop"
+	currentHover = ""
 	$Buttons/IdleShop/IdleShopButton/pressE.visible = false
 
 func _input(event):

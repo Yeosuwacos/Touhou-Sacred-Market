@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b00kh2h5kbxj1"]
+[gd_scene load_steps=11 format=3 uid="uid://b00kh2h5kbxj1"]
 
 [ext_resource type="Script" uid="uid://brc20ms50tw2o" path="res://scenes/game/market.gd" id="1_hpopc"]
 [ext_resource type="PackedScene" uid="uid://cs0ie4yghnk43" path="res://scenes/menu/gui.tscn" id="2_cn1e3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b2dg1b6dem85w" path="res://assets/sprites/sakuya.png" id="5_fwmry"]
 [ext_resource type="Texture2D" uid="uid://djli38mvmfwab" path="res://assets/buttons/confirm.png" id="6_a3nyx"]
 [ext_resource type="Texture2D" uid="uid://b8uynqbvyo18s" path="res://assets/sprites/chimata.png" id="7_e0t0h"]
+[ext_resource type="Texture2D" uid="uid://bdyer130vmqqx" path="res://assets/UI/Frame.png" id="7_mmnd1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1wap"]
 size = Vector2(32, 300)
@@ -136,6 +137,7 @@ shape = SubResource("RectangleShape2D_j1wap")
 
 [node name="pressE" type="Sprite2D" parent="SellingSystem/CardSale/Characters/CallChara/Reimu/ReimuSale"]
 visible = false
+z_index = 2
 texture = ExtResource("6_a3nyx")
 
 [node name="Sakuya" type="GridContainer" parent="SellingSystem/CardSale/Characters/CallChara"]
@@ -148,6 +150,7 @@ shape = SubResource("RectangleShape2D_j1wap")
 
 [node name="pressE" type="Sprite2D" parent="SellingSystem/CardSale/Characters/CallChara/Sakuya/SakuyaHiLo"]
 visible = false
+z_index = 2
 texture = ExtResource("6_a3nyx")
 
 [node name="Marisa" type="GridContainer" parent="SellingSystem/CardSale/Characters/CallChara"]
@@ -160,6 +163,7 @@ shape = SubResource("RectangleShape2D_j1wap")
 
 [node name="pressE" type="Sprite2D" parent="SellingSystem/CardSale/Characters/CallChara/Marisa/MarisaBlackjack"]
 visible = false
+z_index = 2
 texture = ExtResource("6_a3nyx")
 
 [node name="Sanae" type="GridContainer" parent="SellingSystem/CardSale/Characters/CallChara"]
@@ -172,18 +176,44 @@ shape = SubResource("RectangleShape2D_j1wap")
 
 [node name="pressE" type="Sprite2D" parent="SellingSystem/CardSale/Characters/CallChara/Sanae/SanaeCardFlip"]
 visible = false
+z_index = 2
 texture = ExtResource("6_a3nyx")
 
-[node name="Sakuya" type="Sprite2D" parent="SellingSystem/CardSale/Characters"]
+[node name="Sprites" type="Node2D" parent="SellingSystem/CardSale/Characters"]
+
+[node name="OpponentFrame" type="Sprite2D" parent="SellingSystem/CardSale/Characters/Sprites"]
+z_index = 2
+texture = ExtResource("7_mmnd1")
+
+[node name="Sakuya" type="Sprite2D" parent="SellingSystem/CardSale/Characters/Sprites"]
+z_index = 1
 position = Vector2(8344, 2744)
 texture = ExtResource("5_fwmry")
 
-[node name="Chimata" type="Sprite2D" parent="SellingSystem/CardSale/Characters"]
+[node name="ChimataFrame" type="Sprite2D" parent="SellingSystem/CardSale/Characters/Sprites"]
+texture = ExtResource("7_mmnd1")
+
+[node name="Chimata" type="Sprite2D" parent="SellingSystem/CardSale/Characters/Sprites"]
+z_index = 1
 texture = ExtResource("7_e0t0h")
 
 [node name="dialogue" type="Label" parent="SellingSystem/CardSale/Characters"]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Names" type="Node2D" parent="SellingSystem/CardSale/Characters"]
+
+[node name="ChimataName" type="Label" parent="SellingSystem/CardSale/Characters/Names"]
+z_index = 2
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Chimata"
+
+[node name="OpponentName" type="Label" parent="SellingSystem/CardSale/Characters/Names"]
+z_index = 2
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Sakuya"
 
 [node name="Buttons" type="Node2D" parent="SellingSystem/CardSale"]
 
