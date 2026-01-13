@@ -36,6 +36,7 @@ target_position = Vector2(0, 1500)
 script = ExtResource("3_cn1e3")
 
 [node name="BG" type="ColorRect" parent="SellingSystem"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.4660673, 0.17293522, 0.009066197, 1)
@@ -45,10 +46,12 @@ color = Color(0.4660673, 0.17293522, 0.009066197, 1)
 [node name="Bartering" type="Node2D" parent="SellingSystem/minigameGUI"]
 
 [node name="Cashout" type="Button" parent="SellingSystem/minigameGUI/Bartering"]
+visible = false
 offset_right = 32.0
 offset_bottom = 32.0
 
 [node name="HigherLower" type="Node2D" parent="SellingSystem/minigameGUI/Bartering"]
+visible = false
 position = Vector2(0, 300)
 
 [node name="Higher" type="Button" parent="SellingSystem/minigameGUI/Bartering/HigherLower"]
@@ -74,6 +77,7 @@ offset_right = 72.0
 offset_bottom = 55.0
 
 [node name="Blackjack" type="Node2D" parent="SellingSystem/minigameGUI/Bartering"]
+visible = false
 position = Vector2(300, 300)
 
 [node name="Hit" type="Button" parent="SellingSystem/minigameGUI/Bartering/Blackjack"]
@@ -117,6 +121,34 @@ offset_top = 128.0
 offset_right = 40.0
 offset_bottom = 168.0
 scale = Vector2(0.15, 0.15)
+
+[node name="CardFlip" type="GridContainer" parent="SellingSystem/minigameGUI/Bartering"]
+visible = false
+columns = 3
+
+[node name="Card1" type="Label" parent="SellingSystem/minigameGUI/Bartering/CardFlip"]
+layout_mode = 2
+text = "Card 1"
+
+[node name="Card2" type="Label" parent="SellingSystem/minigameGUI/Bartering/CardFlip"]
+layout_mode = 2
+text = "Card 2"
+
+[node name="Card3" type="Label" parent="SellingSystem/minigameGUI/Bartering/CardFlip"]
+layout_mode = 2
+text = "Card 3"
+
+[node name="Pick1" type="Button" parent="SellingSystem/minigameGUI/Bartering/CardFlip"]
+layout_mode = 2
+text = "x"
+
+[node name="Pick2" type="Button" parent="SellingSystem/minigameGUI/Bartering/CardFlip"]
+layout_mode = 2
+text = "x"
+
+[node name="Pick3" type="Button" parent="SellingSystem/minigameGUI/Bartering/CardFlip"]
+layout_mode = 2
+text = "x"
 
 [node name="GUI" parent="SellingSystem" instance=ExtResource("2_cn1e3")]
 
@@ -182,40 +214,48 @@ texture = ExtResource("6_a3nyx")
 [node name="Sprites" type="Node2D" parent="SellingSystem/CardSale/Characters"]
 
 [node name="OpponentFrame" type="Sprite2D" parent="SellingSystem/CardSale/Characters/Sprites"]
+visible = false
 z_index = 2
 texture = ExtResource("7_mmnd1")
 
 [node name="Sakuya" type="Sprite2D" parent="SellingSystem/CardSale/Characters/Sprites"]
+visible = false
 z_index = 1
 position = Vector2(8344, 2744)
 texture = ExtResource("5_fwmry")
 
 [node name="ChimataFrame" type="Sprite2D" parent="SellingSystem/CardSale/Characters/Sprites"]
+visible = false
 texture = ExtResource("7_mmnd1")
 
 [node name="Chimata" type="Sprite2D" parent="SellingSystem/CardSale/Characters/Sprites"]
+visible = false
 z_index = 1
 texture = ExtResource("7_e0t0h")
 
 [node name="dialogue" type="Label" parent="SellingSystem/CardSale/Characters"]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Names" type="Node2D" parent="SellingSystem/CardSale/Characters"]
 
 [node name="ChimataName" type="Label" parent="SellingSystem/CardSale/Characters/Names"]
+visible = false
 z_index = 2
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Chimata"
 
 [node name="OpponentName" type="Label" parent="SellingSystem/CardSale/Characters/Names"]
+visible = false
 z_index = 2
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Sakuya"
 
 [node name="Buttons" type="Node2D" parent="SellingSystem/CardSale"]
+visible = false
 
 [node name="AddRem" type="GridContainer" parent="SellingSystem/CardSale/Buttons"]
 offset_right = 138.0
@@ -283,22 +323,32 @@ layout_mode = 2
 text = "Quest card"
 
 [node name="Sell" type="Button" parent="SellingSystem/CardSale/Buttons"]
+visible = false
 offset_top = 180.0
 offset_right = 64.0
 offset_bottom = 212.0
 text = "Sell"
 
 [node name="HiLo" type="Button" parent="SellingSystem/CardSale/Buttons"]
+visible = false
 offset_top = 180.0
 offset_right = 64.0
 offset_bottom = 212.0
 text = "HiLo"
 
 [node name="Blackjack" type="Button" parent="SellingSystem/CardSale/Buttons"]
+visible = false
 offset_top = 180.0
 offset_right = 64.0
 offset_bottom = 212.0
 text = "Black"
+
+[node name="CardFlip" type="Button" parent="SellingSystem/CardSale/Buttons"]
+visible = false
+offset_top = 180.0
+offset_right = 64.0
+offset_bottom = 212.0
+text = "Flip"
 
 [connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/Cashout" to="SellingSystem" method="_on_cashout_pressed"]
 [connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/HigherLower/Higher" to="SellingSystem" method="_on_higher_pressed"]
@@ -306,6 +356,9 @@ text = "Black"
 [connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/Blackjack/Hit" to="SellingSystem" method="_on_hit_pressed"]
 [connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/Blackjack/DDown" to="SellingSystem" method="_on_d_down_pressed"]
 [connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/Blackjack/Stand" to="SellingSystem" method="_on_stand_pressed"]
+[connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/CardFlip/Pick1" to="SellingSystem" method="_on_pick_1_pressed"]
+[connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/CardFlip/Pick2" to="SellingSystem" method="_on_pick_2_pressed"]
+[connection signal="pressed" from="SellingSystem/minigameGUI/Bartering/CardFlip/Pick3" to="SellingSystem" method="_on_pick_3_pressed"]
 [connection signal="body_entered" from="SellingSystem/CardSale/Characters/CallChara/Reimu/ReimuSale" to="SellingSystem" method="_on_reimu_sale_body_entered"]
 [connection signal="body_exited" from="SellingSystem/CardSale/Characters/CallChara/Reimu/ReimuSale" to="SellingSystem" method="_on_reimu_sale_body_exited"]
 [connection signal="body_entered" from="SellingSystem/CardSale/Characters/CallChara/Sakuya/SakuyaHiLo" to="SellingSystem" method="_on_sakuya_hi_lo_body_entered"]
@@ -327,3 +380,4 @@ text = "Black"
 [connection signal="pressed" from="SellingSystem/CardSale/Buttons/Sell" to="SellingSystem" method="_on_sell_pressed"]
 [connection signal="pressed" from="SellingSystem/CardSale/Buttons/HiLo" to="SellingSystem" method="_on_hi_lo_pressed"]
 [connection signal="pressed" from="SellingSystem/CardSale/Buttons/Blackjack" to="SellingSystem" method="_on_blackjack_pressed"]
+[connection signal="pressed" from="SellingSystem/CardSale/Buttons/CardFlip" to="SellingSystem" method="_on_card_flip_pressed"]

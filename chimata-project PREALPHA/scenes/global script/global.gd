@@ -68,7 +68,7 @@ var dragon_gem_l = 0
 var dragon_gem_xl = 0
 
 #Workshop resources
-var ability_card_xs = 0
+var ability_card_xs = 1
 var ability_card_s = 0
 var ability_card_m = 0
 var ability_card_l = 0

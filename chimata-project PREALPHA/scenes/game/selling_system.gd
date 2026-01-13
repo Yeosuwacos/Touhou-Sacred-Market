@@ -32,7 +32,9 @@ func _ready():
 	
 	$BG.size = minigameSize
 	$BG.position = Vector2(0, get_viewport_rect().size.y - minigameSize.y)
-	$minigameGUI/Bartering/HigherLower.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y/2)
+	$minigameGUI/Bartering/HigherLower.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
+	$minigameGUI/Bartering/Blackjack.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
+	$minigameGUI/Bartering/CardFlip.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
 	$CardSale/Characters/dialogue.position = Vector2(characterSize.x, viewY - minigameSize.y) 
 	
 	$CardSale/Characters/Names/ChimataName.position = Vector2(viewX - characterSize.x/2 - \
@@ -40,30 +42,10 @@ func _ready():
 	$CardSale/Characters/Names/OpponentName.position = Vector2(characterSize.x/2 - \
 	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - characterSize.y + 12)
 	
-	$BG.visible = false
-	$minigameGUI/Bartering/HigherLower.visible = false
-	$minigameGUI/Bartering/Blackjack.visible = false
-	$minigameGUI/Bartering/Cashout.visible = false
-	$CardSale/Buttons.visible = false
-	$CardSale/Characters/dialogue.visible = false
-	
-	$CardSale/Characters/Sprites/OpponentFrame.visible = false
-	$CardSale/Characters/Sprites/ChimataFrame.visible = false
-	$CardSale/Characters/Names/OpponentName.visible = false
-	$CardSale/Characters/Names/ChimataName.visible = false
-	
-	#Hides the characters
-	
-	$CardSale/Characters/Sprites/Sakuya.visible = false
-	$CardSale/Characters/Sprites/Chimata.visible = false
-	
 	#Places the character calling buttons in good proportions
 	
 	$CardSale/Characters/CallChara.add_theme_constant_override("separation", viewX/5)
 	$CardSale/Buttons.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
-	$CardSale/Buttons/Sell.visible = false
-	$CardSale/Buttons/HiLo.visible = false
-	$CardSale/Buttons/Blackjack.visible = false
 
 #Replaces the opponent names correctly
 func replace():
@@ -82,6 +64,7 @@ func _input(event):
 					$CardSale/Buttons/Sell.visible = true
 					$CardSale/Buttons/HiLo.visible = false
 					$CardSale/Buttons/Blackjack.visible = false
+					$CardSale/Buttons/CardFlip.visible = false
 					
 					$CardSale/Characters/Sprites/OpponentFrame.visible = true
 					$CardSale/Characters/Sprites/ChimataFrame.visible = true
@@ -101,6 +84,7 @@ func _input(event):
 					$CardSale/Buttons/HiLo.visible = true
 					$CardSale/Buttons/Sell.visible = false
 					$CardSale/Buttons/Blackjack.visible = false
+					$CardSale/Buttons/CardFlip.visible = false
 					
 					$CardSale/Characters/Sprites/OpponentFrame.visible = true
 					$CardSale/Characters/Sprites/ChimataFrame.visible = true
@@ -120,6 +104,7 @@ func _input(event):
 					$CardSale/Buttons/Blackjack.visible = true
 					$CardSale/Buttons/Sell.visible = false
 					$CardSale/Buttons/HiLo.visible = false
+					$CardSale/Buttons/CardFlip.visible = false
 					
 					$CardSale/Characters/Sprites/OpponentFrame.visible = true
 					$CardSale/Characters/Sprites/ChimataFrame.visible = true
@@ -135,7 +120,24 @@ func _input(event):
 					$CardSale/Characters/dialogue.text = ""
 					
 				"sanae":
-					pass
+					$CardSale/Buttons/CardFlip.visible = true
+					$CardSale/Buttons.visible = true
+					$CardSale/Buttons/Sell.visible = false
+					$CardSale/Buttons/HiLo.visible = false
+					$CardSale/Buttons/Blackjack.visible = false
+					
+					$CardSale/Characters/Sprites/OpponentFrame.visible = true
+					$CardSale/Characters/Sprites/ChimataFrame.visible = true
+					$BG.visible = true
+					
+					$CardSale/Characters/Sprites/Sakuya.visible = false
+					$CardSale/Characters/Sprites/Chimata.visible = true
+					
+					$CardSale/Characters/Names/ChimataName.visible = true
+					$CardSale/Characters/Names/OpponentName.text = "Sanae"
+					$CardSale/Characters/Names/OpponentName.visible = true
+					$CardSale/Characters/dialogue.visible = true
+					$CardSale/Characters/dialogue.text = ""
 			replace()
 
 #Detection functions for character sales
@@ -387,6 +389,64 @@ func disable():
 	$minigameGUI/Bartering/Blackjack/Hit.disabled = true
 	$minigameGUI/Bartering/Blackjack/DDown.disabled = true
 	$minigameGUI/Bartering/Blackjack/Stand.disabled = true
+
+#Card flip minigame
+var card1 = 1
+var card2 = 1
+var card3 = 1
+var card1val = 0
+var card2val = 0
+var card3val = 0
+var index = 0
+
+func _on_card_flip_pressed() -> void:
+	var total = 0
+	total += (Global.sold_xs * 50 + Global.sold_s * 300 + Global.sold_m * \
+	825 + Global.sold_l * 2150 + Global.sold_xl * 5400)
+	if total > 0:
+		$CardSale/Buttons.visible = false
+		$CardSale/Characters/CallChara.visible = false
+		$CardSale/Characters/dialogue.text = ""
+		card_flip(total)
+
+func card_flip(wager):
+	$minigameGUI/Bartering/CardFlip.visible = true
+	Global.wager = wager
+	var mult = randi_range(10,70)
+	var misfortune = 1 - float(mult)/100
+	var fortune = 1 + float(mult)/100
+	var selector: Array = [1,2,3]
+	card_attribute(fortune, misfortune, selector)
+
+#Gives every card a specific attribute 
+func card_attribute(fortune, misfortune, selector):
+	index = randi_range(0,2)
+	card1 = selector.pop_at(index)
+	index = randi_range(0,1)
+	card2 = selector.pop_at(index)
+	card3 = selector.pop_at(0)
+	
+	card1val = distribute(card1,fortune,misfortune)
+	card2val = distribute(card2,fortune,misfortune)
+	card3val = distribute(card3,fortune,misfortune)
+
+func distribute(card, fortune, misfortune):
+	var payout = 0
+	match card:
+		1: payout = misfortune
+		2: payout = 1
+		3: payout = fortune
+	return payout
+
+#Sets up the buttons for when you make your choice
+func _on_pick_1_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_pick_2_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_pick_3_pressed() -> void:
+	pass # Replace with function body.
 
 #Confirming a sale and updating the amount
 func sell(total):
