@@ -389,6 +389,9 @@ func disable():
 	$minigameGUI/Bartering/Blackjack/Hit.disabled = true
 	$minigameGUI/Bartering/Blackjack/DDown.disabled = true
 	$minigameGUI/Bartering/Blackjack/Stand.disabled = true
+	$minigameGUI/Bartering/CardFlip/Pick1.disabled = true
+	$minigameGUI/Bartering/CardFlip/Pick2.disabled = true
+	$minigameGUI/Bartering/CardFlip/Pick3.disabled = true
 
 #Card flip minigame
 var card1 = 1
@@ -426,27 +429,49 @@ func card_attribute(fortune, misfortune, selector):
 	card2 = selector.pop_at(index)
 	card3 = selector.pop_at(0)
 	
-	card1val = distribute(card1,fortune,misfortune)
-	card2val = distribute(card2,fortune,misfortune)
-	card3val = distribute(card3,fortune,misfortune)
-
-func distribute(card, fortune, misfortune):
+	card1val = distribute(card1,fortune,misfortune, "shuffle")
+	card2val = distribute(card2,fortune,misfortune, "shuffle")
+	card3val = distribute(card3,fortune,misfortune, "shuffle")
+	
+func distribute(card, fortune, misfortune, action):
 	var payout = 0
-	match card:
-		1: payout = misfortune
-		2: payout = 1
-		3: payout = fortune
-	return payout
+	match action:
+		"shuffle":
+			match card:
+				1: payout = misfortune
+				2: payout = 1
+				3: payout = fortune
+			return payout
+		
+		"reveal":
+			match card:
+				1: 
+					Global.wager = Global.wager*card1val
+					flipResult(card1val)
+				2: 
+					Global.wager = Global.wager*card2val
+					flipResult(card2val)
+				3: 
+					Global.wager = Global.wager*card3val
+					flipResult(card3val)
+			$minigameGUI/Bartering/Cashout.visible = true
+			disable()
 
 #Sets up the buttons for when you make your choice
 func _on_pick_1_pressed() -> void:
-	pass # Replace with function body.
-
+	distribute(card1,null,null,"reveal")
 func _on_pick_2_pressed() -> void:
-	pass # Replace with function body.
-
+	distribute(card2,null,null,"reveal")
 func _on_pick_3_pressed() -> void:
-	pass # Replace with function body.
+	distribute(card3,null,null,"reveal")
+	
+func flipResult(value):
+	if value == 1:
+		$CardSale/Characters/dialogue.text = "Regular luck! x1"
+	elif value > 1:
+		$CardSale/Characters/dialogue.text = "Fortune! x" + str(value)
+	elif value < 1:
+		$CardSale/Characters/dialogue.text = "Misfortune! x" + str(value)
 
 #Confirming a sale and updating the amount
 func sell(total):
@@ -454,6 +479,7 @@ func sell(total):
 	$GUI/Funds.text = "Funds: " + str(floori(Global.funds))
 	$minigameGUI/Bartering/HigherLower.visible = false
 	$minigameGUI/Bartering/Blackjack.visible = false
+	$minigameGUI/Bartering/CardFlip.visible = false
 
 #Removing the sold items/secondary variables
 func remove_stock():
@@ -486,6 +512,9 @@ func _on_cashout_pressed() -> void:
 	$minigameGUI/Bartering/Blackjack/Hit.disabled = false
 	$minigameGUI/Bartering/Blackjack/Stand.disabled = false
 	$minigameGUI/Bartering/Blackjack/DDown.disabled = false
+	$minigameGUI/Bartering/CardFlip/Pick1.disabled = false
+	$minigameGUI/Bartering/CardFlip/Pick2.disabled = false
+	$minigameGUI/Bartering/CardFlip/Pick3.disabled = false
 	
 	$CardSale.visible = true
 	$CardSale/Buttons.visible = true
