@@ -9,7 +9,6 @@ extends Node2D
 @onready var chimataScene = preload("res://entities/characters/chimata.tscn")
 @onready var chimata = chimataScene.instantiate()
 @export var ores : Array[Ores]
-@export var noiseMaker : FastNoiseLite
 
 #Sets the amount of utilities 
 @onready var bombs = Global.bombQty
@@ -30,7 +29,6 @@ func _ready():
 	
 	#Creates the mine as a 2D grid
 	#Places down every tile correctly
-	noiseMaker.seed = randi()
 	
 	for i in 100:
 		mine.append([])
@@ -42,13 +40,11 @@ func _ready():
 	for i in 100:
 		for j in 500:
 			var pos = Vector2i(i,j)
-			var noise = noiseMaker.get_noise_2d(i*0.1,j*0.1)
-			noise = (noise+1)/2
 			
 			for ore in ores:
-				if ore.minimum <= j && j <= ore.maximum && noise > ore.chance && randf() < 0.03:
+				if ore.minimum <= j && j <= ore.maximum && randf() < 0.025*ore.chance:
 					placeOres(pos,ore.type)
-			
+
 	#Places Chimata at the top of the mine
 	tilemap.set_cell(Vector2i(50, 0), -1)
 	mine[50][0] = 0
@@ -61,7 +57,7 @@ func _ready():
 @onready var ore_xl = 0
 
 #Calculates the amount of moves Chimata is allowed to do
-@onready var moves = Global.moves
+@onready var moves = Global.moves + 1000
 
 #Generates clumps of ores (flood fill algorithm)
 func placeOres(startPos: Vector2i, type: int):

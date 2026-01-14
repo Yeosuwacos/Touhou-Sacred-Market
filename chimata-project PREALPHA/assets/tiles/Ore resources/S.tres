@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_tk2cm")
-chance = 0.05
+chance = 0.9
+minimum = 100
+maximum = 250
 type = 2
 id = "S"
 metadata/_custom_type_script = "uid://c3uo1jftic3er"

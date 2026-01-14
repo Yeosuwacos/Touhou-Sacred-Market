@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_8q8lr")
-chance = 0.01
+chance = 0.6
+minimum = 400
+maximum = 500
 type = 5
 id = "Xl"
 metadata/_custom_type_script = "uid://c3uo1jftic3er"
