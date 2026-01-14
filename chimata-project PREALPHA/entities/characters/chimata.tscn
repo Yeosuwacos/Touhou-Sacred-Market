@@ -20,3 +20,4 @@ shape = SubResource("RectangleShape2D_hj2v7")
 
 [node name="chimataCamera" type="Camera2D" parent="."]
 enabled = false
+zoom = Vector2(0.8, 0.8)
