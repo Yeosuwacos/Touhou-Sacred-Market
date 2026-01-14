@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ores" load_steps=2 format=3 uid="uid://c1fx1bu87ji2m"]
+
+[ext_resource type="Script" uid="uid://c3uo1jftic3er" path="res://ores.gd" id="1_8q8lr"]
+
+[resource]
+script = ExtResource("1_8q8lr")
+chance = 0.01
+type = 5
+id = "Xl"
+metadata/_custom_type_script = "uid://c3uo1jftic3er"

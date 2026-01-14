@@ -8,6 +8,8 @@ extends Node2D
 @onready var tilemap = get_node("mineWindow/oreMap")
 @onready var chimataScene = preload("res://entities/characters/chimata.tscn")
 @onready var chimata = chimataScene.instantiate()
+@onready var ores : Array[Ores]
+@export var noiseMaker : FastNoiseLite
 
 #Sets the amount of utilities 
 @onready var bombs = Global.bombQty
@@ -27,16 +29,23 @@ func _ready():
 	#$mineWindow/moveCounter.position = Vector2((chimataLocation[0]*128+832),(chimataLocation[1]*128-464))
 	
 	#Creates the mine as a 2D grid
-	#Adds values to each tile between 0 and 5
-	#Places the right tile on the right area
+	#Places down every tile correctly
+	noiseMaker.seed = randi()
 	
 	for i in 100:
 		mine.append([])
 		for j in 500:
-			var rarity = roundi(randf_range(0,1) * (j/100)) + randi_range(0,1)
-			rarity *= randi_range(0,1)
-			mine[i].append(rarity)
-			tilemap.set_cell(Vector2i(i,j),1,Vector2i(rarity,0))
+			mine[i].append(0)
+			tilemap.set_cell(Vector2i(i,j),1,Vector2i(0,0))
+	
+	#Goes through the mine again to place down the ores
+	for i in 100:
+		for j in 500:
+			var pos = Vector2i(i,j)
+			
+			for ore in ores:
+				if ore.minimum <= j && j <= ore.maximum && randf() < ore.chance:
+					placeOres(pos,ore.type)
 			
 	#Places Chimata at the top of the mine
 	tilemap.set_cell(Vector2i(50,0),-1)
@@ -51,6 +60,28 @@ func _ready():
 
 #Calculates the amount of moves Chimata is allowed to do
 @onready var moves = Global.moves
+
+#Generates clumps of ores (flood fill algorithm)
+func placeOres(startPos: Vector2i, type: int):
+	var size = randi_range(1,12)
+	
+	var unfinished = [startPos]
+	var finished = {}
+	
+	while unfinished.size > 0 && size > 0:
+		var pos = unfinished.pop_front()
+		if finished.has(pos):
+			continue
+		tilemap.set_cell(pos,Vector2i(type,0))
+		mine[pos.i][pos.j] = type
+		finished[pos] = true
+		size -= 1
+		
+		#Looks around the tile to generate veins
+		unfinished.append(pos + Vector2i(1,0))
+		unfinished.append(pos + Vector2i(0,1))
+		unfinished.append(pos + Vector2i(-1,0))
+		unfinished.append(pos + Vector2i(0,-1))
 
 #Detects where Chimata is going to check which ore she picks up
 #Removes the ore from the mine
