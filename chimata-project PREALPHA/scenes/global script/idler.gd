@@ -9,4 +9,3 @@ func _physics_process(delta):
 		second = 0.0
 		
 		Global.dragon_gem_xs += Global.idleXs
-	

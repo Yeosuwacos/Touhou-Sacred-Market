@@ -8,6 +8,8 @@ extends Node2D
 @onready var shopSize = Vector2(Global.gameSize.x*2, Global.gameSize.y)
 @onready var cardChoiceSize = Vector2(Global.gameSize.x/3, Global.gameSize.y)
 @onready var chimataScene = preload("res://entities/characters/chimata.tscn")
+@onready var currentHover = ""
+@onready var workshopOpen = false
 
 #Variables
 @onready var type = {
@@ -42,6 +44,8 @@ func _ready():
 	get_viewport_rect().size.y - cardChoiceSize.y)
 	$shopGUI/BG.size = shopSize
 	$shopGUI/BG.position = Vector2(0 - $shopGUI.position.x, get_viewport_rect().size.y - shopSize.y - $shopGUI.position.y)
+	$Buttons.add_theme_constant_override("separation", get_viewport_rect().size.y/3)
+	$Buttons.position = Vector2(get_viewport_rect().size.x/2 - $Buttons.size.x/2, chimata.position.y - 64)
 
 func _physics_process(delta):
 	
@@ -192,3 +196,34 @@ func _on_hitzone_area_exited(area: Area2D):
 	if readyArrow == area:
 		readyArrow = null
 	area.queue_free()
+
+#Opens the buttons
+func _input(event):
+	if event is InputEventKey and event.pressed and not event.echo:
+		if Input.is_action_pressed("confirm"):
+			match currentHover:
+				"": pass
+				"cardMaking":
+					if !workshopOpen:
+						$shopGUI.visible = true
+						workshopOpen = true
+					elif workshopOpen:
+						$shopGUI.visible = false
+						workshopOpen = false
+				"idleShop":
+					pass
+
+#Hovering interactions for buttons
+func _on_c_moptions_body_entered(_body) -> void:
+	currentHover = "cardMaking"
+	$Buttons/CardMaking/CMoptions/pressE.visible = true
+func _on_c_moptions_body_exited(_body) -> void:
+	currentHover = ""
+	$Buttons/CardMaking/CMoptions/pressE.visible = false
+
+func _on_idle_shop_button_body_entered(_body) -> void:
+	currentHover = "idleShop"
+	$Buttons/IdleShop/IdleShopButton/pressE.visible = true
+func _on_idle_shop_button_body_exited(_body) -> void:
+	currentHover = ""
+	$Buttons/IdleShop/IdleShopButton/pressE.visible = false

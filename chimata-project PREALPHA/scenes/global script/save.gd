@@ -18,9 +18,7 @@ func saveGame():
 		"charaSize" : Global.charaSize,
 		
 		"passwordEntered" : Global.passwordEntered,
-		"menuOpen" : Global.menuOpen,
 		
-		"isMining" : Global.isMining,
 		"moves" : Global.moves,
 		
 		"bombStr" : Global.bombStr,
@@ -31,30 +29,9 @@ func saveGame():
 		
 		"multStr" : Global.multStr,
 		"multQty" : Global.multQty,
-		"addActive" : Global.addActive,
 		
 		"idleXs" : Global.idleXs,
 		"idleS" : Global.idleS,
-		
-		"follow" : Global.follow,
-		"maxUP" : Global.maxUP,
-		"maxDOWN" : Global.maxDOWN,
-		"maxLEFT" : Global.maxLEFT,
-		"maxRIGHT" : Global.maxRIGHT,
-		"isMoving" : Global.isMoving,
-		
-		"mShopOpen" : Global.mShopOpen,
-		"iShopOpen" : Global.iShopOpen,
-		
-		"wager" : Global.wager,
-		
-		"nb1" : Global.nb1,
-		"nb2" : Global.nb2,
-
-		"playerHand" : Global.playerHand,
-		"marisaHand" : Global.marisaHand,
-
-		"hittable" : Global.hittable,
 
 		"sold_xs" : Global.sold_xs,
 		"sold_s" : Global.sold_s,
@@ -130,7 +107,6 @@ func loadGame():
 
 	Global.menuOpen = loaded.get("menuOpen")
 
-	Global.isMining = loaded.get("isMining")
 	Global.moves = loaded.get("moves")
 
 	Global.bombStr = loaded.get("bombStr")
@@ -141,30 +117,9 @@ func loadGame():
 
 	Global.multStr = loaded.get("multStr")
 	Global.multQty = loaded.get("multQty")
-	Global.addActive = loaded.get("addActive")
 
 	Global.idleXs = loaded.get("idleXs")
 	Global.idleS = loaded.get("idleS")
-
-	Global.follow = loaded.get("follow")
-	Global.maxUP = loaded.get("maxUP")
-	Global.maxDOWN = loaded.get("maxDOWN")
-	Global.maxLEFT = loaded.get("maxLEFT")
-	Global.maxRIGHT = loaded.get("maxRIGHT")
-	Global.isMoving = loaded.get("isMoving")
-
-	Global.mShopOpen = loaded.get("mShopOpen")
-	Global.iShopOpen = loaded.get("iShopOpen")
-
-	Global.wager = loaded.get("wager")
-
-	Global.nb1 = loaded.get("nb1")
-	Global.nb2 = loaded.get("nb2")
-
-	Global.playerHand = loaded.get("playerHand")
-	Global.marisaHand = loaded.get("marisaHand")
-
-	Global.hittable = loaded.get("hittable")
 
 	Global.sold_xs = loaded.get("sold_xs")
 	Global.sold_s = loaded.get("sold_s")

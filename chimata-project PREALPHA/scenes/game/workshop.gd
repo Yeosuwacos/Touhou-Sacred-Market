@@ -26,14 +26,5 @@ func _input(event):
 				Global.menuOpen = false
 				optionPopup.visible = false
 
-#Opens the workshop interface
-func _on_open_workshop_pressed() -> void:
-	if !workshopOpen:
-		$WorkshopZones/shopGUI.visible = true
-		workshopOpen = true
-	elif workshopOpen:
-		$WorkshopZones/shopGUI.visible = false
-		workshopOpen = false
-
 func _exit_tree():
 	Save.saveGame()
