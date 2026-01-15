@@ -156,6 +156,13 @@ text = "Windowed mode"
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="SaveClose" type="Button" parent="."]
+layout_mode = 0
+offset_top = 350.0
+offset_right = 121.0
+offset_bottom = 381.0
+text = "Save and close"
+
 [connection signal="pressed" from="DevMode/Access" to="." method="_on_access_pressed"]
 [connection signal="pressed" from="DevMode/Resources/MoreFundsAdd" to="." method="_on_more_funds_add_pressed"]
 [connection signal="pressed" from="DevMode/Resources/LotsMoreFundsAdd" to="." method="_on_lots_more_funds_add_pressed"]
@@ -170,3 +177,4 @@ offset_bottom = 40.0
 [connection signal="pressed" from="SelectRes/Options/3480x2160" to="SelectRes" method="_on_x_2160_pressed"]
 [connection signal="pressed" from="SelectRes/Options/Fullscreen" to="SelectRes" method="_on_fullscreen_pressed"]
 [connection signal="pressed" from="SelectRes/Options/Windowed" to="SelectRes" method="_on_windowed_pressed"]
+[connection signal="pressed" from="SaveClose" to="." method="_on_save_close_pressed"]

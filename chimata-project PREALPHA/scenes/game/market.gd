@@ -38,3 +38,6 @@ func _input(event):
 			elif Global.menuOpen == true:
 				Global.menuOpen = false
 				optionPopup.visible = false
+				
+func _exit_tree():
+	Save.saveGame()

@@ -65,10 +65,11 @@ func _on_reset_rem_pressed() -> void:
 	Global.tpStr = 5
 	Global.tpQty = 0
 
-	Global.addStr = 2
-	Global.addQty = 0
+	Global.multStr = 2
+	Global.multQty = 0
 
 	Global.idleXs = 0
+	Global.idleS = 0
 	
 	Prices.MoreMoves = 100
 	Prices.MoreMovesBought = 0
@@ -85,3 +86,8 @@ func _on_reset_rem_pressed() -> void:
 func _on_reload_pressed() -> void:
 	get_parent().queue_free()
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/game/market.tscn")
+
+#Saves and closes the game
+func _on_save_close_pressed() -> void:
+	Save.saveGame()
+	get_tree().quit()

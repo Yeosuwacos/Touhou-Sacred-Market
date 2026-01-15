@@ -221,3 +221,6 @@ func endGame():
 	$mineWindow/Labels/returnSurface/Stats.text = "You mined:\r" + str(ore_xs) + " dragon gem dust\r" \
 	+ str(ore_s) + " dragon gem pieces\r" + str(ore_m) + " dragon gems\r" + str(ore_l) \
 	+ " dragon gem chunks\r" + str(ore_xl) + " dragon gem clusters" 
+
+func _exit_tree():
+	Save.saveGame()

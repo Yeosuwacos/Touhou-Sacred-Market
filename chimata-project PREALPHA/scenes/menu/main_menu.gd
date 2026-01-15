@@ -10,4 +10,5 @@ func run():
 
 #Start game
 func _on_start_pressed() -> void:
+	Save.loadGame()
 	run()

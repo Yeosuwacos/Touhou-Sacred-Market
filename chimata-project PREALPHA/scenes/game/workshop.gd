@@ -34,3 +34,6 @@ func _on_open_workshop_pressed() -> void:
 	elif workshopOpen:
 		$WorkshopZones/shopGUI.visible = false
 		workshopOpen = false
+
+func _exit_tree():
+	Save.saveGame()

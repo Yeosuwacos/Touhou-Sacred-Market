@@ -22,6 +22,7 @@ Gui="*res://scenes/menu/gui.gd"
 Global="*res://scenes/global script/global.tscn"
 Prices="*res://scenes/global script/prices.tscn"
 Dialogue="*res://dialogue.gd"
+Save="*res://scenes/global script/save.gd"
 
 [display]
 

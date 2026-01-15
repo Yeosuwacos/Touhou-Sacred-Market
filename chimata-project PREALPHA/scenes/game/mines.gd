@@ -211,3 +211,6 @@ func _on_mult_str_mouse_entered() -> void:
 	$ShopGUI/ItemDesc.text = "Increases the multiplier's ore amount by 1"
 func _on_mult_str_mouse_exited() -> void:
 	$ShopGUI/ItemDesc.text = ""
+	
+func _exit_tree():
+	Save.saveGame()
