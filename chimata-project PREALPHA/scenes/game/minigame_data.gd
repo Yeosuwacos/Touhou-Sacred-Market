@@ -167,11 +167,12 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("frenzy"):
 			if frenzies > 0:
 				for depth in range(0,Global.frenzyStr):
-					for width in range(0,2):
-						mineTile(width-1,depth,Global.addActive)
-				chimataLocation[1] += Global.frenzyStr
+					mineTile(-1,depth,Global.addActive)
+					mineTile(0,depth,Global.addActive)
+					mineTile(1,depth,Global.addActive)
+				chimataLocation[1] += (Global.frenzyStr-1)
 				updateLocation()
-				chimata.position.y += 128*Global.frenzyStr
+				chimata.position.y += 128*(Global.frenzyStr-1)
 				frenzies -= 1
 	#Brings up the minigame end screen (stats and button)
 	elif moves <= 0:

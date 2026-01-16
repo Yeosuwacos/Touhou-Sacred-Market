@@ -37,50 +37,8 @@ func _on_more_cards_add_pressed() -> void:
 
 #Resetting the game's progress
 func _on_reset_rem_pressed() -> void:
-	Global.dragon_gem_xs = 0
-	Global.dragon_gem_s = 0
-	Global.dragon_gem_m = 0
-	Global.dragon_gem_l = 0
-	Global.dragon_gem_xl = 0
-	
-	Global.ability_card_xs = 0
-	Global.ability_card_s = 0
-	Global.ability_card_m = 0
-	Global.ability_card_l = 0
-	Global.ability_card_xl = 0
-	
-	Global.funds = 0
-	
-	Global.sold_xs = 0
-	Global.sold_s = 0
-	Global.sold_m = 0
-	Global.sold_l = 0
-	Global.sold_xl = 0
-	
-	Global.moves = 20
-
-	Global.bombStr = 2
-	Global.bombQty = 0
-
-	Global.tpStr = 5
-	Global.tpQty = 0
-
-	Global.multStr = 2
-	Global.multQty = 0
-
-	Global.idleXs = 0
-	Global.idleS = 0
-	
-	Prices.MoreMoves = 100
-	Prices.MoreMovesBought = 0
-
-	Prices.MoreBombs = 200
-	Prices.MoreBombsBought = 0
-
-	Prices.BombPower = 500
-
-	Prices.idleXs = 1000
-	Prices.idleXsBought = 0
+	Save.loadDefault()
+	_on_reload_pressed()
 
 #Reloads the current page with the correct variables
 func _on_reload_pressed() -> void:
