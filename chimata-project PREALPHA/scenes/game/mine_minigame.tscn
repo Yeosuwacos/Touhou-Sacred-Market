@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b80hdq3ug5e08" path="res://scenes/game/minigame_data.gd" id="1_8p414"]
 [ext_resource type="Texture2D" uid="uid://b6mj3aiurm4vx" path="res://assets/tiles/oreMine.png" id="2_0wkj4"]
-[ext_resource type="Script" uid="uid://c3uo1jftic3er" path="res://ores.gd" id="2_7hdtf"]
+[ext_resource type="Script" path="res://ores.gd" id="2_7hdtf"]
 [ext_resource type="Texture2D" uid="uid://5bdm7lmq4ojq" path="res://assets/tiles/mineBG.png" id="2_nknyf"]
 [ext_resource type="Resource" uid="uid://culwl384yv5fj" path="res://assets/tiles/Ore resources/Xs.tres" id="3_gdpjo"]
 [ext_resource type="Resource" uid="uid://d1nh46wxe1e75" path="res://assets/tiles/Ore resources/S.tres" id="4_3t2yv"]

@@ -152,7 +152,7 @@ func _on_bombs_pressed() -> void:
 		
 func _on_mult_pressed() -> void:
 	if Global.funds >= Prices.Mult:
-		$ShopGUI/Chatacters/Momoyo.texture = momoyoHappy
+		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 		
 func _on_mult_str_pressed() -> void:
 	if Global.funds >= Prices.MultStr:
@@ -172,6 +172,10 @@ func _on_t_ppower_pressed() -> void:
 		
 func _on_momoyo_frenzy_pressed() -> void:
 	if Global.funds >= Prices.Frenzy:
+		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
+		
+func _on_frenzy_power_pressed() -> void:
+	if Global.funds >= Prices.FrenzyPwr:
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 
 #Idle shop
@@ -222,6 +226,11 @@ func _on_mult_str_mouse_exited() -> void:
 func _on_momoyo_frenzy_mouse_entered() -> void:
 	$ShopGUI/ItemDesc.text = "Summons Momoyo to bore down the tiles adjacent and under you. Each purchase adds 1 to your frenzy count."
 func _on_momoyo_frenzy_mouse_exited() -> void:
+	$ShopGUI/ItemDesc.text = ""
+	
+func _on_frenzy_power_mouse_entered() -> void:
+	$ShopGUI/ItemDesc.text = "Increases Momoyo's frenzy strength. Each purchase increases depth by 3"
+func _on_frenzy_power_mouse_exited() -> void:
 	$ShopGUI/ItemDesc.text = ""
 	
 func _exit_tree():

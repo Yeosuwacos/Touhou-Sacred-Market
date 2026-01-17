@@ -64,19 +64,25 @@ func saveGame():
 		"MultBought" : Prices.MultBought,
 
 		"MultStr" : Prices.MultStr,
+		"MultStrBought" : Prices.MultStrBought,
 
 		"MoreBombs" : Prices.MoreBombs,
 		"MoreBombsBought" : Prices.MoreBombsBought,
 
 		"BombPower" : Prices.BombPower,
+		"BombPowerBought" : Prices.BombPowerBought,
 
 		"MoreTPs" : Prices.MoreTPs,
 		"MoreTPsBought" : Prices.MoreTPsBought,
 
 		"TPpower" : Prices.TPpower,
+		"TPpowerBought" : Prices.TPpowerBought,
 		
 		"Frenzy" : Prices.Frenzy,
 		"FrenzyBought" : Prices.FrenzyBought,
+		
+		"FrenzyPwr" : Prices.FrenzyPwr,
+		"FrenzyPwrBought" : Prices.FrenzyPwrBought,
 
 		"idleXsPrice" : Prices.idleXs,
 		"idleXsBought" : Prices.idleXsBought,
@@ -156,19 +162,25 @@ func loadGame():
 	Prices.MultBought = loaded.get("MultBought")
 
 	Prices.MultStr = loaded.get("MultStr")
+	Prices.MultStrBought = loaded.get("MultStrBought")
 
 	Prices.MoreBombs = loaded.get("MoreBombs")
 	Prices.MoreBombsBought = loaded.get("MoreBombsBought")
 
 	Prices.BombPower = loaded.get("BombPower")
+	Prices.BombPowerBought = loaded.get("BombPowerBought")
 
 	Prices.MoreTPs = loaded.get("MoreTPs")
 	Prices.MoreTPsBought = loaded.get("MoreTPsBought")
 
 	Prices.TPpower = loaded.get("TPpower")
+	Prices.TPpowerBought = loaded.get("TPpowerBought")
 	
 	Prices.Frenzy = loaded.get("Frenzy")
 	Prices.FrenzyBought = loaded.get("FrenzyBought")
+	
+	Prices.FrenzyPwr = loaded.get("FrenzyPwr")
+	Prices.FrenzyPwrBought = loaded.get("FrenzyPwrBought")
 
 	Prices.idleXs = loaded.get("idleXsPrice")
 	Prices.idleXsBought = loaded.get("idleXsBought")
@@ -267,19 +279,25 @@ func loadDefault():
 	Prices.MultBought = 0
 
 	Prices.MultStr = 350
+	Prices.MultStrBought = 0
 
 	Prices.MoreBombs = 200
 	Prices.MoreBombsBought = 0
 
 	Prices.BombPower = 500
+	Prices.BombPowerBought = 0
 
 	Prices.MoreTPs = 600
 	Prices.MoreTPsBought = 0
 
 	Prices.TPpower = 1000
+	Prices.TPpowerBought = 0
 
 	Prices.Frenzy = 1000
 	Prices.FrenzyBought = 0
+	
+	Prices.FrenzyPwr = 1350
+	Prices.FrenzyPwrBought = 0
 
 	#Idle shop
 	Prices.idleXs = 1000
