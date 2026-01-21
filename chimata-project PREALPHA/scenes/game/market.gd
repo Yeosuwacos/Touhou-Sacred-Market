@@ -24,6 +24,8 @@ func _ready():
 	$SellingSystem/CardSale/Characters/CallChara.position = Vector2(get_viewport_rect().size.x/2 - \
 	$SellingSystem/CardSale/Characters/CallChara.size.x/2, chimata.position.y - 64 - cardInterface.y)
 	
+	$SellingSystem/GUI/GenUI.scale = Global.res / $SellingSystem/GUI/GenUI.texture.get_size()
+	
 	#Settings initialization
 	add_child(optionPopup)
 	optionPopup.position = Vector2i(0,0)

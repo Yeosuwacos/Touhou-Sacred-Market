@@ -4,8 +4,6 @@ extends Node2D
 func _ready():
 	$IdleShopGrid/idlerXsText.text = "+1 xs/s: " + str(floori(Prices.idleXs))
 	$IdleShopGrid/idlerSText.text = "+1 s/s: " + str(floori(Prices.idleS))
-	$GUI.position.y = $IdleShopGrid.size.y
-	$GUI/Funds.text = "Funds: " + str(floori(Global.funds))
 	
 #Buys idle harvesters
 func _on_idler_xs_pressed() -> void:

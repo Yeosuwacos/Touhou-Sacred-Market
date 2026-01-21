@@ -17,7 +17,6 @@ func _ready():
 	$CardSale/Buttons/AddRem/Xl.text = "Special ability cards " + str(Global.sold_xl) + "/" + str(Global.ability_card_xl)
 
 	#Sets the scale/layout for the characters and the frames
-	$GenUI.scale = Global.res / $GenUI.texture.get_size()
 
 	$CardSale/Characters/Sprites/OpponentFrame.position = Vector2(characterSize.x/2, viewY - characterSize.y/2)
 	$CardSale/Characters/Sprites/OpponentFrame.scale = characterSize/$CardSale/Characters/Sprites/OpponentFrame.texture.get_size()
