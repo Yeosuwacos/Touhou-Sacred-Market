@@ -70,6 +70,21 @@ custom_minimum_size = Vector2(200, 40)
 offset_right = 500.0
 offset_bottom = 84.0
 
+[node name="FrenziesLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBars"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+show_percentage = false
+
+[node name="TPsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBars"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+show_percentage = false
+
+[node name="BombsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBars"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+show_percentage = false
+
 [node name="MultStrLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBars"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2

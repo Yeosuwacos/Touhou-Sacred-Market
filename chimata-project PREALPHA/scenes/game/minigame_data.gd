@@ -40,6 +40,18 @@ func _ready():
 	$mineWindow/Labels/ResourceBars/MultStrLeft.value = mults
 	if mults != 0:
 		$mineWindow/Labels/ResourceBars/MultStrLeft.max_value = mults
+		
+	$mineWindow/Labels/ResourceBars/BombsLeft.value = bombs
+	if bombs != 0:
+		$mineWindow/Labels/ResourceBars/BombsLeft.max_value = mults
+		
+	$mineWindow/Labels/ResourceBars/TPsLeft.value = tps
+	if tps != 0:
+		$mineWindow/Labels/ResourceBars/TPsLeft.max_value = tps
+		
+	$mineWindow/Labels/ResourceBars/FrenziesLeft.value = frenzies
+	if frenzies != 0:
+		$mineWindow/Labels/ResourceBars/FrenziesLeft.max_value = frenzies
 	
 	#Creates the mine as a 2D grid
 	#Places down every tile correctly
@@ -159,6 +171,7 @@ func _physics_process(delta):
 					for j in range(1-Global.bombStr,Global.bombStr):
 						mineTile(i,j,Global.addActive)
 				bombs -= 1
+				$mineWindow/Labels/ResourceBars/BombsLeft.value -= 1
 				
 		if Input.is_action_just_pressed("tp"):
 			#Make sure Chimata does not tp out of bounds
@@ -168,6 +181,7 @@ func _physics_process(delta):
 				mineTile(0,0,Global.addActive)
 				chimata.position.y += 128*Global.tpStr
 				tps -= 1
+				$mineWindow/Labels/ResourceBars/TPsLeft.value -= 1
 				
 		if Input.is_action_just_pressed("addStr"):
 			if mults > 0 && Global.addActive == false:
@@ -185,6 +199,7 @@ func _physics_process(delta):
 				updateLocation()
 				chimata.position.y += 128*(Global.frenzyStr-1)
 				frenzies -= 1
+				$mineWindow/Labels/ResourceBars/FrenziesLeft.value -= 1
 	#Brings up the minigame end screen (stats and button)
 	elif moves <= 0:
 		endGame()
