@@ -21,7 +21,7 @@ func _ready():
 	chimata.position = Vector2i(Global.res.x-50,get_viewport_rect().size.y - shopSize.y - 64)
 	
 	#Settings/GUI initialization
-	$GenUI.scale = Global.res / $GenUI.texture.get_size()
+	$GUI/GenUI.scale = Global.res / $GUI/GenUI.texture.get_size()
 	add_child(optionPopup)
 	optionPopup.position = Vector2i(0,0)
 	optionPopup.visible = false
