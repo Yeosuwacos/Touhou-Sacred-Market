@@ -34,11 +34,8 @@ func _ready():
 	$mineWindow/Labels/ResourceBarsLeft.position.y = get_viewport_rect().size.y - $mineWindow/Labels/ResourceBarsLeft.size.y
 	$mineWindow/Labels/ResourceBarsRight.position.y = get_viewport_rect().size.y - $mineWindow/Labels/ResourceBarsRight.size.y
 	$mineWindow/Labels/ResourceBarsRight.position.x = get_viewport_rect().size.x - $mineWindow/Labels/ResourceBarsRight.size.x
-	$mineWindow/Labels/MovesLeft.position.y = get_viewport_rect().size.y - $mineWindow/Labels/MovesLeft.size.y
-	$mineWindow/Labels/MovesLeft.position.x = get_viewport_rect().size.x/2 - $mineWindow/Labels/MovesLeft.size.x/2
-	
-	$mineWindow/Labels/MovesLeft.value = moves
-	$mineWindow/Labels/MovesLeft.max_value = moves
+	$mineWindow/Labels/ResourceBarsCenter.position.y = get_viewport_rect().size.y - $mineWindow/Labels/ResourceBarsCenter.size.y
+	$mineWindow/Labels/ResourceBarsCenter.position.x = get_viewport_rect().size.x/2 - $mineWindow/Labels/ResourceBarsCenter.size.x/2
 	
 	$mineWindow/Labels/ResourceBarsLeft/MultStrLeft.value = mults
 	if mults != 0:
@@ -216,7 +213,9 @@ func updateLocation():
 	locationX = chimataLocation[0]
 	locationY = chimataLocation[1]
 	moves -= 1
-	$mineWindow/Labels/MovesLeft.value -= 1
+	$mineWindow/Labels/ResourceBarsCenter.size.x -= $mineWindow/Labels/ResourceBarsCenter.size.x/moves
+	$mineWindow/Labels/ResourceBarsCenter.position.x = get_viewport_rect().size.x/2 - $mineWindow/Labels/ResourceBarsCenter.size.x/2
+	
 
 #Adds the corresponding ore and multiplier
 func add_ore(nb,mult):

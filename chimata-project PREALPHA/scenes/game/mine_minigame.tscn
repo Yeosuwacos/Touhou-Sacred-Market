@@ -91,13 +91,13 @@ layout_mode = 2
 fill_mode = 1
 show_percentage = false
 
-[node name="MovesLeft" type="ProgressBar" parent="mineWindow/Labels"]
-z_index = 2
-custom_minimum_size = Vector2(200, 40)
-offset_top = 88.0
+[node name="ResourceBarsCenter" type="VBoxContainer" parent="mineWindow/Labels"]
 offset_right = 500.0
-offset_bottom = 128.0
-show_percentage = false
+offset_bottom = 40.0
+
+[node name="MovesLeft" type="ColorRect" parent="mineWindow/Labels/ResourceBarsCenter"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
 
 [node name="oreMap" type="TileMapLayer" parent="mineWindow"]
 position = Vector2(-20, 0)
