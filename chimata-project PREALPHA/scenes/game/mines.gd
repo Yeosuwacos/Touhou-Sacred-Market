@@ -132,7 +132,7 @@ func _input(event):
 							$ShopGUI.visible = true
 							$IdleShop.visible = true
 							Global.iShopOpen = true
-							$IdleShop/GUI/Funds.text = "Funds: " + str(floori(Global.funds))
+							$GUI/Funds.text = "Funds: " + str(floori(Global.funds))
 							
 							$Shop.visible = false
 							Global.mShopOpen = false

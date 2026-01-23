@@ -47,11 +47,6 @@ offset_right = 64.0
 offset_bottom = 64.0
 text = "Back"
 
-[node name="moveCounter" type="Label" parent="mineWindow/Labels"]
-offset_top = 64.0
-offset_right = 40.0
-offset_bottom = 87.0
-
 [node name="returnSurface" type="Node2D" parent="mineWindow/Labels"]
 visible = false
 
@@ -65,36 +60,43 @@ offset_top = 64.0
 offset_right = 640.0
 offset_bottom = 304.0
 
-[node name="ResourceBars" type="VBoxContainer" parent="mineWindow/Labels"]
+[node name="ResourceBarsLeft" type="VBoxContainer" parent="mineWindow/Labels"]
 custom_minimum_size = Vector2(200, 40)
 offset_right = 500.0
 offset_bottom = 84.0
 
-[node name="FrenziesLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBars"]
+[node name="BombsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsLeft"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 show_percentage = false
 
-[node name="TPsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBars"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-show_percentage = false
-
-[node name="BombsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBars"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-show_percentage = false
-
-[node name="MultStrLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBars"]
+[node name="MultStrLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsLeft"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 show_percentage = false
 
-[node name="MovesLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBars"]
+[node name="ResourceBarsRight" type="VBoxContainer" parent="mineWindow/Labels"]
+offset_right = 500.0
+offset_bottom = 84.0
+
+[node name="FrenziesLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsRight"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+fill_mode = 1
+show_percentage = false
+
+[node name="TPsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsRight"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+fill_mode = 1
+show_percentage = false
+
+[node name="MovesLeft" type="ProgressBar" parent="mineWindow/Labels"]
 z_index = 2
-custom_minimum_size = Vector2(200, 40)
-layout_mode = 2
-value = 100.0
+custom_minimum_size = Vector2(500, 40)
+offset_top = 88.0
+offset_right = 500.0
+offset_bottom = 128.0
 show_percentage = false
 
 [node name="oreMap" type="TileMapLayer" parent="mineWindow"]

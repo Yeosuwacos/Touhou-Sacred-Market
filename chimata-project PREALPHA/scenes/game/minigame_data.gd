@@ -29,29 +29,32 @@ func _ready():
 	
 	#Makes the camera and the move counter follow chimata
 	Global.follow = true
-	#$mineWindow/moveCounter.position = Vector2((chimataLocation[0]*128+832),(chimataLocation[1]*128-464))
 	
 	#Places the UI
-	$mineWindow/Labels/ResourceBars.position.y = get_viewport_rect().size.y - $mineWindow/Labels/ResourceBars.size.y
+	$mineWindow/Labels/ResourceBarsLeft.position.y = get_viewport_rect().size.y - $mineWindow/Labels/ResourceBarsLeft.size.y
+	$mineWindow/Labels/ResourceBarsRight.position.y = get_viewport_rect().size.y - $mineWindow/Labels/ResourceBarsRight.size.y
+	$mineWindow/Labels/ResourceBarsRight.position.x = get_viewport_rect().size.x - $mineWindow/Labels/ResourceBarsRight.size.x
+	$mineWindow/Labels/MovesLeft.position.y = get_viewport_rect().size.y - $mineWindow/Labels/MovesLeft.size.y
+	$mineWindow/Labels/MovesLeft.position.x = get_viewport_rect().size.x/2 - $mineWindow/Labels/MovesLeft.size.x/2
 	
-	$mineWindow/Labels/ResourceBars/MovesLeft.value = moves
-	$mineWindow/Labels/ResourceBars/MovesLeft.max_value = moves
+	$mineWindow/Labels/MovesLeft.value = moves
+	$mineWindow/Labels/MovesLeft.max_value = moves
 	
-	$mineWindow/Labels/ResourceBars/MultStrLeft.value = mults
+	$mineWindow/Labels/ResourceBarsLeft/MultStrLeft.value = mults
 	if mults != 0:
-		$mineWindow/Labels/ResourceBars/MultStrLeft.max_value = mults
+		$mineWindow/Labels/ResourceBarsLeft/MultStrLeft.max_value = mults
 		
-	$mineWindow/Labels/ResourceBars/BombsLeft.value = bombs
+	$mineWindow/Labels/ResourceBarsLeft/BombsLeft.value = bombs
 	if bombs != 0:
-		$mineWindow/Labels/ResourceBars/BombsLeft.max_value = mults
+		$mineWindow/Labels/ResourceBarsLeft/BombsLeft.max_value = mults
 		
-	$mineWindow/Labels/ResourceBars/TPsLeft.value = tps
+	$mineWindow/Labels/ResourceBarsRight/TPsLeft.value = tps
 	if tps != 0:
-		$mineWindow/Labels/ResourceBars/TPsLeft.max_value = tps
+		$mineWindow/Labels/ResourceBarsRight/TPsLeft.max_value = tps
 		
-	$mineWindow/Labels/ResourceBars/FrenziesLeft.value = frenzies
+	$mineWindow/Labels/ResourceBarsRight/FrenziesLeft.value = frenzies
 	if frenzies != 0:
-		$mineWindow/Labels/ResourceBars/FrenziesLeft.max_value = frenzies
+		$mineWindow/Labels/ResourceBarsRight/FrenziesLeft.max_value = frenzies
 	
 	#Creates the mine as a 2D grid
 	#Places down every tile correctly
@@ -136,9 +139,6 @@ func _physics_process(delta):
 	
 	#Makes sure that you cant go out of bounds
 	if moves > 0 && Global.isMining == true:
-		#Move counter
-		$mineWindow/Labels/moveCounter.text = str(moves) + " moves"
-		
 		if Input.is_action_just_pressed("walkLeft"):
 			if chimataLocation[0] > 0:
 				chimataLocation[0] -= 1
@@ -171,7 +171,7 @@ func _physics_process(delta):
 					for j in range(1-Global.bombStr,Global.bombStr):
 						mineTile(i,j,Global.addActive)
 				bombs -= 1
-				$mineWindow/Labels/ResourceBars/BombsLeft.value -= 1
+				$mineWindow/Labels/ResourceBarsLeft/BombsLeft.value -= 1
 				
 		if Input.is_action_just_pressed("tp"):
 			#Make sure Chimata does not tp out of bounds
@@ -181,13 +181,13 @@ func _physics_process(delta):
 				mineTile(0,0,Global.addActive)
 				chimata.position.y += 128*Global.tpStr
 				tps -= 1
-				$mineWindow/Labels/ResourceBars/TPsLeft.value -= 1
+				$mineWindow/Labels/ResourceBarsRight/TPsLeft.value -= 1
 				
 		if Input.is_action_just_pressed("addStr"):
 			if mults > 0 && Global.addActive == false:
 				Global.addActive = true
 				mults -= 1
-				$mineWindow/Labels/ResourceBars/MultStrLeft.value -= 1
+				$mineWindow/Labels/ResourceBarsLeft/MultStrLeft.value -= 1
 				
 		if Input.is_action_just_pressed("frenzy"):
 			if frenzies > 0:
@@ -199,7 +199,7 @@ func _physics_process(delta):
 				updateLocation()
 				chimata.position.y += 128*(Global.frenzyStr-1)
 				frenzies -= 1
-				$mineWindow/Labels/ResourceBars/FrenziesLeft.value -= 1
+				$mineWindow/Labels/ResourceBarsRight/FrenziesLeft.value -= 1
 	#Brings up the minigame end screen (stats and button)
 	elif moves <= 0:
 		endGame()
@@ -216,7 +216,7 @@ func updateLocation():
 	locationX = chimataLocation[0]
 	locationY = chimataLocation[1]
 	moves -= 1
-	$mineWindow/Labels/ResourceBars/MovesLeft.value -= 1
+	$mineWindow/Labels/MovesLeft.value -= 1
 
 #Adds the corresponding ore and multiplier
 func add_ore(nb,mult):
@@ -252,8 +252,6 @@ func _on_back_early_pressed() -> void:
 #Displays statistics and offers to go back to the surface
 func endGame():
 	Global.isMining = false
-	#Removes move counter 
-	$mineWindow/Labels/moveCounter.text = ""
 	
 	#Displays surface
 	$mineWindow/Labels/returnSurface.visible = true
