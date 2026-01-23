@@ -122,7 +122,7 @@ func _physics_process(delta):
 	else:
 		Global.maxLEFT = true
 		
-	if chimataLocation[0] >= 100:
+	if chimataLocation[0] >= 99:
 		Global.maxRIGHT = false
 	else:
 		Global.maxRIGHT = true
@@ -132,7 +132,7 @@ func _physics_process(delta):
 	else:
 		Global.maxUP = true
 		
-	if chimataLocation[1] >= 500:
+	if chimataLocation[1] >= 499:
 		Global.maxDOWN = false
 	else:
 		Global.maxDOWN = true
@@ -146,13 +146,13 @@ func _physics_process(delta):
 				mineTile(0,0,Global.addActive)
 			
 		if Input.is_action_just_pressed("walkRight"):
-			if chimataLocation[0] < 100:
+			if chimataLocation[0] < 99:
 				chimataLocation[0] += 1
 				updateLocation()
 				mineTile(0,0,Global.addActive)
 			
 		if Input.is_action_just_pressed("walkDown"):
-			if chimataLocation[1] < 500:
+			if chimataLocation[1] < 499:
 				chimataLocation[1] += 1
 				updateLocation()
 				mineTile(0,0,Global.addActive)
