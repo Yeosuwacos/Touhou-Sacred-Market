@@ -35,6 +35,9 @@ func saveGame():
 		
 		"idleXs" : Global.idleXs,
 		"idleS" : Global.idleS,
+		"idleM" : Global.idleM,
+		"idleL" : Global.idleL,
+		"idleXl" : Global.idleXl,
 
 		"sold_xs" : Global.sold_xs,
 		"sold_s" : Global.sold_s,
@@ -88,7 +91,16 @@ func saveGame():
 		"idleXsBought" : Prices.idleXsBought,
 
 		"idleSPrice" : Prices.idleS,
-		"idleSBought" : Prices.idleSBought
+		"idleSBought" : Prices.idleSBought,
+		
+		"idleMPrice" : Prices.idleM,
+		"idleMBought" : Prices.idleMBought,
+		
+		"idleLPrice" : Prices.idleL,
+		"idleLBought" : Prices.idleLBought,
+		
+		"idleXlPrice" : Prices.idleXl,
+		"idleXlBought" : Prices.idleXlBought
 		}
 		
 	var savefile = FileAccess.open(path,FileAccess.WRITE)
@@ -133,6 +145,9 @@ func loadGame():
 
 	Global.idleXs = loaded.get("idleXs")
 	Global.idleS = loaded.get("idleS")
+	Global.idleM = loaded.get("idleM")
+	Global.idleL = loaded.get("idleL")
+	Global.idleXl = loaded.get("idleXl")
 
 	Global.sold_xs = loaded.get("sold_xs")
 	Global.sold_s = loaded.get("sold_s")
@@ -187,6 +202,15 @@ func loadGame():
 
 	Prices.idleS = loaded.get("idleSPrice")
 	Prices.idleSBought = loaded.get("idleSBought")
+	
+	Prices.idleM = loaded.get("idleMPrice")
+	Prices.idleMBought = loaded.get("idleMBought")
+	
+	Prices.idleL = loaded.get("idleLPrice")
+	Prices.idleLBought = loaded.get("idleLBought")
+	
+	Prices.idleXl = loaded.get("idleXlPrice")
+	Prices.idleXlBought = loaded.get("idleXlBought")
 
 func loadDefault():
 	#Resolution settings
@@ -220,6 +244,9 @@ func loadDefault():
 	#Idler shop variables
 	Global.idleXs = 0
 	Global.idleS = 0
+	Global.idleM = 0
+	Global.idleL = 0
+	Global.idleXl = 0
 
 	#Chimata camera flag
 	Global.follow = false
@@ -304,4 +331,13 @@ func loadDefault():
 	Prices.idleXsBought = 0
 
 	Prices.idleS = 3000
+	Prices.idleSBought = 0
+	
+	Prices.idleM = 6000
+	Prices.idleSBought = 0
+	
+	Prices.idleL = 10000
+	Prices.idleSBought = 0
+	
+	Prices.idleXl = 15000
 	Prices.idleSBought = 0

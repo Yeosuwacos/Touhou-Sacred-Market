@@ -31,6 +31,9 @@ var frenzyQty = 0
 #Idler shop variables
 var idleXs = 0
 var idleS = 0
+var idleM = 0
+var idleL = 0
+var idleXl = 0
 
 #Chimata camera flag
 var follow = false

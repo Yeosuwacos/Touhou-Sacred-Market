@@ -9,3 +9,7 @@ func _physics_process(delta):
 		second = 0.0
 		
 		Global.dragon_gem_xs += Global.idleXs
+		Global.dragon_gem_s += Global.idleS
+		Global.dragon_gem_m += Global.idleM
+		Global.dragon_gem_l += Global.idleL
+		Global.dragon_gem_xl += Global.idleXl

@@ -34,3 +34,12 @@ var idleXsBought = 0
 
 var idleS = 3000
 var idleSBought = 0
+
+var idleM = 6000
+var idleMBought = 0
+
+var idleL = 10000 
+var idleLBought = 0
+
+var idleXl = 15000
+var idleXlBought = 0

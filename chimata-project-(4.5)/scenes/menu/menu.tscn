@@ -1,0 +1,180 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwsd5ysbvwbww"]
+
+[ext_resource type="Script" uid="uid://dtg08dba76ja5" path="res://scenes/menu/menu.gd" id="1_klgdb"]
+[ext_resource type="Script" uid="uid://cmba8laa7xmcc" path="res://scenes/menu/select_res.gd" id="2_mcvr8"]
+
+[node name="Menu" type="Control"]
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_klgdb")
+
+[node name="DevMode" type="Node2D" parent="."]
+
+[node name="BG" type="ColorRect" parent="DevMode"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.4660673, 0.17293522, 0.009066197, 1)
+
+[node name="Access" type="Button" parent="DevMode"]
+offset_left = 160.0
+offset_top = 24.0
+offset_right = 192.0
+offset_bottom = 56.0
+text = "Ok"
+
+[node name="Password" type="LineEdit" parent="DevMode"]
+offset_top = 24.0
+offset_right = 160.0
+offset_bottom = 56.0
+
+[node name="Title" type="Label" parent="DevMode"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Access dev mode"
+
+[node name="Resources" type="GridContainer" parent="DevMode"]
+offset_top = 60.0
+offset_right = 40.0
+offset_bottom = 100.0
+columns = 2
+
+[node name="MoreFundsAdd" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
+
+[node name="MoreFunds" type="Label" parent="DevMode/Resources"]
+layout_mode = 2
+text = "10k funds"
+
+[node name="LotsMoreFundsAdd" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
+
+[node name="LotsMoreFunds" type="Label" parent="DevMode/Resources"]
+layout_mode = 2
+text = "1m funds"
+
+[node name="MoreOresAdd" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
+
+[node name="MoreOres" type="Label" parent="DevMode/Resources"]
+layout_mode = 2
+text = "1k ores"
+
+[node name="MoreCardsAdd" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "+"
+
+[node name="MoreCards" type="Label" parent="DevMode/Resources"]
+layout_mode = 2
+text = "10 cards"
+
+[node name="ResetRem" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "x"
+
+[node name="Reset" type="Label" parent="DevMode/Resources"]
+layout_mode = 2
+text = "Reset progress"
+
+[node name="Reload" type="Button" parent="DevMode/Resources"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Reload "
+
+[node name="Credits" type="Node2D" parent="."]
+position = Vector2(300, 0)
+
+[node name="Placeholder" type="Label" parent="Credits"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "__Credits__ 
+*CHANGE LATER & ASK FOR WHAT NAMES/SOCIALS TO USE*
+
+Code:
+Yeosuwa
+
+Art: 
+Myst
+Nana
+Interweb
+
+OST: 
+Lamp"
+
+[node name="SelectRes" type="Node2D" parent="."]
+position = Vector2(900, 0)
+script = ExtResource("2_mcvr8")
+
+[node name="Options" type="GridContainer" parent="SelectRes"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="640x480" type="Button" parent="SelectRes/Options"]
+layout_mode = 2
+text = "640x480"
+
+[node name="1280x720" type="Button" parent="SelectRes/Options"]
+layout_mode = 2
+text = "1280x720"
+
+[node name="1920x1080" type="Button" parent="SelectRes/Options"]
+layout_mode = 2
+text = "1920x1080
+"
+
+[node name="2560x1440" type="Button" parent="SelectRes/Options"]
+layout_mode = 2
+text = "2560x1440
+"
+
+[node name="3480x2160" type="Button" parent="SelectRes/Options"]
+layout_mode = 2
+text = "3480x2160
+"
+
+[node name="Fullscreen" type="Button" parent="SelectRes/Options"]
+layout_mode = 2
+text = "Fullscreen mode"
+
+[node name="Windowed" type="Button" parent="SelectRes/Options"]
+layout_mode = 2
+text = "Windowed mode"
+
+[node name="GridContainer" type="GridContainer" parent="SelectRes"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SaveClose" type="Button" parent="."]
+layout_mode = 0
+offset_top = 350.0
+offset_right = 121.0
+offset_bottom = 381.0
+text = "Save and close"
+
+[connection signal="pressed" from="DevMode/Access" to="." method="_on_access_pressed"]
+[connection signal="pressed" from="DevMode/Resources/MoreFundsAdd" to="." method="_on_more_funds_add_pressed"]
+[connection signal="pressed" from="DevMode/Resources/LotsMoreFundsAdd" to="." method="_on_lots_more_funds_add_pressed"]
+[connection signal="pressed" from="DevMode/Resources/MoreOresAdd" to="." method="_on_more_ores_add_pressed"]
+[connection signal="pressed" from="DevMode/Resources/MoreCardsAdd" to="." method="_on_more_cards_add_pressed"]
+[connection signal="pressed" from="DevMode/Resources/ResetRem" to="." method="_on_reset_rem_pressed"]
+[connection signal="pressed" from="DevMode/Resources/Reload" to="." method="_on_reload_pressed"]
+[connection signal="pressed" from="SelectRes/Options/640x480" to="SelectRes" method="_on_x_480_pressed"]
+[connection signal="pressed" from="SelectRes/Options/1280x720" to="SelectRes" method="_on_x_720_pressed"]
+[connection signal="pressed" from="SelectRes/Options/1920x1080" to="SelectRes" method="_on_x_1080_pressed"]
+[connection signal="pressed" from="SelectRes/Options/2560x1440" to="SelectRes" method="_on_x_1440_pressed"]
+[connection signal="pressed" from="SelectRes/Options/3480x2160" to="SelectRes" method="_on_x_2160_pressed"]
+[connection signal="pressed" from="SelectRes/Options/Fullscreen" to="SelectRes" method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="SelectRes/Options/Windowed" to="SelectRes" method="_on_windowed_pressed"]
+[connection signal="pressed" from="SaveClose" to="." method="_on_save_close_pressed"]
