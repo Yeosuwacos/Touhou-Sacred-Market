@@ -257,7 +257,7 @@ func _on_idler_xs_pressed() -> void:
 		Global.funds -= Prices.idleXs
 		Global.idleXs += 1
 		Prices.idleXsBought += 1
-		Prices.idleXs += 10
+		Prices.idleXs += 100*Prices.idleXsBought**2
 		$IdleShop/IdleShopGrid/idlerXsText.text = "+1 xs/s " + str(floori(Prices.idleXs))
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 		$UI/Funds.text = str(floori(Global.funds))
@@ -267,7 +267,7 @@ func _on_idler_s_pressed() -> void:
 		Global.funds -= Prices.idleS
 		Global.idleS += 1
 		Prices.idleSBought += 1
-		Prices.idleS += 10
+		Prices.idleS += 125*Prices.idleSBought**2.2
 		$IdleShop/IdleShopGrid/idlerSText.text = "+1 s/s " + str(floori(Prices.idleS))
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 		$UI/Funds.text = str(floori(Global.funds))
@@ -277,7 +277,7 @@ func _on_idler_m_pressed() -> void:
 		Global.funds -= Prices.idleM
 		Global.idleM += 1
 		Prices.idleMBought += 1
-		Prices.idleM += 10
+		Prices.idleM +=  150*Prices.idleMBought**2.4
 		$IdleShop/IdleShopGrid/idlerMText.text = "+1 m/s " + str(floori(Prices.idleM))
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 		$UI/Funds.text = str(floori(Global.funds))
@@ -287,7 +287,7 @@ func _on_idler_l_pressed() -> void:
 		Global.funds -= Prices.idleL
 		Global.idleL += 1
 		Prices.idleLBought += 1
-		Prices.idleL += 10
+		Prices.idleL +=  175*Prices.idleLBought**2.6
 		$IdleShop/IdleShopGrid/idlerLText.text = "+1 l/s " + str(floori(Prices.idleL))
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 		$UI/Funds.text = str(floori(Global.funds))
@@ -297,7 +297,7 @@ func _on_idler_xl_pressed() -> void:
 		Global.funds -= Prices.idleXl
 		Global.idleXl += 1
 		Prices.idleXlBought += 1
-		Prices.idleXl += 10
+		Prices.idleXl +=  200*Prices.idleXlBought**2.8
 		$IdleShop/IdleShopGrid/idlerXlText.text = "+1 xl/s " + str(floori(Prices.idleXl))
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 		$UI/Funds.text = str(floori(Global.funds))

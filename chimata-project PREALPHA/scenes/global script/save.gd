@@ -212,6 +212,7 @@ func loadGame():
 	Prices.idleXl = loaded.get("idleXlPrice")
 	Prices.idleXlBought = loaded.get("idleXlBought")
 
+#Standard initialization (saveless)
 func loadDefault():
 	#Resolution settings
 	Global.res = Vector2(1920,1080)
