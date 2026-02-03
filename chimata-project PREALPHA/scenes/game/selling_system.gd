@@ -4,6 +4,7 @@ extends Node2D
 @onready var minigameSize = Global.gameSize
 @onready var gameAreaSize = Vector2(Global.gameSize.x/3,Global.gameSize.y)
 @onready var characterSize = Global.charaSize
+@onready var nanaScale = 0.85
 @onready var viewX = get_viewport_rect().size.x
 @onready var viewY = get_viewport_rect().size.y
 @onready var currentHover = ""
@@ -21,8 +22,8 @@ func _ready():
 	$CardSale/Characters/Sprites/OpponentFrame.position = Vector2(characterSize.x/2, viewY - characterSize.y/2)
 	$CardSale/Characters/Sprites/OpponentFrame.scale = characterSize/$CardSale/Characters/Sprites/OpponentFrame.texture.get_size()
 
-	$CardSale/Characters/Sprites/Sakuya.scale = characterSize/$CardSale/Characters/Sprites/Sakuya.texture.get_size()
-	$CardSale/Characters/Sprites/Sakuya.position = Vector2(characterSize.x/2, viewY - characterSize.y/2)
+	$CardSale/Characters/Sprites/Sakuya.scale = characterSize/$CardSale/Characters/Sprites/Sakuya.texture.get_size()*nanaScale
+	$CardSale/Characters/Sprites/Sakuya.position = Vector2(characterSize.x/2, viewY - nanaScale*characterSize.y/2)
 	
 	$CardSale/Characters/Sprites/Chimata.scale = characterSize/$CardSale/Characters/Sprites/Chimata.texture.get_size()
 	$CardSale/Characters/Sprites/Chimata.position = Vector2(viewX - characterSize.x/2, viewY - characterSize.y/2)
