@@ -165,8 +165,12 @@ func _physics_process(delta):
 			#Makes sure the bomb explosion is within range of the map
 			if bombs > 0 && chimataLocation[1] > Global.bombStr:
 				for i in range(1-Global.bombStr,Global.bombStr):
-					for j in range(1-Global.bombStr,Global.bombStr):
-						mineTile(i,j,Global.addActive)
+					mineTile(i,0,Global.addActive)
+				for j in range(1-Global.bombStr,Global.bombStr):
+					mineTile(0,j,Global.addActive)
+				for k in range(2-Global.bombStr, Global.bombStr-1):
+					mineTile(k,k,Global.addActive)
+					mineTile(k,-k,Global.addActive)
 				bombs -= 1
 				$mineWindow/Labels/ResourceBarsLeft/BombsLeft.value -= 1
 				

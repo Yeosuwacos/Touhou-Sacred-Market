@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d33ey25jdpimv"]
+[gd_scene format=3 uid="uid://d33ey25jdpimv"]
 
 [ext_resource type="Script" uid="uid://b80hdq3ug5e08" path="res://scenes/game/minigame_data.gd" id="1_8p414"]
 [ext_resource type="Texture2D" uid="uid://b6mj3aiurm4vx" path="res://assets/tiles/oreMine.png" id="2_0wkj4"]
@@ -25,91 +25,91 @@ texture_region_size = Vector2i(128, 128)
 tile_size = Vector2i(128, 128)
 sources/1 = SubResource("TileSetAtlasSource_0wkj4")
 
-[node name="MinigameData" type="Node2D"]
+[node name="MinigameData" type="Node2D" unique_id=1840349489]
 script = ExtResource("1_8p414")
 ores = Array[ExtResource("2_7hdtf")]([ExtResource("3_gdpjo"), ExtResource("4_3t2yv"), ExtResource("5_u3umb"), ExtResource("6_2pmfl"), ExtResource("7_ugh6f")])
 
-[node name="Background" type="Parallax2D" parent="."]
+[node name="Background" type="Parallax2D" parent="." unique_id=971288099]
 repeat_size = Vector2(128, 128)
 repeat_times = 40
 
-[node name="bgDirt" type="Sprite2D" parent="Background"]
+[node name="bgDirt" type="Sprite2D" parent="Background" unique_id=522753301]
 position = Vector2(-24, -24)
 scale = Vector2(2, 2)
 texture = ExtResource("2_nknyf")
 
-[node name="mineWindow" type="Node2D" parent="."]
+[node name="mineWindow" type="Node2D" parent="." unique_id=1972007718]
 
-[node name="Labels" type="CanvasLayer" parent="mineWindow"]
+[node name="Labels" type="CanvasLayer" parent="mineWindow" unique_id=307750191]
 
-[node name="BackEarly" type="Button" parent="mineWindow/Labels"]
+[node name="BackEarly" type="Button" parent="mineWindow/Labels" unique_id=373226105]
 offset_right = 64.0
 offset_bottom = 64.0
 text = "Back"
 
-[node name="returnSurface" type="Node2D" parent="mineWindow/Labels"]
+[node name="returnSurface" type="Node2D" parent="mineWindow/Labels" unique_id=274937156]
 visible = false
 
-[node name="Back" type="Button" parent="mineWindow/Labels/returnSurface"]
+[node name="Back" type="Button" parent="mineWindow/Labels/returnSurface" unique_id=821670541]
 offset_right = 64.0
 offset_bottom = 64.0
 text = "Back"
 
-[node name="Stats" type="RichTextLabel" parent="mineWindow/Labels/returnSurface"]
+[node name="Stats" type="RichTextLabel" parent="mineWindow/Labels/returnSurface" unique_id=2116003372]
 offset_top = 64.0
 offset_right = 640.0
 offset_bottom = 304.0
 
-[node name="ResourceBarsLeft" type="VBoxContainer" parent="mineWindow/Labels"]
+[node name="ResourceBarsLeft" type="VBoxContainer" parent="mineWindow/Labels" unique_id=1117991540]
 custom_minimum_size = Vector2(200, 40)
 offset_right = 500.0
 offset_bottom = 84.0
 
-[node name="BombsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsLeft"]
+[node name="BombsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsLeft" unique_id=371167925]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 show_percentage = false
 
-[node name="MultStrLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsLeft"]
+[node name="MultStrLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsLeft" unique_id=1907959451]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 show_percentage = false
 
-[node name="ResourceBarsRight" type="VBoxContainer" parent="mineWindow/Labels"]
+[node name="ResourceBarsRight" type="VBoxContainer" parent="mineWindow/Labels" unique_id=873705152]
 offset_right = 500.0
 offset_bottom = 84.0
 
-[node name="FrenziesLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsRight"]
+[node name="FrenziesLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsRight" unique_id=560089914]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 fill_mode = 1
 show_percentage = false
 
-[node name="TPsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsRight"]
+[node name="TPsLeft" type="ProgressBar" parent="mineWindow/Labels/ResourceBarsRight" unique_id=1671235176]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 fill_mode = 1
 show_percentage = false
 
-[node name="ResourceBarsCenter" type="VBoxContainer" parent="mineWindow/Labels"]
+[node name="ResourceBarsCenter" type="VBoxContainer" parent="mineWindow/Labels" unique_id=833457683]
 offset_right = 500.0
 offset_bottom = 40.0
 
-[node name="MovesLeft" type="ColorRect" parent="mineWindow/Labels/ResourceBarsCenter"]
+[node name="MovesLeft" type="ColorRect" parent="mineWindow/Labels/ResourceBarsCenter" unique_id=483981435]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="oreMap" type="TileMapLayer" parent="mineWindow"]
+[node name="oreMap" type="TileMapLayer" parent="mineWindow" unique_id=476317947]
 position = Vector2(-20, 0)
 tile_set = SubResource("TileSet_csx57")
 
-[node name="Track" type="Control" parent="."]
+[node name="Track" type="Control" parent="." unique_id=1151812260]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Track"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Track" unique_id=1136025817]
 stream = ExtResource("10_gdpjo")
 autoplay = true
 parameters/looping = true
