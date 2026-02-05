@@ -157,9 +157,9 @@ func _physics_process(delta):
 		cooldown = 0.0
 		var target = hoverTile()
 		if mineTile(target,Global.addActive):
-			mineTile(target,Global.addActive)
 			moves -= 1
-		$mineWindow/Labels/ResourceBarsCenter.size.x = get_viewport_rect().size.x/2 - $mineWindow/Labels/ResourceBarsCenter.size.x/2
+			$mineWindow/Labels/ResourceBarsCenter.size.x -= $mineWindow/Labels/ResourceBarsCenter.size.x/moves
+			$mineWindow/Labels/ResourceBarsCenter.position.x = get_viewport_rect().size.x/2 - $mineWindow/Labels/ResourceBarsCenter.size.x/2
 	#Special actions
 	if Input.is_action_just_pressed("bomb") && bombs > 0:
 		var bombSignal = false
@@ -177,7 +177,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("tp") && tps > 0:
 		var y = chimataPos.y + Global.tpStr
 		if y < 500:
-			mineTile(Vector2i(chimataPos.x,Global.tpStr),Global.addActive)
+			mineTile(Vector2i(chimataPos.x,chimataPos.y + Global.tpStr + 1),Global.addActive)
 			tps -= 1
 			moves -= 1
 			chimata.position.y += tileSize*Global.tpStr
@@ -212,11 +212,11 @@ func mineTile(pos,mult):
 	var tileVal = mine[pos.x][pos.y]
 	if tileVal == -1:
 		return false
-
-	addOre(tileVal,mult)
-	mine[pos.x][pos.y] = 0
-	tilemap.set_cell(pos,-1)
-	return true
+	else:
+		addOre(tileVal,mult)
+		mine[pos.x][pos.y] = -1
+		tilemap.set_cell(pos,-1)
+		return true
 
 #Adds the corresponding ore and multiplier
 func addOre(nb,mult):
