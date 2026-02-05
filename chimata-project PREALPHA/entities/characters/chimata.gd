@@ -25,6 +25,9 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0
 		
+	if Input.is_action_just_pressed("walkUp"):
+		velocity.y = -600
+		
 	move_and_slide()
 	
 	#Manages chimata's camera

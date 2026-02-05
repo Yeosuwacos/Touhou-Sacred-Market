@@ -55,16 +55,20 @@ func _ready():
 		$mineWindow/Labels/ResourceBarsRight/FrenziesLeft.max_value = frenzies
 	
 	#Creates the mine as a 2D grid
-	#Places down every tile correctly
+	#Places down every tile correctly and generates the caverns
 	
 	for i in 100:
 		mine.append([])
 		for j in 500:
-			mine[i].append(0)
-			tilemap.set_cell(Vector2i(i, j), 1, Vector2i(0, 0))
+			if solidTile(noise.get_noise_2d(i,j)):
+				mine[i].append(0)
+				tilemap.set_cell(Vector2i(i, j), 1, Vector2i(0, 0))
+			else:
+				mine[i].append(-1)
 	
 	#Goes through the mine again to place down the ores
 	for i in 100:
+		mine.append([])
 		for j in 500:
 			var pos = Vector2i(i,j)
 			
@@ -109,6 +113,12 @@ func placeOres(startPos: Vector2i, type: int):
 		unfinished.append(pos + Vector2i(-1,0))
 		unfinished.append(pos + Vector2i(0,-1))
 
+#Checks if the tile should exist based on the caverns
+func solidTile(noise):
+	if noise <= -0.15:
+		return false
+	return true
+	
 #Gets the current tile Chimata is on
 func getTile():
 	return Vector2i(int(chimata.position.x/128), int(chimata.position.y/128))
@@ -135,6 +145,7 @@ func _physics_process(delta):
 		return
 	var chimataPos = getTile()
 	
+	#Movement
 	var input_dir = Vector2(
 	Input.get_action_strength("walkRight") - Input.get_action_strength("walkLeft"),
 	Input.get_action_strength("walkDown") - Input.get_action_strength("walkUp")
@@ -150,6 +161,9 @@ func _physics_process(delta):
 		chimata.velocity.y += chimata.gravity * delta
 	else:
 		chimata.velocity.y = 0
+		
+	if Input.is_action_just_pressed("walkUp"):
+		chimata.velocity.y = -600
 
 	chimata.move_and_slide()
 	
