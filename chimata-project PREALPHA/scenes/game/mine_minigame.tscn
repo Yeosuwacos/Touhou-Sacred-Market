@@ -11,6 +11,9 @@
 [ext_resource type="Resource" uid="uid://c1fx1bu87ji2m" path="res://assets/tiles/Ore resources/Xl.tres" id="7_ugh6f"]
 [ext_resource type="AudioStream" uid="uid://k3lboicpfw0s" path="res://assets/music/Shiny Rocks.mp3" id="10_gdpjo"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gdpjo"]
+noise_type = 3
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wkj4"]
 texture = ExtResource("2_0wkj4")
 texture_region_size = Vector2i(128, 128)
@@ -35,6 +38,7 @@ sources/1 = SubResource("TileSetAtlasSource_0wkj4")
 [node name="MinigameData" type="Node2D" unique_id=1840349489]
 script = ExtResource("1_8p414")
 ores = Array[ExtResource("2_7hdtf")]([ExtResource("3_gdpjo"), ExtResource("4_3t2yv"), ExtResource("5_u3umb"), ExtResource("6_2pmfl"), ExtResource("7_ugh6f")])
+noise = SubResource("FastNoiseLite_gdpjo")
 
 [node name="Background" type="Parallax2D" parent="." unique_id=971288099]
 repeat_size = Vector2(128, 128)

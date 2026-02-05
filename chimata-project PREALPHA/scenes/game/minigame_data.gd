@@ -7,6 +7,7 @@ extends Node2D
 @onready var chimata = chimataScene.instantiate()
 @onready var cooldown = 0.2
 @export var ores : Array[Ores]
+@export var noise : FastNoiseLite
 const tileSize := 128
 var start = Vector2i(50,0)
 
