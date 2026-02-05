@@ -1,49 +1,36 @@
 extends CharacterBody2D
 
 @export var speed = 500
+@export var gravity = 900
 var ePressed = false
-var flipped = false
+var orient = Vector2.RIGHT
+var direction = Vector2.ZERO
 
 func _physics_process(delta):
-	var direction = Vector2.ZERO
-	var orientation = Vector2.ZERO
+	direction = Vector2.ZERO
+	direction.x = Input.get_action_strength("walkRight") - Input.get_action_strength("walkLeft")
+	direction.y = Input.get_action_strength("walkDown") - Input.get_action_strength("walkUp")
 	
-	#Manages Chimata's orientation
-	if Input.is_action_pressed("walkLeft"):
-		orientation.x -= 1
-	if Input.is_action_pressed("walkRight"):
-		orientation.x += 1
-		
-	if orientation.x > 0:
-		$Graphics/Sprite2D.flip_h = false
-	if orientation.x < 0:
-		$Graphics/Sprite2D.flip_h = true
+	#Orientation
+	if direction != Vector2.ZERO:
+		direction = direction.normalized()
+		orient = direction
+		$Graphics/Sprite2D.flip_h = direction.x < 0
 	
+	#Movement
+	velocity.x = direction.x * speed
 	
-	#Walking direction (only left & right) normally
-	if Global.isMining == false && Global.follow == false && Global.isMoving == true:
-		if Input.is_action_pressed("walkLeft"):
-			direction.x -= 1
-		if Input.is_action_pressed("walkRight"):
-			direction.x += 1
+	if Global.isMining:
+		velocity.y += gravity * delta
+	else:
+		velocity.y = 0
 		
-	#Walking only if we are currently mining, and in corresponding tiles
+	if Input.is_action_just_pressed("walkUp") && is_on_floor():
+		velocity.y = -600
 		
-	if Global.isMining == true:
-		if Input.is_action_just_pressed("walkLeft") && Global.maxLEFT == true:
-			position.x -= 128
-		if Input.is_action_just_pressed("walkRight") && Global.maxRIGHT == true:
-			position.x += 128
-		if Input.is_action_just_pressed("walkDown") && Global.maxDOWN == true:
-			position.y += 128
-		if Input.is_action_just_pressed("walkUp") && Global.maxUP == true:
-			position.y -= 128
-		
-	direction = direction.normalized() * speed
-	position += direction * delta
-
+	move_and_slide()
+	
 	#Manages chimata's camera
-
 	if Global.follow == true:
 		$chimataCamera.enabled = true
 	else:

@@ -2,13 +2,14 @@ extends Node2D
 
 #Readies the mine layout
 @onready var mine = []
-@onready var chimataLocation = [50,0]
-@onready var locationX = 0
-@onready var locationY = 0
 @onready var tilemap = get_node("mineWindow/oreMap")
 @onready var chimataScene = preload("res://entities/characters/chimata.tscn")
 @onready var chimata = chimataScene.instantiate()
+@onready var cooldown = 0.2
 @export var ores : Array[Ores]
+@export var noise : FastNoiseLite
+const tileSize := 128
+var start = Vector2i(100,0)
 
 #Sets the amount of utilities 
 @onready var bombs = Global.bombQty
@@ -24,8 +25,8 @@ func _ready():
 	Global.isMining = true
 	
 	#Loads Chimata in the right spot
+	chimata.position = Vector2(start.x*tileSize + tileSize/2, start.y*tileSize + tileSize/2)
 	add_child(chimata)
-	chimata.position = Vector2((chimataLocation[0]*128+32),(chimataLocation[1]*128+64))
 	
 	#Makes the camera and the move counter follow chimata
 	Global.follow = true
@@ -54,16 +55,20 @@ func _ready():
 		$mineWindow/Labels/ResourceBarsRight/FrenziesLeft.max_value = frenzies
 	
 	#Creates the mine as a 2D grid
-	#Places down every tile correctly
+	#Places down every tile correctly and generates the caverns
 	
-	for i in 100:
+	for i in 200:
 		mine.append([])
 		for j in 500:
-			mine[i].append(0)
-			tilemap.set_cell(Vector2i(i, j), 1, Vector2i(0, 0))
+			if solidTile(noise.get_noise_2d(i,j)):
+				mine[i].append(0)
+				tilemap.set_cell(Vector2i(i, j), 1, Vector2i(0, 0))
+			else:
+				mine[i].append(-1)
 	
 	#Goes through the mine again to place down the ores
-	for i in 100:
+	for i in 200:
+		mine.append([])
 		for j in 500:
 			var pos = Vector2i(i,j)
 			
@@ -72,7 +77,7 @@ func _ready():
 					placeOres(pos,ore.type)
 
 	#Places Chimata at the top of the mine
-	tilemap.set_cell(Vector2i(50, 0), -1)
+	tilemap.set_cell(start, -1)
 	mine[50][0] = 0
 	
 #Makes an inventory for all ores collected
@@ -108,121 +113,128 @@ func placeOres(startPos: Vector2i, type: int):
 		unfinished.append(pos + Vector2i(-1,0))
 		unfinished.append(pos + Vector2i(0,-1))
 
+#Checks if the tile should exist based on the caverns
+func solidTile(noise):
+	if noise <= -0.15:
+		return false
+	return true
+	
+#Gets the current tile Chimata is on
+func getTile():
+	return Vector2i(int(chimata.position.x/128), int(chimata.position.y/128))
+
+#Gets the tile Chimata is hovering on
+func hoverTile():
+	return Vector2i(chimata.position.x/tileSize + direct().x,chimata.position.y/tileSize + direct().y)
+#Turns Chimata's orientation into an axis
+func direct():
+	var orient = chimata.orient
+	if abs(orient.x) > abs(orient.y):
+		return Vector2i(sign(orient.x),0)
+	else:
+		return Vector2i(0,sign(orient.y))
+
 #Detects where Chimata is going to check which ore she picks up
 #Removes the ore from the mine
 #Uses special items if needed
 
 func _physics_process(delta):
-	#Manages the boundaries
-	if chimataLocation[0] <= 0:
-		Global.maxLEFT = false
-	else:
-		Global.maxLEFT = true
-		
-	if chimataLocation[0] >= 99:
-		Global.maxRIGHT = false
-	else:
-		Global.maxRIGHT = true
-		
-	if chimataLocation[1] <= 0:
-		Global.maxUP = false
-	else:
-		Global.maxUP = true
-		
-	if chimataLocation[1] >= 499:
-		Global.maxDOWN = false
-	else:
-		Global.maxDOWN = true
+	if cooldown < 0.2:
+		cooldown += delta
+	if moves <= 0 || Global.isMining == false:
+		return
+	var chimataPos = getTile()
 	
-	#Makes sure that you cant go out of bounds
-	if moves > 0 && Global.isMining == true:
-		if Input.is_action_just_pressed("walkLeft"):
-			if chimataLocation[0] > 0:
-				chimataLocation[0] -= 1
-				updateLocation()
-				mineTile(0,0,Global.addActive)
+	#Movement
+	var input_dir = Vector2(
+	Input.get_action_strength("walkRight") - Input.get_action_strength("walkLeft"),
+	Input.get_action_strength("walkDown") - Input.get_action_strength("walkUp")
+	)
+
+	if input_dir != Vector2.ZERO:
+		input_dir = input_dir.normalized()
+		chimata.orient = input_dir
+
+	chimata.velocity.x = input_dir.x * chimata.speed
+
+	if Global.isMining:
+		chimata.velocity.y += chimata.gravity * delta
+	else:
+		chimata.velocity.y = 0
+		
+	if Input.is_action_just_pressed("walkUp") && chimata.is_on_floor():
+		chimata.velocity.y = -600
+
+	chimata.move_and_slide()
+	
+	#Mining
+	if Input.is_action_pressed("confirm") && cooldown >= 0.2:
+		cooldown = 0.0
+		var target = hoverTile()
+		if mineTile(target,Global.addActive):
+			moves -= 1
+			$mineWindow/Labels/ResourceBarsCenter.size.x -= $mineWindow/Labels/ResourceBarsCenter.size.x/moves
+			$mineWindow/Labels/ResourceBarsCenter.position.x = get_viewport_rect().size.x/2 - $mineWindow/Labels/ResourceBarsCenter.size.x/2
+	#Special actions
+	if Input.is_action_just_pressed("bomb") && bombs > 0:
+		var bombSignal = false
+		for i in range(-Global.bombStr+1,Global.bombStr):
+			for j in range(-Global.bombStr+1, Global.bombStr):
+				var pos = chimataPos + Vector2i(i,j)
+				if mineTile(pos, Global.addActive) == true:
+					bombSignal = true
+					mineTile(pos, Global.addActive)
+		if bombSignal == true:
+			bombs -= 1
+			moves -= 1
+			$mineWindow/Labels/ResourceBarsLeft/BombsLeft.value -= 1
 			
-		if Input.is_action_just_pressed("walkRight"):
-			if chimataLocation[0] < 99:
-				chimataLocation[0] += 1
-				updateLocation()
-				mineTile(0,0,Global.addActive)
+	if Input.is_action_just_pressed("tp") && tps > 0:
+		var y = chimataPos.y + Global.tpStr
+		if y < 500:
+			mineTile(Vector2i(chimataPos.x,chimataPos.y + Global.tpStr + 1),Global.addActive)
+			tps -= 1
+			moves -= 1
+			chimata.position.y += tileSize*Global.tpStr
+			$mineWindow/Labels/ResourceBarsRight/TPsLeft.value -= 1
 			
-		if Input.is_action_just_pressed("walkDown"):
-			if chimataLocation[1] < 499:
-				chimataLocation[1] += 1
-				updateLocation()
-				mineTile(0,0,Global.addActive)
+	if Input.is_action_just_pressed("addStr") && mults > 0 && Global.addActive == false:
+		Global.addActive = true
+		mults -= 1
+		$mineWindow/Labels/ResourceBarsLeft/MultStrLeft.value -= 1
 			
-		if Input.is_action_just_pressed("walkUp"):
-			if chimataLocation[1] > 0:
-				chimataLocation[1] -= 1
-				updateLocation()
-				mineTile(0,0,Global.addActive)
-			
-		#Special actions
-		if Input.is_action_just_pressed("bomb"):
-			#Makes sure the bomb explosion is within range of the map
-			if bombs > 0 && chimataLocation[1] > Global.bombStr:
-				for i in range(1-Global.bombStr,Global.bombStr):
-					mineTile(i,0,Global.addActive)
-				for j in range(1-Global.bombStr,Global.bombStr):
-					mineTile(0,j,Global.addActive)
-				for k in range(2-Global.bombStr, Global.bombStr-1):
-					mineTile(k,k,Global.addActive)
-					mineTile(k,-k,Global.addActive)
-				bombs -= 1
-				$mineWindow/Labels/ResourceBarsLeft/BombsLeft.value -= 1
-				
-		if Input.is_action_just_pressed("tp"):
-			#Make sure Chimata does not tp out of bounds
-			if tps > 0 && (chimataLocation[1] + Global.tpStr) < 500:
-				chimataLocation[1] += Global.tpStr
-				updateLocation()
-				mineTile(0,0,Global.addActive)
-				chimata.position.y += 128*Global.tpStr
-				tps -= 1
-				$mineWindow/Labels/ResourceBarsRight/TPsLeft.value -= 1
-				
-		if Input.is_action_just_pressed("addStr"):
-			if mults > 0 && Global.addActive == false:
-				Global.addActive = true
-				mults -= 1
-				$mineWindow/Labels/ResourceBarsLeft/MultStrLeft.value -= 1
-				
-		if Input.is_action_just_pressed("frenzy"):
-			if frenzies > 0:
-				for depth in range(0,Global.frenzyStr):
-					mineTile(-1,depth,Global.addActive)
-					mineTile(0,depth,Global.addActive)
-					mineTile(1,depth,Global.addActive)
-				chimataLocation[1] += (Global.frenzyStr-1)
-				updateLocation()
-				chimata.position.y += 128*(Global.frenzyStr-1)
-				frenzies -= 1
-				$mineWindow/Labels/ResourceBarsRight/FrenziesLeft.value -= 1
+	if Input.is_action_just_pressed("frenzy") && frenzies > 0:
+		var y = chimataPos.y + Global.frenzyStr
+		if y < 500:
+			for depth in range(Global.frenzyStr):
+				mineTile(Vector2i(chimataPos.x - 1, chimataPos.y + depth), Global.addActive)
+				mineTile(Vector2i(chimataPos.x, chimataPos.y + depth), Global.addActive)
+				mineTile(Vector2i(chimataPos.x + 1, chimataPos.y + depth), Global.addActive)
+			frenzies -= 1
+			moves -= 1
+			$mineWindow/Labels/ResourceBarsRight/FrenziesLeft.value -= 1
 	#Brings up the minigame end screen (stats and button)
-	elif moves <= 0:
+	if moves <= 0:
 		endGame()
 		
 #Executes multiple mining operations
-func mineTile(offsetX,offsetY,mult):
-	add_ore(mine[locationX+offsetX][locationY+offsetY],mult)
-	mine[locationX+offsetX][locationY+offsetY] = 0
-	tilemap.set_cell(Vector2i(locationX+offsetX,locationY+offsetY),-1)
-
-#Updates chimata's current location
-#Decrements the amount of moves Chimata has
-func updateLocation():
-	locationX = chimataLocation[0]
-	locationY = chimataLocation[1]
-	moves -= 1
-	$mineWindow/Labels/ResourceBarsCenter.size.x -= $mineWindow/Labels/ResourceBarsCenter.size.x/moves
-	$mineWindow/Labels/ResourceBarsCenter.position.x = get_viewport_rect().size.x/2 - $mineWindow/Labels/ResourceBarsCenter.size.x/2
+func mineTile(pos,mult):
+	#Boundaries
+	pos.x = clamp(pos.x,0,199)
+	pos.y = clamp(pos.y,0,499)
 	
+	#Mines the tile depending on value
+	var tileVal = mine[pos.x][pos.y]
+	if tileVal == -1:
+		return false
+	else:
+		addOre(tileVal,mult)
+		mine[pos.x][pos.y] = -1
+		tilemap.set_cell(pos,-1)
+		return true
 
 #Adds the corresponding ore and multiplier
-func add_ore(nb,mult):
+func addOre(nb,mult):
 	var strength = 1
 	if mult == true:
 		strength = Global.multStr
