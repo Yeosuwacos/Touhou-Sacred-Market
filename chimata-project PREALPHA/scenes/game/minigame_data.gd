@@ -9,7 +9,7 @@ extends Node2D
 @export var ores : Array[Ores]
 @export var noise : FastNoiseLite
 const tileSize := 128
-var start = Vector2i(50,0)
+var start = Vector2i(100,0)
 
 #Sets the amount of utilities 
 @onready var bombs = Global.bombQty
@@ -57,7 +57,7 @@ func _ready():
 	#Creates the mine as a 2D grid
 	#Places down every tile correctly and generates the caverns
 	
-	for i in 100:
+	for i in 200:
 		mine.append([])
 		for j in 500:
 			if solidTile(noise.get_noise_2d(i,j)):
@@ -67,7 +67,7 @@ func _ready():
 				mine[i].append(-1)
 	
 	#Goes through the mine again to place down the ores
-	for i in 100:
+	for i in 200:
 		mine.append([])
 		for j in 500:
 			var pos = Vector2i(i,j)
@@ -77,7 +77,7 @@ func _ready():
 					placeOres(pos,ore.type)
 
 	#Places Chimata at the top of the mine
-	tilemap.set_cell(Vector2i(50, 0), -1)
+	tilemap.set_cell(start, -1)
 	mine[50][0] = 0
 	
 #Makes an inventory for all ores collected
@@ -162,7 +162,7 @@ func _physics_process(delta):
 	else:
 		chimata.velocity.y = 0
 		
-	if Input.is_action_just_pressed("walkUp"):
+	if Input.is_action_just_pressed("walkUp") && chimata.is_on_floor():
 		chimata.velocity.y = -600
 
 	chimata.move_and_slide()
@@ -220,7 +220,7 @@ func _physics_process(delta):
 #Executes multiple mining operations
 func mineTile(pos,mult):
 	#Boundaries
-	pos.x = clamp(pos.x,0,99)
+	pos.x = clamp(pos.x,0,199)
 	pos.y = clamp(pos.y,0,499)
 	
 	#Mines the tile depending on value
