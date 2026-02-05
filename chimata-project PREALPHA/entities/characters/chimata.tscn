@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d04y0grsjftof" path="res://assets/sprites/chimataSprite.png" id="2_hj2v7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hj2v7"]
+size = Vector2(32, 64)
 
 [node name="Chimata" type="CharacterBody2D" unique_id=1491888658]
 scale = Vector2(2, 2)

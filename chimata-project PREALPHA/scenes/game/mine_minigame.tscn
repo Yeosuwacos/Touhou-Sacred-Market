@@ -15,14 +15,21 @@
 texture = ExtResource("2_0wkj4")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
 1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 64, 64, 64, 64, -64, -64, -64)
 2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
 3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
 4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
 5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
 
 [sub_resource type="TileSet" id="TileSet_csx57"]
 tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_0wkj4")
 
 [node name="MinigameData" type="Node2D" unique_id=1840349489]
@@ -100,6 +107,10 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="oreMap" type="TileMapLayer" parent="mineWindow" unique_id=476317947]
+position = Vector2(-20, 0)
+tile_set = SubResource("TileSet_csx57")
+
+[node name="oreMap" type="TileMapLayer" parent="mineWindow/oreMap" unique_id=512666497]
 position = Vector2(-20, 0)
 tile_set = SubResource("TileSet_csx57")
 
