@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://tardjd57fswc" path="res://assets/tiles/Ore resources/M.tres" id="5_u3umb"]
 [ext_resource type="Resource" uid="uid://bi2geyqicg14f" path="res://assets/tiles/Ore resources/L.tres" id="6_2pmfl"]
 [ext_resource type="Resource" uid="uid://c1fx1bu87ji2m" path="res://assets/tiles/Ore resources/Xl.tres" id="7_ugh6f"]
+[ext_resource type="Texture2D" uid="uid://bb2ugjx142q6y" path="res://assets/game elements/light.png" id="9_3t2yv"]
 [ext_resource type="AudioStream" uid="uid://k3lboicpfw0s" path="res://assets/music/Shiny Rocks.mp3" id="10_gdpjo"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gdpjo"]
@@ -115,6 +116,10 @@ offset_bottom = 40.0
 [node name="MovesLeft" type="ColorRect" parent="mineWindow/Labels/ResourceBarsCenter" unique_id=483981435]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+
+[node name="Light" type="PointLight2D" parent="mineWindow/Labels" unique_id=1836758295]
+texture = ExtResource("9_3t2yv")
+texture_scale = 7.0
 
 [node name="oreMap" type="TileMapLayer" parent="mineWindow" unique_id=476317947]
 position = Vector2(-20, 0)

@@ -6,6 +6,7 @@ extends Node2D
 @onready var chimataScene = preload("res://entities/characters/chimata.tscn")
 @onready var chimata = chimataScene.instantiate()
 @onready var cooldown = 0.2
+@onready var light0 = $mineWindow/Labels/Light.texture_scale
 @export var ores : Array[Ores]
 @export var noise : FastNoiseLite
 const tileSize := 128
@@ -30,6 +31,9 @@ func _ready():
 	
 	#Makes the camera and the move counter follow chimata
 	Global.follow = true
+	
+	#Light source
+	$mineWindow/Labels/Light.position = Vector2(get_viewport_rect().size.x/2,get_viewport_rect().size.y/2)
 	
 	#Places the UI
 	$mineWindow/Labels/ResourceBarsLeft.position.y = get_viewport_rect().size.y - $mineWindow/Labels/ResourceBarsLeft.size.y
@@ -59,7 +63,7 @@ func _ready():
 	
 	for i in 200:
 		mine.append([])
-		for j in 500:
+		for j in 1000:
 			if solidTile(noise.get_noise_2d(i,j)):
 				mine[i].append(0)
 				tilemap.set_cell(Vector2i(i, j), 1, Vector2i(0, 0))
@@ -69,7 +73,7 @@ func _ready():
 	#Goes through the mine again to place down the ores
 	for i in 200:
 		mine.append([])
-		for j in 500:
+		for j in 1000:
 			var pos = Vector2i(i,j)
 			
 			for ore in ores:
@@ -96,7 +100,7 @@ func placeOres(startPos: Vector2i, type: int):
 	
 	while unfinished.size() > 0 && size > 0:
 		var pos = unfinished.pop_front()
-		if pos.x < 0 || pos.x >= 200 || pos.y < 0 || pos.y >= 500:
+		if pos.x < 0 || pos.x >= 200 || pos.y < 0 || pos.y >= 1000:
 			continue
 		if finished.has(pos):
 			continue
@@ -139,33 +143,15 @@ func direct():
 #Uses special items if needed
 
 func _physics_process(delta):
+	#Mining cooldown
 	if cooldown < 0.2:
 		cooldown += delta
 	if moves <= 0 || Global.isMining == false:
 		return
 	var chimataPos = getTile()
 	
-	#Movement
-	var input_dir = Vector2(
-	Input.get_action_strength("walkRight") - Input.get_action_strength("walkLeft"),
-	Input.get_action_strength("walkDown") - Input.get_action_strength("walkUp")
-	)
-
-	if input_dir != Vector2.ZERO:
-		input_dir = input_dir.normalized()
-		chimata.orient = input_dir
-
-	chimata.velocity.x = input_dir.x * chimata.speed
-
-	if Global.isMining:
-		chimata.velocity.y += chimata.gravity * delta
-	else:
-		chimata.velocity.y = 0
-		
-	if Input.is_action_just_pressed("walkUp") && chimata.is_on_floor():
-		chimata.velocity.y = -600
-
-	chimata.move_and_slide()
+	#Lighting management
+	$mineWindow/Labels/Light.texture_scale = light0 - chimataPos.y/200.0
 	
 	#Mining
 	if Input.is_action_pressed("confirm") && cooldown >= 0.2:
@@ -175,6 +161,7 @@ func _physics_process(delta):
 			moves -= 1
 			$mineWindow/Labels/ResourceBarsCenter.size.x -= $mineWindow/Labels/ResourceBarsCenter.size.x/moves
 			$mineWindow/Labels/ResourceBarsCenter.position.x = get_viewport_rect().size.x/2 - $mineWindow/Labels/ResourceBarsCenter.size.x/2
+			
 	#Special actions
 	if Input.is_action_just_pressed("bomb") && bombs > 0:
 		var bombSignal = false
@@ -191,7 +178,7 @@ func _physics_process(delta):
 			
 	if Input.is_action_just_pressed("tp") && tps > 0:
 		var y = chimataPos.y + Global.tpStr
-		if y < 500:
+		if y < 1000:
 			mineTile(Vector2i(chimataPos.x,chimataPos.y + Global.tpStr + 1),Global.addActive)
 			tps -= 1
 			moves -= 1
@@ -205,7 +192,7 @@ func _physics_process(delta):
 			
 	if Input.is_action_just_pressed("frenzy") && frenzies > 0:
 		var y = chimataPos.y + Global.frenzyStr
-		if y < 500:
+		if y < 1000:
 			for depth in range(Global.frenzyStr):
 				mineTile(Vector2i(chimataPos.x - 1, chimataPos.y + depth), Global.addActive)
 				mineTile(Vector2i(chimataPos.x, chimataPos.y + depth), Global.addActive)
@@ -221,7 +208,7 @@ func _physics_process(delta):
 func mineTile(pos,mult):
 	#Boundaries
 	pos.x = clamp(pos.x,0,199)
-	pos.y = clamp(pos.y,0,499)
+	pos.y = clamp(pos.y,0,999)
 	
 	#Mines the tile depending on value
 	var tileVal = mine[pos.x][pos.y]

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bkim5a3g86llo" path="res://entities/characters/chimata.gd" id="1_hj2v7"]
 [ext_resource type="Texture2D" uid="uid://d04y0grsjftof" path="res://assets/sprites/chimataSprite.png" id="2_hj2v7"]
-[ext_resource type="Texture2D" uid="uid://bb2ugjx142q6y" path="res://assets/game elements/light.png" id="3_pa2nn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hj2v7"]
 size = Vector2(32, 60)
@@ -16,11 +15,6 @@ script = ExtResource("1_hj2v7")
 [node name="Sprite2D" type="Sprite2D" parent="Graphics" unique_id=1575670737]
 position = Vector2(3, 0)
 texture = ExtResource("2_hj2v7")
-
-[node name="Light" type="PointLight2D" parent="Graphics" unique_id=2079721595]
-enabled = false
-texture = ExtResource("3_pa2nn")
-texture_scale = 2.5
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=665130382]
 shape = SubResource("RectangleShape2D_hj2v7")

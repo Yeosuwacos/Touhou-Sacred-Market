@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 500
-@export var gravity = 900
+@export var gravity = 2400
 var ePressed = false
 var orient = Vector2.RIGHT
 var direction = Vector2.ZERO
@@ -17,18 +17,17 @@ func _physics_process(delta):
 		orient = direction
 		$Graphics/Sprite2D.flip_h = direction.x < 0
 	
-	#Movement and lighting
-	velocity.x = direction.x * speed
-	
+	#Movement
 	if Global.isMining:
-		$Graphics/Light.enabled = true
 		velocity.y += gravity * delta
+		velocity.x = direction.x * speed*2
+		
 	else:
 		velocity.y = 0
-		$Graphics/Light.enabled = false
+		velocity.x = direction.x * speed
 		
 	if Input.is_action_just_pressed("walkUp") && is_on_floor():
-		velocity.y = -600
+		velocity.y = -900
 		
 	move_and_slide()
 	
