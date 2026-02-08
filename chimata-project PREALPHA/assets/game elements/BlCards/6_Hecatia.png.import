@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b42kdw4n7jbvc"
-path="res://.godot/imported/5_of_spades.png-1c6a408b3cf6ed717339f56e71c79eb7.ctex"
+uid="uid://uuugiopaed0t"
+path="res://.godot/imported/6_Hecatia.png-52ce4e4ded276635658571235c5ca001.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game elements/BlCards/5_of_spades.png"
-dest_files=["res://.godot/imported/5_of_spades.png-1c6a408b3cf6ed717339f56e71c79eb7.ctex"]
+source_file="res://assets/game elements/BlCards/6_Hecatia.png"
+dest_files=["res://.godot/imported/6_Hecatia.png-52ce4e4ded276635658571235c5ca001.ctex"]
 
 [params]
 

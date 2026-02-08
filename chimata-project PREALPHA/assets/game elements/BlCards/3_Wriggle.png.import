@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5pw18cmr4wli"
-path="res://.godot/imported/6_of_spades.png-c9bdc4b81f1b31e357a52a8d6e7ef396.ctex"
+uid="uid://i8nggti5i1yd"
+path="res://.godot/imported/3_Wriggle.png-fd100eeabf7ecfd82ccbac00ab87088f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game elements/BlCards/6_of_spades.png"
-dest_files=["res://.godot/imported/6_of_spades.png-c9bdc4b81f1b31e357a52a8d6e7ef396.ctex"]
+source_file="res://assets/game elements/BlCards/3_Wriggle.png"
+dest_files=["res://.godot/imported/3_Wriggle.png-fd100eeabf7ecfd82ccbac00ab87088f.ctex"]
 
 [params]
 

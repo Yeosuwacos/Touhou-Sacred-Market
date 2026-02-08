@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkcwck4cftjs0"
-path="res://.godot/imported/3_of_spades.png-c4574c1e6e58258d2ec9e5add63142f3.ctex"
+uid="uid://hy7j5f3jvpkf"
+path="res://.godot/imported/9_Cirno.png-435922c956ecfba05f731f32f3b96492.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game elements/BlCards/3_of_spades.png"
-dest_files=["res://.godot/imported/3_of_spades.png-c4574c1e6e58258d2ec9e5add63142f3.ctex"]
+source_file="res://assets/game elements/BlCards/9_Cirno.png"
+dest_files=["res://.godot/imported/9_Cirno.png-435922c956ecfba05f731f32f3b96492.ctex"]
 
 [params]
 

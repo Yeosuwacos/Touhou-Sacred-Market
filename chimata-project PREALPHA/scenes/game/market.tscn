@@ -113,13 +113,13 @@ position = Vector2(0, 96)
 [node name="YourCards" type="HBoxContainer" parent="SellingSystem/minigameGUI/Bartering/Blackjack/BlCards" unique_id=811869457]
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.2, 0.2)
 
 [node name="MarisaCards" type="HBoxContainer" parent="SellingSystem/minigameGUI/Bartering/Blackjack/BlCards" unique_id=1785565653]
-offset_top = 128.0
+offset_top = 150.0
 offset_right = 40.0
-offset_bottom = 168.0
-scale = Vector2(0.15, 0.15)
+offset_bottom = 190.0
+scale = Vector2(0.2, 0.2)
 
 [node name="CardFlip" type="GridContainer" parent="SellingSystem/minigameGUI/Bartering" unique_id=437258228]
 visible = false
