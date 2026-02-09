@@ -40,9 +40,9 @@ func _ready():
 	$CardSale/Characters/dialogue.position = Vector2(characterSize.x, viewY - minigameSize.y) 
 	
 	$CardSale/Characters/Names/ChimataName.position = Vector2(viewX - characterSize.x/2 - \
-	$CardSale/Characters/Names/ChimataName.size.x/2, viewY - characterSize.y + 16)
+	$CardSale/Characters/Names/ChimataName.size.x/2, viewY - 48)
 	$CardSale/Characters/Names/OpponentName.position = Vector2(characterSize.x/2 - \
-	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - characterSize.y + 16)
+	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - 48)
 	
 	#Places the character calling buttons in good proportions
 	
@@ -52,7 +52,7 @@ func _ready():
 #Replaces the opponent names correctly
 func replace():
 	$CardSale/Characters/Names/OpponentName.position = Vector2(characterSize.x/2 - \
-	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - characterSize.y + 16)
+	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - 48)
 
 #Picks the right character and begins a sale
 func _input(event):

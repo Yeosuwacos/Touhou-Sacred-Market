@@ -5,6 +5,9 @@ extends Node2D
 @onready var readyArrow: Area2D = null
 
 #Workshop layout
+@onready var viewX = get_viewport_rect().size.x
+@onready var viewY = get_viewport_rect().size.y
+@onready var characterSize = Global.charaSize
 @onready var shopSize = Vector2(Global.gameSize.x*2, Global.gameSize.y)
 @onready var cardChoiceSize = Vector2(Global.gameSize.x/3, Global.gameSize.y)
 @onready var chimataScene = preload("res://entities/characters/chimata.tscn")
@@ -28,6 +31,22 @@ extends Node2D
 func _ready():
 	add_child(chimata)
 	chimata.position = Vector2(50,get_viewport_rect().size.y - shopSize.y - 64)
+	
+	#Frames and character sprites
+	$Characters/Megumu.scale = characterSize/$Characters/Megumu.texture.get_size()
+	$Characters/Megumu.position = Vector2(characterSize.x/2, viewY - characterSize.y/2)
+	$Characters/MegumuFrame.position = Vector2(characterSize.x/2, viewY - characterSize.y/2)
+	$Characters/MegumuFrame.scale = characterSize/$Characters/MegumuFrame.texture.get_size()
+	
+	$Characters/Chimata.scale = characterSize/$Characters/Chimata.texture.get_size()
+	$Characters/Chimata.position = Vector2(viewX - characterSize.x/2, viewY - characterSize.y/2)
+	$Characters/ChimataFrame.position = Vector2(viewX - characterSize.x/2, viewY - characterSize.y/2)
+	$Characters/ChimataFrame.scale = characterSize/$Characters/ChimataFrame.texture.get_size()
+	
+	$Names/ChimataName.position = Vector2(viewX - characterSize.x/2 - \
+	$Names/ChimataName.size.x/2, viewY - 48)
+	$Names/MegumuName.position = Vector2(characterSize.x/2 - \
+	$Names/MegumuName.size.x/2, viewY - 48)
 	
 	#Place the paths to other locations
 	$gotoMarket.position = Vector2(0,0)
@@ -206,9 +225,13 @@ func _input(event):
 				"cardMaking":
 					if !workshopOpen:
 						$shopGUI.visible = true
+						$Characters.visible = true
+						$Names.visible = true
 						workshopOpen = true
 					elif workshopOpen:
 						$shopGUI.visible = false
+						$Characters.visible = false
+						$Names.visible = false
 						workshopOpen = false
 				"idleShop":
 					pass
