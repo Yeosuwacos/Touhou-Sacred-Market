@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2ss7vsdekkfq"]
+
+[ext_resource type="Script" uid="uid://t3grk6edu5cm" path="res://scenes/global script/idler.gd" id="1_shpyl"]
+
+[node name="Idler" type="Node2D"]
+script = ExtResource("1_shpyl")

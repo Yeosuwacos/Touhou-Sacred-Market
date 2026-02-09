@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdgdthca2f7bu"]
+
+[ext_resource type="Script" uid="uid://dx4alqkgkcmt8" path="res://scenes/global script/prices.gd" id="1_cs8xc"]
+
+[node name="Prices" type="Node2D"]
+script = ExtResource("1_cs8xc")
