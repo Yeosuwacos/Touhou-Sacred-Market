@@ -457,7 +457,7 @@ func DisplayCard(cardNo):
 	var card = TextureRect.new()
 	var png = null
 	match cardNo:
-		1: png = load("res://assets/game elements/BlCards/ace_of_spades.png")
+		1: png = load("res://assets/game elements/BlCards/1_Shinmyoumaru.png")
 		2: png = load("res://assets/game elements/BlCards/2_of_spades.png")
 		3: png = load("res://assets/game elements/BlCards/3_Wriggle.png")
 		4: png = load("res://assets/game elements/BlCards/4_of_spades.png")
@@ -466,10 +466,10 @@ func DisplayCard(cardNo):
 		7: png = load("res://assets/game elements/BlCards/7_of_spades.png")
 		8: png = load("res://assets/game elements/BlCards/8_of_spades.png")
 		9: png = load("res://assets/game elements/BlCards/9_Cirno.png")
-		10: png = load("res://assets/game elements/BlCards/10_of_spades.png")
+		10: png = load("res://assets/game elements/BlCards/10_Mayumi.png")
 		11: png = load("res://assets/game elements/BlCards/jack_of_spades.png")
 		12: png = load("res://assets/game elements/BlCards/queen_of_spades.png")
-		13: png = load("res://assets/game elements/BlCards/king_of_spades.png")
+		13: png = load("res://assets/game elements/BlCards/K_Shikieiki.png")
 	card.texture = png
 	return card
 

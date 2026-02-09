@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi1lwae7123gs"
-path="res://.godot/imported/king_of_spades.png-38853d7c0fc03754bf07163e40c37d51.ctex"
+uid="uid://cu5yvvbe0sd73"
+path="res://.godot/imported/K_Shikieiki.png-5ad8a12a632f67cd9aeff135a325d1b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game elements/BlCards/king_of_spades.png"
-dest_files=["res://.godot/imported/king_of_spades.png-38853d7c0fc03754bf07163e40c37d51.ctex"]
+source_file="res://assets/game elements/BlCards/K_Shikieiki.png"
+dest_files=["res://.godot/imported/K_Shikieiki.png-5ad8a12a632f67cd9aeff135a325d1b2.ctex"]
 
 [params]
 

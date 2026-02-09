@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://phhg815yahh7"
-path="res://.godot/imported/10_of_spades.png-36e10917e4b9f41d27ca154f4ecd04b8.ctex"
+uid="uid://b742cael3eaei"
+path="res://.godot/imported/1_Shinmyoumaru.png-99eacd9e83cc971d7aefc40b9bcd85bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game elements/BlCards/10_of_spades.png"
-dest_files=["res://.godot/imported/10_of_spades.png-36e10917e4b9f41d27ca154f4ecd04b8.ctex"]
+source_file="res://assets/game elements/BlCards/1_Shinmyoumaru.png"
+dest_files=["res://.godot/imported/1_Shinmyoumaru.png-99eacd9e83cc971d7aefc40b9bcd85bc.ctex"]
 
 [params]
 
