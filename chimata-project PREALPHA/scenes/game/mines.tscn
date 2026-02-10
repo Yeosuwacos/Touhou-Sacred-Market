@@ -112,13 +112,13 @@ texture = ExtResource("6_bmy1k")
 z_index = 2
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Chimata"
+text = "Tenkyuu Chimata"
 
 [node name="MomoyoName" type="Label" parent="ShopGUI/Names" unique_id=1909586235]
 z_index = 2
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Momoyo"
+text = "Himemushi Momoyo"
 
 [node name="mDialogue" type="Label" parent="ShopGUI" unique_id=89094992]
 z_index = 2

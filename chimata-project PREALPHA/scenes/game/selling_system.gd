@@ -40,9 +40,9 @@ func _ready():
 	$CardSale/Characters/dialogue.position = Vector2(characterSize.x, viewY - minigameSize.y) 
 	
 	$CardSale/Characters/Names/ChimataName.position = Vector2(viewX - characterSize.x/2 - \
-	$CardSale/Characters/Names/ChimataName.size.x/2, viewY - 48)
+	$CardSale/Characters/Names/ChimataName.size.x/2, viewY - 40)
 	$CardSale/Characters/Names/OpponentName.position = Vector2(characterSize.x/2 - \
-	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - 48)
+	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - 40)
 	
 	#Places the character calling buttons in good proportions
 	
@@ -52,7 +52,7 @@ func _ready():
 #Replaces the opponent names correctly
 func replace():
 	$CardSale/Characters/Names/OpponentName.position = Vector2(characterSize.x/2 - \
-	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - 48)
+	$CardSale/Characters/Names/OpponentName.size.x/2, viewY - 40)
 
 #Picks the right character and begins a sale
 func _input(event):
@@ -76,7 +76,7 @@ func _input(event):
 					$CardSale/Characters/Sprites/Chimata.visible = true
 					
 					$CardSale/Characters/Names/ChimataName.visible = true
-					$CardSale/Characters/Names/OpponentName.text = "Reimu"
+					$CardSale/Characters/Names/OpponentName.text = "Hakurei Reimu"
 					$CardSale/Characters/Names/OpponentName.visible = true
 					$CardSale/Characters/dialogue.visible = true
 					$CardSale/Characters/dialogue.text = ""
@@ -96,7 +96,7 @@ func _input(event):
 					$CardSale/Characters/Sprites/Chimata.visible = true
 					
 					$CardSale/Characters/Names/ChimataName.visible = true
-					$CardSale/Characters/Names/OpponentName.text = "Sakuya"
+					$CardSale/Characters/Names/OpponentName.text = "Izayoi Sakuya"
 					$CardSale/Characters/Names/OpponentName.visible = true
 					$CardSale/Characters/dialogue.visible = true
 					$CardSale/Characters/dialogue.text = Dialogue.HiLoLines.pick_random()
@@ -116,7 +116,7 @@ func _input(event):
 					$CardSale/Characters/Sprites/Chimata.visible = true
 					
 					$CardSale/Characters/Names/ChimataName.visible = true
-					$CardSale/Characters/Names/OpponentName.text = "Marisa"
+					$CardSale/Characters/Names/OpponentName.text = "Kirisame Marisa"
 					$CardSale/Characters/Names/OpponentName.visible = true
 					$CardSale/Characters/dialogue.visible = true
 					$CardSale/Characters/dialogue.text = ""
@@ -136,7 +136,7 @@ func _input(event):
 					$CardSale/Characters/Sprites/Chimata.visible = true
 					
 					$CardSale/Characters/Names/ChimataName.visible = true
-					$CardSale/Characters/Names/OpponentName.text = "Sanae"
+					$CardSale/Characters/Names/OpponentName.text = "Kochiya Sanae"
 					$CardSale/Characters/Names/OpponentName.visible = true
 					$CardSale/Characters/dialogue.visible = true
 					$CardSale/Characters/dialogue.text = ""

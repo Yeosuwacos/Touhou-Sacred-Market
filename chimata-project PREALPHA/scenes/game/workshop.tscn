@@ -155,13 +155,13 @@ visible = false
 z_index = 2
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Chimata"
+text = "Tenkyuu Chimata"
 
 [node name="MegumuName" type="Label" parent="WorkshopZones/Names" unique_id=1538060024]
 z_index = 2
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Megumu
+text = "Iizunamaru Megumu
 "
 
 [connection signal="timeout" from="WorkshopZones/shopGUI/cardOptions/Updater" to="WorkshopZones" method="_on_updater_timeout"]

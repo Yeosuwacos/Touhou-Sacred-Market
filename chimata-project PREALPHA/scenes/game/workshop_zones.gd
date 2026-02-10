@@ -44,9 +44,9 @@ func _ready():
 	$Characters/ChimataFrame.scale = characterSize/$Characters/ChimataFrame.texture.get_size()
 	
 	$Names/ChimataName.position = Vector2(viewX - characterSize.x/2 - \
-	$Names/ChimataName.size.x/2, viewY - 48)
+	$Names/ChimataName.size.x/2, viewY - 40)
 	$Names/MegumuName.position = Vector2(characterSize.x/2 - \
-	$Names/MegumuName.size.x/2, viewY - 48)
+	$Names/MegumuName.size.x/2, viewY - 40)
 	
 	#Place the paths to other locations
 	$gotoMarket.position = Vector2(0,0)

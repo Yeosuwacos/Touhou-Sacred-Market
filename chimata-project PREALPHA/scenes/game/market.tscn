@@ -246,14 +246,14 @@ visible = false
 z_index = 2
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Chimata"
+text = "Tenkyuu Chimata"
 
 [node name="OpponentName" type="Label" parent="SellingSystem/CardSale/Characters/Names" unique_id=204549819]
 visible = false
 z_index = 2
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Sakuya"
+text = "Izayoi Sakuya"
 
 [node name="Buttons" type="Node2D" parent="SellingSystem/CardSale" unique_id=1508693055]
 visible = false
