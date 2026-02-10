@@ -34,9 +34,7 @@ func _ready():
 	
 	$BG.size = minigameSize
 	$BG.position = Vector2(0, get_viewport_rect().size.y - minigameSize.y)
-	$minigameGUI/Bartering/HigherLower.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
-	$minigameGUI/Bartering/Blackjack.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
-	$minigameGUI/Bartering/CardFlip.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
+	$minigameGUI/Bartering.position = Vector2(viewX/2 - gameAreaSize.x/2, viewY - gameAreaSize.y)
 	$CardSale/Characters/dialogue.position = Vector2(characterSize.x, viewY - minigameSize.y) 
 	
 	$CardSale/Characters/Names/ChimataName.position = Vector2(viewX - characterSize.x/2 - \
