@@ -15,6 +15,18 @@ extends Node2D
 
 @onready var currentHover = ""
 
+const itemDesc = {
+	"moves": "Grants you 25 extra stamina, allowing you to go further down the mines.",
+	"bombs": "Grants you 1 bomb, which can be used to dig out every tile around you.",
+	"bombPwr": "Increases the bombs' strength.",
+	"tps": "Warps you deeper down with only 1 stamina consumed.",
+	"tpPwr": "Increases teleport range by 5.",
+	"mults": "Grants increased ore yield for your next tile mined.",
+	"multPwr": "Increases multiplier strength by 1.",
+	"frenzies": "Summons Momoyo to dig nearby tiles.",
+	"frenzyPwr": "Increases frenzy depth by 3."
+}
+
 func _ready():
 	refresher()
 	
@@ -242,50 +254,11 @@ func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 		$GUI/Funds.text = str(floori(Global.funds))
 
-#Description for every item
-func _on_moves_mouse_entered() -> void:
-	$ShopGUI/ItemDesc.text = "Grants you 25 extra stamina, allowing you to go further down the mines."
-func _on_moves_mouse_exited() -> void:
-	$ShopGUI/ItemDesc.text = ""
+#Item description functions (on hover
+func showDesc(item):
+	$ShopGUI/ItemDesc.text = itemDesc.get(item, "")
 
-func _on_bombs_mouse_entered() -> void:
-	$ShopGUI/ItemDesc.text = "Grants you 1 bomb, which can be used to dig out every tile around you."
-func _on_bombs_mouse_exited() -> void:
-	$ShopGUI/ItemDesc.text = ""
-
-func _on_bomb_power_mouse_entered() -> void:
-	$ShopGUI/ItemDesc.text = "Increases the bombs' strength, enabling it to dig out more tiles with one bomb."
-func _on_bomb_power_mouse_exited() -> void:
-	$ShopGUI/ItemDesc.text = ""
-
-func _on_t_ps_mouse_entered() -> void:
-	$ShopGUI/ItemDesc.text = "Warps you deeper down with only 1 stamina consumed. Each purchase adds 1 to your teleport item count."
-func _on_t_ps_mouse_exited() -> void:
-	$ShopGUI/ItemDesc.text = ""
-
-func _on_t_ppower_mouse_entered() -> void:
-	$ShopGUI/ItemDesc.text = "Increases the teleport's range by 5."
-func _on_t_ppower_mouse_exited() -> void:
-	$ShopGUI/ItemDesc.text = ""
-
-func _on_mult_mouse_entered() -> void:
-	$ShopGUI/ItemDesc.text = "Grants you increased ore yield for your next tile mined. Each purchase adds 1 to your multiplier count."
-func _on_mult_mouse_exited() -> void:
-	$ShopGUI/ItemDesc.text = ""
-
-func _on_mult_str_mouse_entered() -> void:
-	$ShopGUI/ItemDesc.text = "Increases the multiplier's ore amount by 1"
-func _on_mult_str_mouse_exited() -> void:
-	$ShopGUI/ItemDesc.text = ""
-	
-func _on_momoyo_frenzy_mouse_entered() -> void:
-	$ShopGUI/ItemDesc.text = "Summons Momoyo to bore down the tiles adjacent and under you. Each purchase adds 1 to your frenzy count."
-func _on_momoyo_frenzy_mouse_exited() -> void:
-	$ShopGUI/ItemDesc.text = ""
-	
-func _on_frenzy_power_mouse_entered() -> void:
-	$ShopGUI/ItemDesc.text = "Increases Momoyo's frenzy strength. Each purchase increases depth by 3"
-func _on_frenzy_power_mouse_exited() -> void:
+func clearDesc():
 	$ShopGUI/ItemDesc.text = ""
 
 func _exit_tree():
