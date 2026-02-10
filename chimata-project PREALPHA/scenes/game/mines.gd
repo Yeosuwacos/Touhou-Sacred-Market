@@ -144,98 +144,38 @@ func _input(event):
 							Global.iShopOpen = false
 						$ShopGUI/Characters/Momoyo.texture = momoyo
 
-#Momoyo expressions
-#Shop
-func _on_moves_pressed() -> void:
-	purchase("MoreMoves","moves",25,100,1.2,$Shop/ShopGrid/MovesText,"+25 stamina ",Prices.MoreMovesBought,null)
 
 #Special upgrades panel
 func _on_special_upgrades_pressed() -> void:
 	pass 
 
+#Shop
+func _on_moves_pressed() -> void:
+	purchase("MoreMoves","moves",25,100,1.2,$Shop/ShopGrid/MovesText,"+25 stamina ",Prices.MoreMovesBought,null)
+
 func _on_mult_pressed() -> void:
-	purchase("Mult","multQty",1,250,1.5,$Shop/ShopGrid/MultText,"+ 1 ore multiplier ",Prices.MultBought,5)
-		
+	purchase("Mult","multQty",1,350,1.2,$Shop/ShopGrid/MultText,"+ 1 ore multiplier ",Prices.MultBought,10)
+
 func _on_mult_str_pressed() -> void:
-	if Global.funds >= Prices.MultStr:
-		Global.funds -= Prices.MultStr
-		Global.multStr += 1
-		Prices.MultStrBought += 1
-		Prices.MultStr += 100*Prices.MultStrBought**1.2
-		$Shop/ShopGrid/MultStrText.text = "+1 multiplier strength: " + str(floori(Prices.MultStr))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
-		
+	purchase("MultStr","multStr",1,250,1.5,$Shop/ShopGrid/MultStrText,"+1 multiplier strength: ",Prices.MultStrBought,10)
+
 func _on_bombs_pressed() -> void:
-	if Global.funds >= Prices.MoreBombs:
-		Global.funds -= Prices.MoreBombs
-		Global.bombQty += 1
-		Prices.MoreBombsBought += 1
-		Prices.MoreBombs += 100*Prices.MoreBombsBought**1.4
-		
-		if Global.bombQty == 10:
-			$Shop/ShopGrid/BombsText.text = "+1 bomb: MAX"
-		else:
-			$Shop/ShopGrid/BombsText.text = "+1 bomb: " + str(floori(Prices.MoreBombs))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("MoreBombs","bombQty",1,200,1.4,$Shop/ShopGrid/BombsText,"+1 bomb ",Prices.MoreBombsBought,5)
 
 func _on_bomb_power_pressed() -> void:
-	if Global.funds >= Prices.BombPower:
-		Global.funds -= Prices.BombPower
-		Global.bombStr += 1
-		Prices.BombPowerBought += 1
-		Prices.BombPower += 500*Prices.BombPowerBought**1.6
-		$Shop/ShopGrid/BombPowerText.text = "+Bomb power: " + str(floori(Prices.BombPower))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("BombPower","bombStr",1,500,1.6,$Shop/ShopGrid/BombPowerText,"+Bomb power",Prices.BombPowerBought,5)
 
 func _on_t_ps_pressed() -> void:
-	if Global.funds >= Prices.MoreTPs:
-		Global.funds -= Prices.MoreTPs
-		Global.tpQty += 1
-		Prices.MoreTPsBought += 1
-		Prices.MoreTPs += 200*Prices.MoreTPsBought**1.3
-		
-		if Global.tpQty == 10:
-			$Shop/ShopGrid/TPsText.text = "+1 teleport: MAX"
-		else:
-			$Shop/ShopGrid/TPsText.text = "+1 teleport: " + str(floori(Prices.MoreTPs))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("MoreTPs","tpQty",1,600,1.3,$Shop/ShopGrid/TPsText,"+1 teleport ",Prices.MoreTPsBought,5)
 
 func _on_t_ppower_pressed() -> void:
-	if Global.funds >= Prices.TPpower:
-		Global.funds -= Prices.TPpower
-		Global.tpStr += 5
-		Prices.TPpowerBought += 1
-		Prices.TPpower += 300*Prices.TPpowerBought**1.5
-		$Shop/ShopGrid/TPpowerText.text = "+5 teleport power: " + str(floori(Prices.TPpower))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
-		
+	purchase("TPpower","tpStr",5,750,1.5,$Shop/ShopGrid/TPpowerText,"+5 teleport power ",Prices.TPpowerBought,10)
+
 func _on_momoyo_frenzy_pressed() -> void:
-	if Global.funds >= Prices.Frenzy:
-		Global.funds -= Prices.Frenzy
-		Global.frenzyQty += 1
-		Prices.FrenzyBought += 1
-		Prices.Frenzy += 250*Prices.FrenzyBought**1.35
-		if Global.frenzyQty == 10:
-			$Shop/ShopGrid/MomoyoFrenzyText.text = "+1 frenzy: MAX"
-		else:
-			$Shop/ShopGrid/MomoyoFrenzyText.text = "+1 frenzy: " + str(floori(Prices.Frenzy))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
-		
+	purchase("Frenzy","frenzyQty",1,1000,1.35,$Shop/ShopGrid/MomoyoFrenzyText,"+1 frenzy ",Prices.FrenzyBought,5)
+
 func _on_frenzy_power_pressed() -> void:
-	if Global.funds >= Prices.FrenzyPwr:
-		Global.funds -= Prices.FrenzyPwr
-		Global.frenzyStr += 3
-		Prices.FrenzyPwrBought += 1
-		Prices.FrenzyPwr += 400*Prices.FrenzyPwrBought**1.4
-		$Shop/ShopGrid/FrenzyPowerText.text = "+3 frenzy power: " + str(floori(Prices.FrenzyPwr))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("FrenzyPwr","frenzyStr",1,1350,1.4,$Shop/ShopGrid/FrenzyPowerText,"+3 frenzy power ", Prices.FrenzyPwrBought,10)
 
 #Idle shop
 func _on_idler_xs_pressed() -> void:
@@ -305,10 +245,8 @@ func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
 		text.text = textContent + " MAX"
 	else:
 		text.text = textContent + str(floori(Prices.get(price)))
-		 
-
-	$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-	$UI/Funds.text = str(floori(Global.funds))
+		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
+		$UI/Funds.text = str(floori(Global.funds))
 
 #Description for every item
 func _on_moves_mouse_entered() -> void:
