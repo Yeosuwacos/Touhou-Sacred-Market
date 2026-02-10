@@ -17,9 +17,6 @@ size = Vector2(32, 300)
 [node name="Mines" type="Node2D" unique_id=168678240]
 script = ExtResource("1_fyqyq")
 
-[node name="UI" parent="." unique_id=1021945147 instance=ExtResource("2_1d28e")]
-z_index = 4
-
 [node name="Buttons" type="HBoxContainer" parent="." unique_id=159032173]
 z_index = 1
 offset_right = 106.0

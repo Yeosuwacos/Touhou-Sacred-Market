@@ -16,6 +16,8 @@ extends Node2D
 @onready var currentHover = ""
 
 func _ready():
+	refresher()
+	
 	var chimata = chimataScene.instantiate()
 	add_child(chimata)
 	chimata.position = Vector2i(Global.res.x-50,get_viewport_rect().size.y - shopSize.y - 64)
@@ -56,10 +58,6 @@ func _ready():
 	$ShopGUI/Names/ChimataName.position = Vector2(get_viewport_rect().size.x - characterSize.x/2 - $ShopGUI/Names/ChimataName.size.x/2, \
 	get_viewport_rect().size.y - 40)
 	
-	#Funds UI
-	$UI/Funds.text = str(floori(Global.funds))
-	$UI/Funds.position = Vector2(24,24)
-	
 	#Hides the shop until the button is pressed
 	Global.mShopOpen = false
 	Global.iShopOpen = false
@@ -67,6 +65,37 @@ func _ready():
 	$ShopGUI.visible = false
 	$Shop.visible = false
 	$IdleShop.visible = false
+
+#Updates the pricing for upgrades
+func refresher():
+	# Main shop
+	updater("MoreMoves", "moves", "+25 stamina: ", $Shop/ShopGrid/MovesText, null)
+	updater("Mult", "multQty", "+1 ore multiplier: ", $Shop/ShopGrid/MultText, 10)
+	updater("MultStr", "multStr", "+1 multiplier strength: ", $Shop/ShopGrid/MultStrText, 10)
+	updater("MoreBombs", "bombQty", "+1 bomb: ", $Shop/ShopGrid/BombsText, 5)
+	updater("BombPower", "bombStr", "+Bomb power: ", $Shop/ShopGrid/BombPowerText, 5)
+	updater("MoreTPs", "tpQty", "+1 teleport: ", $Shop/ShopGrid/TPsText, 5)
+	updater("TPpower", "tpStr", "+5 teleport power: ", $Shop/ShopGrid/TPpowerText, 10)
+	updater("Frenzy", "frenzyQty", "+1 frenzy: ", $Shop/ShopGrid/MomoyoFrenzyText, 5)
+	updater("FrenzyPwr", "frenzyStr", "+3 frenzy power: ", $Shop/ShopGrid/FrenzyPowerText, 10)
+	
+	# Idle shop
+	updater("idleXs", "idleXs", "+1 dust gatherer: ", $IdleShop/IdleShopGrid/idlerXsText, null)
+	updater("idleS", "idleS", "+1 ore gatherer: ", $IdleShop/IdleShopGrid/idlerSText, null)
+	updater("idleM", "idleM", "+1 gem gatherer: ", $IdleShop/IdleShopGrid/idlerMText, null)
+	updater("idleL", "idleL", "+1 chunk gatherer: ", $IdleShop/IdleShopGrid/idlerLText, null)
+	updater("idleXl", "idleXl", "+1 cluster gatherer: ", $IdleShop/IdleShopGrid/idlerXlText, null)
+	
+	#Price tag
+	$GUI/Funds.text = str(floori(Global.funds))
+
+func updater(price, upg, textEdit, label, max):
+	var bought = Prices.get(price + "Bought")
+
+	if max != null && bought >= max:
+		label.text = textEdit + " MAX"
+	else:
+		label.text = textEdit + str(floori(Prices.get(price)))
 
 #Confirmation detection
 func _on_start_mining_body_entered(_body) -> void:
@@ -179,54 +208,19 @@ func _on_frenzy_power_pressed() -> void:
 
 #Idle shop
 func _on_idler_xs_pressed() -> void:
-	if Global.funds >= Prices.idleXs:
-		Global.funds -= Prices.idleXs
-		Global.idleXs += 1
-		Prices.idleXsBought += 1
-		Prices.idleXs += 100*Prices.idleXsBought**2
-		$IdleShop/IdleShopGrid/idlerXsText.text = "+1 xs/s " + str(floori(Prices.idleXs))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("idleXs","idleXs",1,1000,2,$IdleShop/IdleShopGrid/idlerXsText,"+1 dust gatherer: ",Prices.idleXsBought,null)
 
 func _on_idler_s_pressed() -> void:
-	if Global.funds >= Prices.idleS:
-		Global.funds -= Prices.idleS
-		Global.idleS += 1
-		Prices.idleSBought += 1
-		Prices.idleS += 125*Prices.idleSBought**2.2
-		$IdleShop/IdleShopGrid/idlerSText.text = "+1 s/s " + str(floori(Prices.idleS))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("idleS","idleS",1,1500,2.2,$IdleShop/IdleShopGrid/idlerSText,"+ 1 ore gatherer: ",Prices.idleSBought,null)
 		
 func _on_idler_m_pressed() -> void:
-	if Global.funds >= Prices.idleM:
-		Global.funds -= Prices.idleM
-		Global.idleM += 1
-		Prices.idleMBought += 1
-		Prices.idleM +=  150*Prices.idleMBought**2.4
-		$IdleShop/IdleShopGrid/idlerMText.text = "+1 m/s " + str(floori(Prices.idleM))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("idleM","idleM",1,2000,2.4,$IdleShop/IdleShopGrid/idlerMText,"+ 1 gem gatherer: ",Prices.idleMBought,null)
 
 func _on_idler_l_pressed() -> void:
-	if Global.funds >= Prices.idleL:
-		Global.funds -= Prices.idleL
-		Global.idleL += 1
-		Prices.idleLBought += 1
-		Prices.idleL +=  175*Prices.idleLBought**2.6
-		$IdleShop/IdleShopGrid/idlerLText.text = "+1 l/s " + str(floori(Prices.idleL))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("idleL","idleL",1,3000,2.6,$IdleShop/IdleShopGrid/idlerLText,"+ 1 chunk gatherer: ",Prices.idleLBought,null)
 
 func _on_idler_xl_pressed() -> void:
-	if Global.funds >= Prices.idleXl:
-		Global.funds -= Prices.idleXl
-		Global.idleXl += 1
-		Prices.idleXlBought += 1
-		Prices.idleXl +=  200*Prices.idleXlBought**2.8
-		$IdleShop/IdleShopGrid/idlerXlText.text = "+1 xl/s " + str(floori(Prices.idleXl))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("idleXl","idleXl",1,5000,2.8,$IdleShop/IdleShopGrid/idlerXlText,"+ 1 cluster gatherer: ",Prices.idleXlBought,null)
 
 #Universal upgrade system
 func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
@@ -239,14 +233,13 @@ func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
 	
 	var upgBought = price + "Bought"
 	Prices.set(upgBought, Prices.get(upgBought) + 1)
-	Prices.set(price,basePrice*pow(Prices.get(upgBought),pwr))
+	Prices.set(price,basePrice*pow(Prices.get(upgBought) + 1,pwr))
 	
 	if max != null && current >= max-1:
 		text.text = textContent + " MAX"
 	else:
 		text.text = textContent + str(floori(Prices.get(price)))
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
 		$GUI/Funds.text = str(floori(Global.funds))
 
 #Description for every item
