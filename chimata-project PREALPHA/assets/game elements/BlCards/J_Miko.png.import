@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6yhvyn603l8g"
-path="res://.godot/imported/jack_of_spades.png-46b11887b7da2101cf229309d680b8fa.ctex"
+uid="uid://xojrgdp6j73j"
+path="res://.godot/imported/J_Miko.png-e8e8649eeaff92584eec2abd3dbc76cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game elements/BlCards/jack_of_spades.png"
-dest_files=["res://.godot/imported/jack_of_spades.png-46b11887b7da2101cf229309d680b8fa.ctex"]
+source_file="res://assets/game elements/BlCards/J_Miko.png"
+dest_files=["res://.godot/imported/J_Miko.png-e8e8649eeaff92584eec2abd3dbc76cd.ctex"]
 
 [params]
 

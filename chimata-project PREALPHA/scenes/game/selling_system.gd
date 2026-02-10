@@ -467,7 +467,7 @@ func DisplayCard(cardNo):
 		8: png = load("res://assets/game elements/BlCards/8_of_spades.png")
 		9: png = load("res://assets/game elements/BlCards/9_Cirno.png")
 		10: png = load("res://assets/game elements/BlCards/10_Mayumi.png")
-		11: png = load("res://assets/game elements/BlCards/jack_of_spades.png")
+		11: png = load("res://assets/game elements/BlCards/J_Miko.png")
 		12: png = load("res://assets/game elements/BlCards/queen_of_spades.png")
 		13: png = load("res://assets/game elements/BlCards/K_Shikieiki.png")
 	card.texture = png
