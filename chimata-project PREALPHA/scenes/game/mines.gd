@@ -147,32 +147,14 @@ func _input(event):
 #Momoyo expressions
 #Shop
 func _on_moves_pressed() -> void:
-	if Global.funds >= Prices.MoreMoves:
-		Global.funds -= Prices.MoreMoves
-		Global.moves += 25
-		Prices.MoreMovesBought += 1
-		Prices.MoreMoves += 50*Prices.MoreMovesBought**1.2
-		$Shop/ShopGrid/MovesText.text = "+25 stamina: " + str(floori(Prices.MoreMoves))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("MoreMoves","moves",25,100,1.2,$Shop/ShopGrid/MovesText,"+25 stamina ",Prices.MoreMovesBought,null)
 
 #Special upgrades panel
 func _on_special_upgrades_pressed() -> void:
 	pass 
 
 func _on_mult_pressed() -> void:
-	if Global.funds >= Prices.Mult:
-		Global.funds -= Prices.Mult
-		Global.multQty += 1
-		Prices.MultBought += 1
-		Prices.Mult += 50*Prices.MultBought**1.7
-		
-		if Global.multQty == 10:
-			$Shop/ShopGrid/MultText.text = "+1 ore multiplier: MAX"
-		else:
-			$Shop/ShopGrid/MultText.text = "+1 ore multiplier: " + str(floori(Prices.Mult))
-		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$UI/Funds.text = str(floori(Global.funds))
+	purchase("Mult","multQty",1,250,1.5,$Shop/ShopGrid/MultText,"+ 1 ore multiplier ",Prices.MultBought,5)
 		
 func _on_mult_str_pressed() -> void:
 	if Global.funds >= Prices.MultStr:
@@ -305,6 +287,28 @@ func _on_idler_xl_pressed() -> void:
 		$IdleShop/IdleShopGrid/idlerXlText.text = "+1 xl/s " + str(floori(Prices.idleXl))
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 		$UI/Funds.text = str(floori(Global.funds))
+
+#Universal upgrade system
+func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
+	if Global.funds < Prices.get(price): return
+	if max != null && current >= max: 
+		text.text = textContent + " MAX"
+		return
+	Global.funds -= Prices.get(price)
+	Global.set(upg, Global.get(upg) + addUpg)
+	
+	var upgBought = price + "Bought"
+	Prices.set(upgBought, Prices.get(upgBought) + 1)
+	Prices.set(price,basePrice*pow(Prices.get(upgBought),pwr))
+	
+	if max != null && current >= max-1:
+		text.text = textContent + " MAX"
+	else:
+		text.text = textContent + str(floori(Prices.get(price)))
+		 
+
+	$ShopGUI/Characters/Momoyo.texture = momoyoHappy
+	$UI/Funds.text = str(floori(Global.funds))
 
 #Description for every item
 func _on_moves_mouse_entered() -> void:
