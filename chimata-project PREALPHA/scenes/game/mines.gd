@@ -151,31 +151,31 @@ func _on_special_upgrades_pressed() -> void:
 
 #Shop
 func _on_moves_pressed() -> void:
-	purchase("MoreMoves","moves",25,100,1.2,$Shop/ShopGrid/MovesText,"+25 stamina ",Prices.MoreMovesBought,null)
+	purchase("MoreMoves","moves",25,100,1.2,$Shop/ShopGrid/MovesText,"+25 stamina: ",Prices.MoreMovesBought,null)
 
 func _on_mult_pressed() -> void:
-	purchase("Mult","multQty",1,350,1.2,$Shop/ShopGrid/MultText,"+ 1 ore multiplier ",Prices.MultBought,10)
+	purchase("Mult","multQty",1,350,1.2,$Shop/ShopGrid/MultText,"+1 ore multiplier: ",Prices.MultBought,10)
 
 func _on_mult_str_pressed() -> void:
 	purchase("MultStr","multStr",1,250,1.5,$Shop/ShopGrid/MultStrText,"+1 multiplier strength: ",Prices.MultStrBought,10)
 
 func _on_bombs_pressed() -> void:
-	purchase("MoreBombs","bombQty",1,200,1.4,$Shop/ShopGrid/BombsText,"+1 bomb ",Prices.MoreBombsBought,5)
+	purchase("MoreBombs","bombQty",1,200,1.4,$Shop/ShopGrid/BombsText,"+1 bomb: ",Prices.MoreBombsBought,5)
 
 func _on_bomb_power_pressed() -> void:
-	purchase("BombPower","bombStr",1,500,1.6,$Shop/ShopGrid/BombPowerText,"+Bomb power",Prices.BombPowerBought,5)
+	purchase("BombPower","bombStr",1,500,1.6,$Shop/ShopGrid/BombPowerText,"+Bomb power: ",Prices.BombPowerBought,5)
 
 func _on_t_ps_pressed() -> void:
-	purchase("MoreTPs","tpQty",1,600,1.3,$Shop/ShopGrid/TPsText,"+1 teleport ",Prices.MoreTPsBought,5)
+	purchase("MoreTPs","tpQty",1,600,1.3,$Shop/ShopGrid/TPsText,"+1 teleport: ",Prices.MoreTPsBought,5)
 
 func _on_t_ppower_pressed() -> void:
-	purchase("TPpower","tpStr",5,750,1.5,$Shop/ShopGrid/TPpowerText,"+5 teleport power ",Prices.TPpowerBought,10)
+	purchase("TPpower","tpStr",5,750,1.5,$Shop/ShopGrid/TPpowerText,"+5 teleport power: ",Prices.TPpowerBought,10)
 
 func _on_momoyo_frenzy_pressed() -> void:
-	purchase("Frenzy","frenzyQty",1,1000,1.35,$Shop/ShopGrid/MomoyoFrenzyText,"+1 frenzy ",Prices.FrenzyBought,5)
+	purchase("Frenzy","frenzyQty",1,1000,1.35,$Shop/ShopGrid/MomoyoFrenzyText,"+1 frenzy: ",Prices.FrenzyBought,5)
 
 func _on_frenzy_power_pressed() -> void:
-	purchase("FrenzyPwr","frenzyStr",1,1350,1.4,$Shop/ShopGrid/FrenzyPowerText,"+3 frenzy power ", Prices.FrenzyPwrBought,10)
+	purchase("FrenzyPwr","frenzyStr",1,1350,1.4,$Shop/ShopGrid/FrenzyPowerText,"+3 frenzy power: ", Prices.FrenzyPwrBought,10)
 
 #Idle shop
 func _on_idler_xs_pressed() -> void:
@@ -247,6 +247,7 @@ func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
 		text.text = textContent + str(floori(Prices.get(price)))
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
 		$UI/Funds.text = str(floori(Global.funds))
+		$GUI/Funds.text = str(floori(Global.funds))
 
 #Description for every item
 func _on_moves_mouse_entered() -> void:
