@@ -35,7 +35,6 @@ func _ready():
 	chimata.position = Vector2i(Global.res.x-50,get_viewport_rect().size.y - shopSize.y - 64)
 	
 	#Settings/GUI initialization
-	$GUI/GenUI.scale = Global.res / $GUI/GenUI.texture.get_size()
 	add_child(optionPopup)
 	optionPopup.position = Vector2i(0,0)
 	optionPopup.visible = false
@@ -99,7 +98,7 @@ func refresher():
 	updater("idleXl", "idleXl", "+1 cluster gatherer: ", $IdleShop/IdleShopGrid/idlerXlText, null)
 	
 	#Price tag
-	$GUI/Funds.text = str(floori(Global.funds))
+	$Shop/GUI/Funds.text = str(floori(Global.funds))
 
 func updater(price, upg, textEdit, label, max):
 	var bought = Prices.get(price + "Bought")
@@ -173,7 +172,7 @@ func _input(event):
 							$ShopGUI.visible = true
 							$IdleShop.visible = true
 							Global.iShopOpen = true
-							$GUI/Funds.text = "Funds: " + str(floori(Global.funds))
+							$Shop/GUI/Funds.text = "Funds: " + str(floori(Global.funds))
 							
 							$Shop.visible = false
 							Global.mShopOpen = false
@@ -252,7 +251,7 @@ func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
 	else:
 		text.text = textContent + str(floori(Prices.get(price)))
 		$ShopGUI/Characters/Momoyo.texture = momoyoHappy
-		$GUI/Funds.text = str(floori(Global.funds))
+		$Shop/GUI/Funds.text = str(floori(Global.funds))
 
 #Item description functions (on hover
 func showDesc(item):

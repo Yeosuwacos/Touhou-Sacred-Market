@@ -59,8 +59,6 @@ shape = SubResource("RectangleShape2D_cuk8l")
 visible = false
 texture = ExtResource("2_cuk8l")
 
-[node name="GUI" parent="." unique_id=467049067 instance=ExtResource("2_1d28e")]
-
 [node name="Background" type="Parallax2D" parent="." unique_id=1240152747]
 repeat_size = Vector2(128, 128)
 repeat_times = 40
