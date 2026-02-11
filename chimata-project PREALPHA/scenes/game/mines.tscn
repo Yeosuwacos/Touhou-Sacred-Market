@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bldynvbs8ownu" path="res://scenes/game/mine_zones.gd" id="3_2au7w"]
 [ext_resource type="Script" uid="uid://dlii2oup33qw1" path="res://scenes/game/shop.gd" id="3_yh3sh"]
 [ext_resource type="Texture2D" uid="uid://qyuk6lkeyewq" path="res://assets/sprites/momoyo.png" id="4_8ojic"]
-[ext_resource type="Script" uid="uid://bsyo62gccx47c" path="res://scenes/game/idle_shop.gd" id="4_yh3sh"]
 [ext_resource type="Texture2D" uid="uid://bdyer130vmqqx" path="res://assets/UI/Frame.png" id="6_bmy1k"]
 [ext_resource type="Texture2D" uid="uid://b8uynqbvyo18s" path="res://assets/sprites/chimata.png" id="6_lrki8"]
 
@@ -127,16 +126,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.4660673, 0.17293522, 0.009066197, 1)
 
-[node name="Shop" type="Node2D" parent="." unique_id=2100498929]
+[node name="Shop" type="VBoxContainer" parent="." unique_id=472478754]
 visible = false
+theme_override_constants/separation = 32
 script = ExtResource("3_yh3sh")
 
-[node name="GUI" parent="Shop" unique_id=745655068 instance=ExtResource("2_1d28e")]
-script = null
-
 [node name="ShopGrid" type="GridContainer" parent="Shop" unique_id=368274365]
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 columns = 4
 
 [node name="Moves" type="Button" parent="Shop/ShopGrid" unique_id=299701941]
@@ -209,48 +205,50 @@ layout_mode = 2
 [node name="FrenzyPowerText" type="Label" parent="Shop/ShopGrid" unique_id=1049175068]
 layout_mode = 2
 
-[node name="IdleShop" type="Node2D" parent="." unique_id=1754892754]
-script = ExtResource("4_yh3sh")
-
-[node name="IdleShopGrid" type="GridContainer" parent="IdleShop" unique_id=429422126]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IdleShopGrid" type="GridContainer" parent="Shop" unique_id=429422126]
+layout_mode = 2
 columns = 4
 
-[node name="idlerXs" type="Button" parent="IdleShop/IdleShopGrid" unique_id=1835939952]
+[node name="idlerXs" type="Button" parent="Shop/IdleShopGrid" unique_id=1835939952]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="idlerXsText" type="Label" parent="IdleShop/IdleShopGrid" unique_id=2014655477]
+[node name="idlerXsText" type="Label" parent="Shop/IdleShopGrid" unique_id=2014655477]
 layout_mode = 2
 
-[node name="idlerS" type="Button" parent="IdleShop/IdleShopGrid" unique_id=891570614]
+[node name="idlerS" type="Button" parent="Shop/IdleShopGrid" unique_id=891570614]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="idlerSText" type="Label" parent="IdleShop/IdleShopGrid" unique_id=420523839]
+[node name="idlerSText" type="Label" parent="Shop/IdleShopGrid" unique_id=420523839]
 layout_mode = 2
 
-[node name="idlerM" type="Button" parent="IdleShop/IdleShopGrid" unique_id=541072328]
+[node name="idlerM" type="Button" parent="Shop/IdleShopGrid" unique_id=541072328]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="idlerMText" type="Label" parent="IdleShop/IdleShopGrid" unique_id=1040242485]
+[node name="idlerMText" type="Label" parent="Shop/IdleShopGrid" unique_id=1040242485]
 layout_mode = 2
 
-[node name="idlerL" type="Button" parent="IdleShop/IdleShopGrid" unique_id=979460505]
+[node name="idlerL" type="Button" parent="Shop/IdleShopGrid" unique_id=979460505]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="idlerLText" type="Label" parent="IdleShop/IdleShopGrid" unique_id=468813452]
+[node name="idlerLText" type="Label" parent="Shop/IdleShopGrid" unique_id=468813452]
 layout_mode = 2
 
-[node name="idlerXl" type="Button" parent="IdleShop/IdleShopGrid" unique_id=837214099]
+[node name="idlerXl" type="Button" parent="Shop/IdleShopGrid" unique_id=837214099]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="idlerXlText" type="Label" parent="IdleShop/IdleShopGrid" unique_id=562860761]
+[node name="idlerXlText" type="Label" parent="Shop/IdleShopGrid" unique_id=562860761]
 layout_mode = 2
+
+[node name="GUI" parent="Shop" unique_id=745655068 instance=ExtResource("2_1d28e")]
+layout_mode = 2
+script = null
+
+[node name="Trophies" type="Node2D" parent="." unique_id=1400073045]
 
 [connection signal="body_entered" from="Buttons/Mining/StartMining" to="." method="_on_start_mining_body_entered"]
 [connection signal="body_exited" from="Buttons/Mining/StartMining" to="." method="_on_start_mining_body_exited"]
@@ -286,8 +284,8 @@ layout_mode = 2
 [connection signal="mouse_entered" from="Shop/ShopGrid/FrenzyPower" to="." method="showDesc" binds= [&"frenzyPwr"]]
 [connection signal="mouse_exited" from="Shop/ShopGrid/FrenzyPower" to="." method="clearDesc"]
 [connection signal="pressed" from="Shop/ShopGrid/FrenzyPower" to="." method="_on_frenzy_power_pressed"]
-[connection signal="pressed" from="IdleShop/IdleShopGrid/idlerXs" to="." method="_on_idler_xs_pressed"]
-[connection signal="pressed" from="IdleShop/IdleShopGrid/idlerS" to="." method="_on_idler_s_pressed"]
-[connection signal="pressed" from="IdleShop/IdleShopGrid/idlerM" to="." method="_on_idler_m_pressed"]
-[connection signal="pressed" from="IdleShop/IdleShopGrid/idlerL" to="." method="_on_idler_l_pressed"]
-[connection signal="pressed" from="IdleShop/IdleShopGrid/idlerXl" to="." method="_on_idler_xl_pressed"]
+[connection signal="pressed" from="Shop/IdleShopGrid/idlerXs" to="." method="_on_idler_xs_pressed"]
+[connection signal="pressed" from="Shop/IdleShopGrid/idlerS" to="." method="_on_idler_s_pressed"]
+[connection signal="pressed" from="Shop/IdleShopGrid/idlerM" to="." method="_on_idler_m_pressed"]
+[connection signal="pressed" from="Shop/IdleShopGrid/idlerL" to="." method="_on_idler_l_pressed"]
+[connection signal="pressed" from="Shop/IdleShopGrid/idlerXl" to="." method="_on_idler_xl_pressed"]

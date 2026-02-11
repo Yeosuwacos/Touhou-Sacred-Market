@@ -43,7 +43,7 @@ func _ready():
 	$ShopGUI/BG.position = Vector2(0, get_viewport_rect().size.y - shopSize.y)
 	$Shop.position = Vector2(get_viewport_rect().size.x/2 - itemChoiceSize.x/2 + 50, \
 	get_viewport_rect().size.y - itemChoiceSize.y + 50)
-	$IdleShop.position = Vector2(get_viewport_rect().size.x/2 - itemChoiceSize.x/2 + 50, \
+	$Trophies.position = Vector2(get_viewport_rect().size.x/2 - itemChoiceSize.x/2 + 50, \
 	get_viewport_rect().size.y - itemChoiceSize.y + 50)
 	$ShopGUI/mDialogue.position = Vector2(characterSize.x, get_viewport_rect().size.y - shopSize.y) 
 	$ShopGUI/ItemDesc.size = Vector2(get_viewport_rect().size.x - characterSize.x*2, 100)
@@ -75,7 +75,7 @@ func _ready():
 	
 	$ShopGUI.visible = false
 	$Shop.visible = false
-	$IdleShop.visible = false
+	$Trophies.visible = false
 
 #Updates the pricing for upgrades
 func refresher():
@@ -91,11 +91,11 @@ func refresher():
 	updater("FrenzyPwr", "frenzyStr", "+3 frenzy power: ", $Shop/ShopGrid/FrenzyPowerText, 10)
 	
 	# Idle shop
-	updater("idleXs", "idleXs", "+1 dust gatherer: ", $IdleShop/IdleShopGrid/idlerXsText, null)
-	updater("idleS", "idleS", "+1 ore gatherer: ", $IdleShop/IdleShopGrid/idlerSText, null)
-	updater("idleM", "idleM", "+1 gem gatherer: ", $IdleShop/IdleShopGrid/idlerMText, null)
-	updater("idleL", "idleL", "+1 chunk gatherer: ", $IdleShop/IdleShopGrid/idlerLText, null)
-	updater("idleXl", "idleXl", "+1 cluster gatherer: ", $IdleShop/IdleShopGrid/idlerXlText, null)
+	updater("idleXs", "idleXs", "+1 dust gatherer: ", $Shop/IdleShopGrid/idlerXsText, null)
+	updater("idleS", "idleS", "+1 ore gatherer: ", $Shop/IdleShopGrid/idlerSText, null)
+	updater("idleM", "idleM", "+1 gem gatherer: ", $Shop/IdleShopGrid/idlerMText, null)
+	updater("idleL", "idleL", "+1 chunk gatherer: ", $Shop/IdleShopGrid/idlerLText, null)
+	updater("idleXl", "idleXl", "+1 cluster gatherer: ", $Shop/IdleShopGrid/idlerXlText, null)
 	
 	#Price tag
 	$Shop/GUI/Funds.text = str(floori(Global.funds))
@@ -157,7 +157,7 @@ func _input(event):
 						Global.mShopOpen = true
 						$Shop/GUI/Funds.text = "Funds: " + str(floori(Global.funds))
 						
-						$IdleShop.visible = false
+						$Trophies.visible = false
 						Global.iShopOpen = false
 						
 					elif Global.mShopOpen == true:
@@ -170,7 +170,7 @@ func _input(event):
 						if Global.iShopOpen == false:
 							$ShopGUI/mDialogue.text = Dialogue.idleShopLines.pick_random()
 							$ShopGUI.visible = true
-							$IdleShop.visible = true
+							$Trophies.visible = true
 							Global.iShopOpen = true
 							$Shop/GUI/Funds.text = "Funds: " + str(floori(Global.funds))
 							
@@ -180,7 +180,7 @@ func _input(event):
 							
 						elif Global.iShopOpen == true:
 							$ShopGUI.visible = false
-							$IdleShop.visible = false
+							$Trophies.visible = false
 							Global.iShopOpen = false
 						$ShopGUI/Characters/Momoyo.texture = momoyo
 
@@ -219,19 +219,19 @@ func _on_frenzy_power_pressed() -> void:
 
 #Idle shop
 func _on_idler_xs_pressed() -> void:
-	purchase("idleXs","idleXs",1,1000,2,$IdleShop/IdleShopGrid/idlerXsText,"+1 dust gatherer: ",Prices.idleXsBought,null)
+	purchase("idleXs","idleXs",1,1000,2,$Shop/IdleShopGrid/idlerXsText,"+1 dust gatherer: ",Prices.idleXsBought,null)
 
 func _on_idler_s_pressed() -> void:
-	purchase("idleS","idleS",1,1500,2.2,$IdleShop/IdleShopGrid/idlerSText,"+ 1 ore gatherer: ",Prices.idleSBought,null)
+	purchase("idleS","idleS",1,1500,2.2,$Shop/IdleShopGrid/idlerSText,"+ 1 ore gatherer: ",Prices.idleSBought,null)
 		
 func _on_idler_m_pressed() -> void:
-	purchase("idleM","idleM",1,2000,2.4,$IdleShop/IdleShopGrid/idlerMText,"+ 1 gem gatherer: ",Prices.idleMBought,null)
+	purchase("idleM","idleM",1,2000,2.4,$Shop/IdleShopGrid/idlerMText,"+ 1 gem gatherer: ",Prices.idleMBought,null)
 
 func _on_idler_l_pressed() -> void:
-	purchase("idleL","idleL",1,3000,2.6,$IdleShop/IdleShopGrid/idlerLText,"+ 1 chunk gatherer: ",Prices.idleLBought,null)
+	purchase("idleL","idleL",1,3000,2.6,$Shop/IdleShopGrid/idlerLText,"+ 1 chunk gatherer: ",Prices.idleLBought,null)
 
 func _on_idler_xl_pressed() -> void:
-	purchase("idleXl","idleXl",1,5000,2.8,$IdleShop/IdleShopGrid/idlerXlText,"+ 1 cluster gatherer: ",Prices.idleXlBought,null)
+	purchase("idleXl","idleXl",1,5000,2.8,$Shop/IdleShopGrid/idlerXlText,"+ 1 cluster gatherer: ",Prices.idleXlBought,null)
 
 #Universal upgrade system
 func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
