@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqn0cnsq6a6b7"]
-
-[ext_resource type="Script" uid="uid://ph165w3n8vsf" path="res://scenes/global script/save.gd" id="1_mayom"]
-
-[node name="Save" type="Node2D"]
-script = ExtResource("1_mayom")
