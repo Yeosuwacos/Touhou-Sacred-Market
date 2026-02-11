@@ -100,10 +100,10 @@ func refresher():
 	#Price tag
 	$Shop/GUI/Funds.text = str(floori(Global.funds))
 
-func updater(price, upg, textEdit, label, max):
+func updater(price, upg, textEdit, label, maximum):
 	var bought = Prices.get(price + "Bought")
 
-	if max != null && bought >= max:
+	if maximum != null && bought >= maximum:
 		label.text = textEdit + " MAX"
 	else:
 		label.text = textEdit + str(floori(Prices.get(price)))
@@ -124,7 +124,7 @@ func _on_shop_button_body_exited(_body) -> void:
 	$Buttons/Shop/ShopButton/pressE.visible = false
 	
 func _on_idle_shop_button_body_entered(_body) -> void:
-	currentHover = "idleShop"
+	currentHover = "trophies"
 	$Buttons/IdleShop/IdleShopButton/pressE.visible = true
 func _on_idle_shop_button_body_exited(_body) -> void:
 	currentHover = ""
@@ -166,9 +166,9 @@ func _input(event):
 						Global.mShopOpen = false
 					$ShopGUI/Characters/Momoyo.texture = momoyo
 					
-				"idleShop":
+				"trophies":
 						if Global.iShopOpen == false:
-							$ShopGUI/mDialogue.text = Dialogue.idleShopLines.pick_random()
+							$ShopGUI/mDialogue.text = Dialogue.trophyLines.pick_random()
 							$ShopGUI.visible = true
 							$Trophies.visible = true
 							Global.iShopOpen = true
@@ -234,9 +234,9 @@ func _on_idler_xl_pressed() -> void:
 	purchase("idleXl","idleXl",1,5000,2.8,$Shop/IdleShopGrid/idlerXlText,"+ 1 cluster gatherer: ",Prices.idleXlBought,null)
 
 #Universal upgrade system
-func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
+func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,maximum):
 	if Global.funds < Prices.get(price): return
-	if max != null && current >= max: 
+	if maximum != null && current >= maximum: 
 		text.text = textContent + " MAX"
 		return
 	Global.funds -= Prices.get(price)
@@ -246,7 +246,7 @@ func purchase(price,upg,addUpg,basePrice,pwr,text,textContent,current,max):
 	Prices.set(upgBought, Prices.get(upgBought) + 1)
 	Prices.set(price,basePrice*pow(Prices.get(upgBought) + 1,pwr))
 	
-	if max != null && current >= max-1:
+	if maximum != null && current >= maximum-1:
 		text.text = textContent + " MAX"
 	else:
 		text.text = textContent + str(floori(Prices.get(price)))
