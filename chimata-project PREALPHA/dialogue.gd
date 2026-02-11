@@ -9,9 +9,8 @@ var mineShopLines = [
 	"♫ I am a dragon-eating centipede princess and I'm digging a hole ♫"
 ]
 
-var idleShopLines = [
-	"Wait isn't that a little bit lazy?",
-	"When in doubt, send others to do your own work"
+var trophyLines = [
+	"WIP"
 ]
 
 var HiLoLines = [
